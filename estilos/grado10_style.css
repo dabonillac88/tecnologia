@@ -1,0 +1,309 @@
+/* Importar Fuentes de Programación */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* Variables de Color - Paleta Grado 10 */
+:root {
+    --color-main-bg: #0D0201;     /* Fondo Principal - Casi Negro */
+    --color-section-bg: #1a1d24;  /* Fondo Secciones - Un poco más claro que el main */
+    --color-card-bg: #35400C;     /* Fondo Tarjetas - Verde Oliva Oscuro */
+    --color-header-bg: #7D458C;   /* Fondo Cabecera/Footer - Morado */
+    --color-accent: #03A678;      /* Acento Principal - Verde/Teal */
+    --color-hover: #734B02;       /* Acento Hover - Marrón */
+    --color-text-light: #EAEAEA;  /* Texto Principal - Gris Claro/Blanco */
+    --color-text-header: #FFFFFF; /* Texto Cabecera/Footer - Blanco */
+    --color-text-accent: #03A678; /* Texto Acento - Verde/Teal */
+    --color-border: #7D458C;      /* Color Borde - Morado */
+    --color-code-bg: #0f1115;     /* Fondo para bloques de código (más oscuro) */
+    --color-code-border: #444;    /* Borde para bloques de código */
+    --color-prompt-bg: rgba(3, 166, 120, 0.08); /* Fondo prompt interactivo */
+    --color-prompt-border: var(--color-accent); /* Borde prompt interactivo */
+
+
+    /* Fuentes estilo programación */
+    --font-titles: 'Fira Code', monospace;       /* Fuente para títulos/botones */
+    --font-body: 'JetBrains Mono', monospace;    /* Fuente para texto principal */
+}
+
+/* Reset Básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-main-bg);
+    color: var(--color-text-light);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 960px; /* Ancho optimizado para lectura de texto/código */
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Estilo del Encabezado Simple */
+.simple-header {
+    background-color: var(--color-header-bg);
+    padding: 1.2rem 0;
+    border-bottom: 3px solid var(--color-accent);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.simple-header h1 {
+    font-family: var(--font-titles);
+    font-size: 1.2rem;
+    color: var(--color-text-header);
+    margin: 0;
+    font-weight: 700;
+}
+
+.back-link {
+    color: var(--color-text-header);
+    text-decoration: none;
+    font-family: var(--font-titles);
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--color-text-header);
+    border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: var(--color-accent);
+    color: var(--color-main-bg);
+    border-color: var(--color-accent);
+}
+
+
+/* Estilos del Contenido Principal */
+main {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+    flex-grow: 1;
+}
+
+main h2 {
+    font-family: var(--font-titles);
+    font-size: 1.8rem; /* Tamaño principal ajustado */
+    color: var(--color-accent);
+    text-align: center;
+    margin-bottom: 2rem; /* Más espacio después del título principal */
+    font-weight: 700;
+}
+
+.page-description { /* Usado también para introducciones de sección */
+    text-align: left; /* Alinear a la izquierda para lectura */
+    font-size: 1.1rem; /* Tamaño ajustado */
+    margin-bottom: 2rem;
+    color: var(--color-text-light);
+    opacity: 0.9;
+    line-height: 1.7;
+}
+
+/* Estilos para secciones de contenido dentro del OVA */
+.content-section {
+    background-color: var(--color-section-bg); /* Fondo sutil para la sección */
+    border: 1px solid var(--color-code-border); /* Borde muy sutil */
+    border-radius: 5px;
+    padding: 1.5rem 2rem; /* Más padding interno */
+    margin-bottom: 2.5rem; /* Espacio entre secciones */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3); /* Sombra suave */
+}
+
+/* Quitar borde inferior que ya no es necesario */
+/* .content-section:last-child { border-bottom: none; } */
+
+.content-section h3 {
+    font-family: var(--font-titles);
+    color: var(--color-accent);
+    font-size: 1.4rem; /* Un poco más grande */
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+    border-left: none; /* Quitar borde izquierdo */
+    padding-left: 0;
+    border-bottom: 2px solid var(--color-border); /* Línea inferior morada */
+    padding-bottom: 0.5rem;
+    display: block; /* Ocupar todo el ancho */
+}
+
+.content-section p, .content-section ul, .content-section ol {
+    margin-bottom: 1.2rem; /* Más espacio entre párrafos/listas */
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+.content-section ul, .content-section ol {
+    padding-left: 2.5rem; /* Más indentación */
+}
+.content-section li {
+    margin-bottom: 0.6rem;
+}
+
+/* Estilo para bloques de código */
+pre {
+    background-color: var(--color-code-bg);
+    border: 1px solid var(--color-code-border);
+    border-left: 5px solid var(--color-accent); /* Borde izquierdo Teal */
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    overflow-x: auto; /* Scroll horizontal si el código es largo */
+    margin: 1.5rem 0;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.6); /* Sombra interna más pronunciada */
+}
+
+code {
+    font-family: var(--font-body); /* Asegurar fuente monoespaciada */
+    font-size: 1rem; /* Tamaño de código */
+    color: var(--color-text-light); /* Color del texto del código */
+    line-height: 1.6; /* Ajustar interlínea del código */
+}
+
+/* Estilo para prompts interactivos */
+.interactive-prompt {
+    background-color: var(--color-prompt-bg);
+    border: 1px solid var(--color-prompt-border);
+    padding: 1.5rem; /* Más padding */
+    margin: 2rem 0; /* Más margen */
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(3, 166, 120, 0.2); /* Resplandor suave Teal */
+}
+
+.interactive-prompt strong {
+    display: block; /* Título en bloque */
+    color: var(--color-accent);
+    font-family: var(--font-titles);
+    font-size: 1.1rem; /* Título del prompt más grande */
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+.interactive-prompt ol {
+    padding-left: 1.5rem; /* Menos indentación interna */
+}
+.interactive-prompt li {
+    margin-bottom: 0.5rem;
+}
+
+
+/* --- Estilos de Tarjetas OVA (Se mantienen para la página de Grado 10) --- */
+.ova-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.5rem;
+}
+.ova-card {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.ova-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 10px rgba(3, 166, 120, 0.3);
+}
+.ova-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    filter: saturate(80%);
+}
+.ova-content {
+    padding: 1.2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.ova-content h3 { /* Estilo de H3 dentro de tarjeta */
+    font-family: var(--font-titles);
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    border-left: none;
+    padding-left: 0;
+    border-bottom: none; /* Sin borde inferior en tarjetas */
+    padding-bottom: 0;
+}
+.ova-content p.card-text {
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+    flex-grow: 1;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+.btn {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-main-bg);
+    padding: 8px 18px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-family: var(--font-titles);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+    margin-top: auto;
+    align-self: flex-start;
+}
+.btn:hover {
+    background-color: var(--color-hover);
+    color: var(--color-text-light);
+    border-color: var(--color-hover);
+}
+/* --- Fin Estilos de Tarjetas OVA --- */
+
+
+/* Estilos del Pie de Página */
+.portal-footer {
+    background-color: var(--color-header-bg);
+    color: var(--color-text-header);
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    border-top: 3px solid var(--color-accent);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    body { font-size: 15px; }
+    main h2 { font-size: 1.6rem; }
+    .simple-header h1 { font-size: 1.1rem; }
+    .content-section { padding: 1.2rem 1.5rem; }
+    .content-section h3 { font-size: 1.2rem; }
+    .content-section p, .content-section li { font-size: 1rem; }
+    code { font-size: 0.95rem; }
+    .interactive-prompt strong { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+     body { font-size: 14px; }
+     main h2 { font-size: 1.4rem; }
+     .simple-header h1 { font-size: 1rem; }
+     .page-description { font-size: 1rem; }
+     .content-section { padding: 1rem; }
+     .content-section h3 { font-size: 1.1rem; }
+     .content-section p, .content-section li { font-size: 0.95rem; }
+     code { font-size: 0.9rem; }
+     .portal-footer { font-size: 0.8rem; }
+}

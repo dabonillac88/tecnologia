@@ -1,0 +1,396 @@
+/* Importar Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Quicksand:wght@500;700&display=swap');
+
+/* Variables de Color (CSS Custom Properties) */
+:root {
+    --color-principal: #223240; /* Azul oscuro/gris */
+    --color-apoyo1: #3B8C66;    /* Verde medio */
+    --color-apoyo2: #347355;    /* Verde oscuro */
+    --color-apoyo3: #60BF81;    /* Verde claro */
+    --color-contraste: #9FD948; /* Verde lima brillante */
+    --color-texto: #F0F0F0;     /* Gris muy claro / Blanco */
+    --font-titulos: 'Poppins', sans-serif;
+    --font-texto: 'Quicksand', sans-serif;
+}
+
+/* Reset Básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-principal);
+    color: var(--color-texto);
+    font-family: var(--font-texto);
+    line-height: 1.6;
+    font-size: 16px; /* Tamaño base para adolescentes */
+}
+
+header {
+    background-color: var(--color-apoyo2);
+    color: var(--color-contraste);
+    padding: 2rem 1rem;
+    text-align: center;
+    border-bottom: 5px solid var(--color-contraste);
+}
+
+header h1 {
+    font-family: var(--font-titulos);
+    font-size: 2.5rem; /* Tamaño grande y llamativo */
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header .subtitle {
+    font-size: 1.2rem;
+    color: var(--color-texto);
+    font-weight: 500;
+}
+
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.card {
+    background-color: var(--color-apoyo1);
+    border-radius: 15px; /* Bordes redondeados amigables */
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease; /* Efecto sutil al pasar el ratón */
+}
+
+.card:hover {
+   transform: translateY(-5px); /* Pequeño levantamiento */
+}
+
+/* Fondo alterno para variedad visual */
+.card.alternate-bg {
+    background-color: var(--color-apoyo2);
+}
+
+.card h2 {
+    font-family: var(--font-titulos);
+    color: var(--color-contraste);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-apoyo3);
+    padding-bottom: 0.5rem;
+}
+
+.card h3 {
+    font-family: var(--font-titulos);
+    color: var(--color-apoyo3);
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.card p, .card li {
+    margin-bottom: 1rem;
+    font-size: 1.1rem; /* Un poco más grande para fácil lectura */
+}
+
+.card ul {
+    list-style: none; /* Quitar puntos por defecto */
+    padding-left: 0;
+}
+
+.card li::before {
+    content: '➡️'; /* Usar un emoji o icono como viñeta */
+    color: var(--color-contraste);
+    margin-right: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.section-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 1rem 0;
+    display: block; /* Para que centrar con margin auto funcione */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+.ova-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    filter: saturate(80%);
+}
+.section-image.centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.io-columns {
+    display: flex; /* Usar flexbox para columnas */
+    flex-wrap: wrap; /* Para que se apilen en pantallas pequeñas */
+    gap: 2rem; /* Espacio entre columnas */
+    margin-top: 1.5rem;
+}
+
+.io-column {
+    flex: 1; /* Cada columna toma espacio igual */
+    min-width: 250px; /* Ancho mínimo antes de envolver */
+    background-color: rgba(0, 0, 0, 0.1); /* Fondo sutil para diferenciar */
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.io-column .emoji {
+    font-size: 1.5rem; /* Hacer emojis más grandes */
+}
+
+.io-column .icon {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-size: 1.2rem; /* Tamaño de iconos de ejemplo */
+    color: var(--color-apoyo3);
+}
+.io-image {
+     max-width: 100%;
+     height: auto;
+     border-radius: 5px;
+     margin-top: 1rem;
+}
+
+
+.comparison {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.compare-col {
+    flex: 1;
+    min-width: 280px;
+    border: 3px solid var(--color-apoyo3);
+    padding: 1.5rem;
+    border-radius: 10px;
+    background-color: var(--color-principal); /* Fondo oscuro para resaltar */
+}
+
+.compare-col h3 {
+    text-align: center;
+    color: var(--color-contraste);
+    margin-top: 0;
+}
+
+.compare-col ul {
+    padding-left: 0;
+}
+.compare-col li::before {
+     content: ''; /* Resetear el emoji por defecto */
+     margin-right: 0;
+}
+.compare-col li {
+    padding-left: 1.5em;
+    text-indent: -1.5em; /* Alinear texto después del ícono */
+}
+/* Íconos de check y warning para la comparación */
+.compare-col li::before {
+    font-family: sans-serif; /* O usar FontAwesome si se incluye */
+    margin-right: 0.7em;
+    font-weight: bold;
+}
+.compare-col li:nth-child(1)::before,
+.compare-col li:nth-child(2)::before,
+.compare-col li:nth-child(3)::before,
+.compare-col li:nth-child(4)::before {
+    content: '✅'; /* Check */
+     color: #76c77b; /* Verde suave */
+}
+.compare-col li:nth-child(5)::before {
+    content: '⚠️'; /* Warning */
+     color: #f0ad4e; /* Amarillo/Naranja */
+}
+
+
+.conclusion-comparacion {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    color: var(--color-apoyo3);
+}
+
+
+/* Estilo para Call to Action */
+.call-to-action {
+    background: linear-gradient(135deg, var(--color-apoyo3), var(--color-apoyo1));
+    text-align: center;
+}
+
+.call-to-action h2 {
+    color: var(--color-principal); /* Texto oscuro sobre fondo claro */
+    border-bottom: none;
+    font-size: 2.5rem;
+}
+.call-to-action p {
+     color: var(--color-principal);
+     font-weight: 500;
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--color-contraste);
+    color: var(--color-principal); /* Texto oscuro para contraste */
+    padding: 12px 25px;
+    border-radius: 25px; /* Botones redondeados */
+    text-decoration: none;
+    font-family: var(--font-titulos);
+    font-weight: bold;
+    margin: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.btn:hover {
+    background-color: #8BC34A; /* Un tono ligeramente más oscuro del contraste */
+    transform: scale(1.05); /* Efecto de zoom sutil */
+    color: #000;
+}
+
+.final-motivation {
+    margin-top: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--color-principal);
+}
+/* --- Estilos de Tarjetas OVA (Se mantienen para la página de Grado 10) --- */
+.ova-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.5rem;
+}
+.ova-card {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.ova-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 10px rgba(3, 166, 120, 0.3);
+}
+.ova-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    filter: saturate(80%);
+}
+.ova-content {
+    padding: 1.2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.ova-content h3 { /* Estilo de H3 dentro de tarjeta */
+    font-family: var(--font-titles);
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+    border-left: none;
+    padding-left: 0;
+    border-bottom: none; /* Sin borde inferior en tarjetas */
+    padding-bottom: 0;
+}
+.ova-content p.card-text {
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+    flex-grow: 1;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+.btn {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-main-bg);
+    padding: 8px 18px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-family: var(--font-titles);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+    margin-top: auto;
+    align-self: flex-start;
+}
+.btn:hover {
+    background-color: var(--color-hover);
+    color: var(--color-text-light);
+    border-color: var(--color-hover);
+}
+/* --- Fin Estilos de Tarjetas OVA --- */
+
+
+/* Estilos del Pie de Página */
+.portal-footer {
+    background-color: var(--color-header-bg);
+    color: var(--color-text-header);
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    border-top: 3px solid var(--color-accent);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    body { font-size: 15px; }
+    main h2 { font-size: 1.6rem; }
+    .simple-header h1 { font-size: 1.1rem; }
+    .content-section { padding: 1.2rem 1.5rem; }
+    .content-section h3 { font-size: 1.2rem; }
+    .content-section p, .content-section li { font-size: 1rem; }
+    code { font-size: 0.95rem; }
+    .interactive-prompt strong { font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+     body { font-size: 14px; }
+     main h2 { font-size: 1.4rem; }
+     .simple-header h1 { font-size: 1rem; }
+     .page-description { font-size: 1rem; }
+     .content-section { padding: 1rem; }
+     .content-section h3 { font-size: 1.1rem; }
+     .content-section p, .content-section li { font-size: 0.95rem; }
+     code { font-size: 0.9rem; }
+     .portal-footer { font-size: 0.8rem; }
+}
+
+
+/* Media Queries para Responsividad (Ejemplo básico) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    .card h2 {
+        font-size: 1.8rem;
+    }
+    .io-columns, .comparison {
+        flex-direction: column; /* Apilar columnas en pantallas pequeñas */
+    }
+     .btn {
+          display: block; /* Hacer botones ocupar todo el ancho */
+          margin: 0.8rem auto;
+     }
+}

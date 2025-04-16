@@ -3,434 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Microcontroladores: ¡El Cerebro de tus Inventos!</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Portal OVAs - Tecnología e Informátca</title>
+    <link rel="stylesheet" href="estilos/portal_style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
-    </head>
+</head>
 <body>
 
-    <header>
-        <h1>🚀 ¡Microcontroladores: El Cerebro de tus Inventos! 💡</h1>
-        <p class="subtitle">Descubre el mundo increíble de Micro:bit y Arduino</p>
-	<p class="subtitle">Tecnología e informática</p>
-	<p class="subtitle">Institución educativa Santa Juana de Lestonnac</p>    
-	<p class="subtitle">Profesora: Diana Alejandra Bonilla Cardona</p>    
+    <header class="portal-header">
+        <div class="header-content container">
+            <img src="imagenes\escudo-512x512-1-300x300.png" alt="Logo Institución Educativa Santa Juana de Lestonnac" class="school-logo">
+            <div class="header-info">
+                <h1>Institución Educativa Santa Juana de Lestonnac</h1>
+                <p><strong>Materia:</strong> Tecnología e Informática</p>
+                <p><strong>Docente:</strong> Diana Alejandra Bonilla Cardona</p>
+            </div>
+        </div>
     </header>
 
-    <main class="container">
+    <main class="container portal-main">
+        <h2>Portal de Objetos Virtuales de Aprendizaje (OVA)</h2>
+        <p class="portal-instructions">Selecciona tu grado para acceder a los recursos:</p>
 
-        <section id="intro" class="card">
-            <h2>¿Te imaginas darle vida a tus ideas?</h2>
-            <p>¿Crear un robot que sigue una línea, luces que cambian con la música o tu propia alarma? ¡Todo eso es posible gracias a los <strong>microcontroladores</strong>!</p>
-            <p>Piensa en ellos como diminutos cerebros 🧠 que puedes programar para controlar todo tipo de proyectos electrónicos. ¡Están por todas partes!</p>
-             <img src="https://media.istockphoto.com/id/1169550547/es/foto/collage-de-microcontrolador-de-pantalla-de-pantalla-sensor-interruptores-de-interruptores-de.jpg?s=1024x1024&w=is&k=20&c=WQAeKAnPcwjFO2Fc8tc0ehAvN0B94J6pWVTRC11jVNk=" alt="Collage de proyectos con microcontroladores" class="section-image">
-        </section>
-
-        <section id="que-es" class="card alternate-bg">
-            <h2>¿Qué es exactamente un Microcontrolador?</h2>
-            <p>Es un chip súper inteligente, un pequeño computador en un solo circuito integrado. Su corazón es el <strong>microprocesador</strong>, que lee y ejecuta las instrucciones que tú le das (el código).</p>
-            <p>Es como el director de una orquesta 🎶, pero en lugar de músicos, controla luces, motores, sensores y mucho más para realizar una tarea específica.</p>
-        </section>
-
-        <section id="io" class="card">
-            <h2>¡Sintiendo y Actuando! (Entradas y Salidas)</h2>
-            <p>Los microcontroladores interactúan con el mundo real a través de Entradas y Salidas:</p>
-            <div class="io-columns">
-                <div class="io-column">
-                    <h3>INPUTS (Entradas - Los Sentidos <span class="emoji">👂👁️</span>)</h3>
-                    <p>Cómo "sienten" lo que pasa alrededor:</p>
-                    <ul>
-                        <li><span class="icon">🔘</span> Botones (¿Presionado?)</li>
-                        <li><span class="icon">☀️</span> Sensores de Luz (¿Día o noche?)</li>
-                        <li><span class="icon">🌡️</span> Sensores de Temperatura (¿Frío o calor?)</li>
-                        <li><span class="icon">〰️</span> Sensores de Movimiento (¿Algo se mueve?)</li>
-                    </ul>
-                     <img src="https://www.datocms-assets.com/53444/1661866062-types-of-sensors.jpg?auto=format&fit=max&w=1024" alt="Iconos de sensores" class="io-image">
-                </div>
-                <div class="io-column">
-                    <h3>OUTPUTS (Salidas - Las Acciones <span class="emoji">💡🔊</span>)</h3>
-                    <p>Cómo "actúan" en el mundo:</p>
-                    <ul>
-                        <li><span class="icon">💡</span> Encender LEDs (¡Luz!)</li>
-                        <li><span class="icon">⚙️</span> Mover Motores (¡Acción!)</li>
-                        <li><span class="icon">💬</span> Mostrar Mensajes (Pantallas)</li>
-                        <li><span class="icon">🔊</span> Producir Sonidos (Zumbadores)</li>
-                    </ul>
-                     <img src="https://roboticoss.com/wp-content/uploads/2023/04/Actuadores-para-robotica-1.webp" alt="Iconos de actuadores" class="io-image">
-                </div>
-            </div>
-        </section>
-
-        <section id="microbit" class="card alternate-bg">
-            <h2>Conoce a la Estrella: Micro:bit ⭐</h2>
-            <img src="https://cdn.sanity.io/images/ajwvhvgo/production/4de361b622ac9bf5e8b9c3109a3935dd47b96167-1490x609.png?w=653&q=80&fit=max&auto=format" alt="Placa Micro:bit" class="section-image centered">
-            <p>¡Tu puerta de entrada al mundo maker! El Micro:bit es súper amigable.</p>
-            <ul>
-                <li>Tiene una pantalla de <strong>25 LEDs</strong> para mostrar dibujos y mensajes.</li>
-                <li>Incluye <strong>botones A y B</strong> para interactuar.</li>
-                <li>¡Sensores incorporados! De <strong>movimiento</strong>, <strong>brújula</strong> y <strong>luz</strong>.</li>
-                <li>Conexión fácil con pinzas cocodrilo 🐊.</li>
-                <li>Se programa con <strong>bloques</strong> (¡como armar un puzzle!) usando MakeCode.</li>
-            </ul>
-            <p><strong>Ideal para:</strong> Empezar rápido, proyectos visuales, clases de tecnología.</p>
-        </section>
-
-        <section id="arduino" class="card">
-            <h2>Conoce a la Estrella: Arduino 🛠️</h2>
-             <img src="https://aprendiendoarduino.wordpress.com/wp-content/uploads/2017/06/15121-arduinouno-descripciondepines_thumb255b2255d.jpg?w=625" alt="Placa Arduino UNO" class="section-image centered">
-            <p>¡El campeón de la versatilidad y el favorito de los makers!</p>
-            <ul>
-                <li>Placa base con muchos <strong>pines</strong> para conectar de todo.</li>
-                <li>Requiere conectar <strong>componentes externos</strong> (sensores, LEDs, motores...).</li>
-                <li>¡Una <strong>comunidad GIGANTE</strong>! Millones de tutoriales y proyectos.</li>
-                <li>Se programa normalmente en <strong>texto</strong> (basado en C++), ¡un reto divertido!</li>
-                <li>Existen muchos modelos diferentes (UNO, Nano, Mega...).</li>
-            </ul>
-            <p><strong>Ideal para:</strong> Proyectos más complejos, aprender electrónica, gran flexibilidad.</p>
-        </section>
-
-        <section id="comparacion" class="card alternate-bg">
-            <h2>¿Micro:bit o Arduino? 🤔 ¡El Duelo Amistoso!</h2>
-            <p>Ambos son geniales, pero tienen sus diferencias. ¡Elige según tu aventura!</p>
-            <div class="comparison">
-                <div class="compare-col">
-                    <h3>Micro:bit</h3>
-                    <ul>
-                        <li>✅ Muy fácil para empezar</li>
-                        <li>✅ Sensores y LEDs incorporados</li>
-                        <li>✅ Programación visual (Bloques)</li>
-                        <li>✅ Ideal para primeras experiencias</li>
-                        <li>⚠️ Menos flexible para hardware externo complejo</li>
-                    </ul>
-                </div>
-                <div class="compare-col">
-                    <h3>Arduino</h3>
-                    <ul>
-                        <li>✅ Extremadamente Versátil</li>
-                        <li>✅ Conectas lo que necesites</li>
-                        <li>✅ Programación en texto (más potente)</li>
-                        <li>✅ Comunidad y recursos enormes</li>
-                        <li>⚠️ Curva de aprendizaje inicial un poco mayor</li>
-                    </ul>
-                </div>
-            </div>
-            <p class="conclusion-comparacion">¡Lo mejor es probar ambos! Empieza con Micro:bit y luego salta a Arduino, ¡o viceversa!</p>
-        </section>
-
-        <section id="esp32" class="card">
-            <h2>🚀 ¡Subiendo de Nivel! Más Allá...</h2>
-            <p>Micro:bit y Arduino son increíbles, ¡pero hay más! Cuando quieras hacer proyectos conectados a Internet (IoT - Internet de las Cosas), existe el...</p>
-             <img src="https://dinastiatecnologica.com/wp-content/uploads/2023/10/ESP32-Pinout.jpg" alt="Placa ESP32" class="section-image centered">
-            <h3>ESP32</h3>
-            <p>¡Este microcontrolador tiene <strong>WiFi y Bluetooth integrados</strong>! Imagina controlar tus proyectos desde tu celular o que publiquen datos en la web. ¡El futuro es conectado!</p>
-        </section>
-
-        <section id="cta" class="card call-to-action">
-            <h2>🎉 ¡Ahora es TU Turno! 🎉</h2>
-            <p>¡Has aprendido un montón! Pero esto es solo el comienzo de una aventura tecnológica increíble. ¡No tengas miedo de experimentar!</p>
-            <a href="https://makecode.microbit.org/" target="_blank" class="btn">Prueba el simulador Micro:bit</a>
-            <a href="https://www.tinkercad.com/circuits" target="_blank" class="btn">Prueba el simulador Arduino (Tinkercad)</a>
-            <a href="https://microbit.org/es/" target="_blank" class="btn">Sitio Oficial Micro:bit</a>
-            <a href="https://www.arduino.cc/" target="_blank" class="btn">Sitio Oficial Arduino</a>
-            <p class="final-motivation"><strong>¡El único límite es tu imaginación! ¿Qué vas a crear?</strong></p>
-        </section>
-
+        <div class="grade-buttons">
+            <a href="ovas8.html" class="grade-btn grade-8">
+                <span>Grado</span>
+                <strong>8º</strong>
+            </a>
+            <a href="ovas9.html" class="grade-btn grade-9">
+                <span>Grado</span>
+                <strong>9º</strong>
+            </a>
+            <a href="ovas10.html" class="grade-btn grade-10">
+                <span>Grado</span>
+                <strong>10º</strong>
+            </a>
+            <a href="ovas11.html" class="grade-btn grade-11">
+                <span>Grado</span>
+                <strong>11º</strong>
+            </a>
+        </div>
     </main>
 
-    <footer>
-        <p>Recurso Educativo Digital creado con 💗 para la clase de Tecnología e Informática (Grado 9º)</p>
+    <footer class="portal-footer">
+        <p>&copy; Diana Alejandra Bonilla-Cardona Msc - Tecnología e Informática</p>
     </footer>
 
 </body>
 </html>
-<style>
-	/* Importar Fuentes */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Quicksand:wght@500;700&display=swap');
-
-/* Variables de Color (CSS Custom Properties) */
-:root {
-    --color-principal: #223240; /* Azul oscuro/gris */
-    --color-apoyo1: #3B8C66;    /* Verde medio */
-    --color-apoyo2: #347355;    /* Verde oscuro */
-    --color-apoyo3: #60BF81;    /* Verde claro */
-    --color-contraste: #9FD948; /* Verde lima brillante */
-    --color-texto: #F0F0F0;     /* Gris muy claro / Blanco */
-    --font-titulos: 'Poppins', sans-serif;
-    --font-texto: 'Quicksand', sans-serif;
-}
-
-/* Reset Básico */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background-color: var(--color-principal);
-    color: var(--color-texto);
-    font-family: var(--font-texto);
-    line-height: 1.6;
-    font-size: 16px; /* Tamaño base para adolescentes */
-}
-
-header {
-    background-color: var(--color-apoyo2);
-    color: var(--color-contraste);
-    padding: 2rem 1rem;
-    text-align: center;
-    border-bottom: 5px solid var(--color-contraste);
-}
-
-header h1 {
-    font-family: var(--font-titulos);
-    font-size: 2.5rem; /* Tamaño grande y llamativo */
-    margin-bottom: 0.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-header .subtitle {
-    font-size: 1.2rem;
-    color: var(--color-texto);
-    font-weight: 500;
-}
-
-.container {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
-
-.card {
-    background-color: var(--color-apoyo1);
-    border-radius: 15px; /* Bordes redondeados amigables */
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease; /* Efecto sutil al pasar el ratón */
-}
-
-.card:hover {
-   transform: translateY(-5px); /* Pequeño levantamiento */
-}
-
-/* Fondo alterno para variedad visual */
-.card.alternate-bg {
-    background-color: var(--color-apoyo2);
-}
-
-.card h2 {
-    font-family: var(--font-titulos);
-    color: var(--color-contraste);
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--color-apoyo3);
-    padding-bottom: 0.5rem;
-}
-
-.card h3 {
-    font-family: var(--font-titulos);
-    color: var(--color-apoyo3);
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.card p, .card li {
-    margin-bottom: 1rem;
-    font-size: 1.1rem; /* Un poco más grande para fácil lectura */
-}
-
-.card ul {
-    list-style: none; /* Quitar puntos por defecto */
-    padding-left: 0;
-}
-
-.card li::before {
-    content: '➡️'; /* Usar un emoji o icono como viñeta */
-    color: var(--color-contraste);
-    margin-right: 0.8rem;
-    font-size: 1.2rem;
-}
-
-.section-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin: 1rem 0;
-    display: block; /* Para que centrar con margin auto funcione */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-.section-image.centered {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.io-columns {
-    display: flex; /* Usar flexbox para columnas */
-    flex-wrap: wrap; /* Para que se apilen en pantallas pequeñas */
-    gap: 2rem; /* Espacio entre columnas */
-    margin-top: 1.5rem;
-}
-
-.io-column {
-    flex: 1; /* Cada columna toma espacio igual */
-    min-width: 250px; /* Ancho mínimo antes de envolver */
-    background-color: rgba(0, 0, 0, 0.1); /* Fondo sutil para diferenciar */
-    padding: 1rem;
-    border-radius: 10px;
-}
-
-.io-column .emoji {
-    font-size: 1.5rem; /* Hacer emojis más grandes */
-}
-
-.io-column .icon {
-    display: inline-block;
-    margin-right: 0.5rem;
-    font-size: 1.2rem; /* Tamaño de iconos de ejemplo */
-    color: var(--color-apoyo3);
-}
-.io-image {
-     max-width: 100%;
-     height: auto;
-     border-radius: 5px;
-     margin-top: 1rem;
-}
-
-
-.comparison {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    margin-top: 1.5rem;
-}
-
-.compare-col {
-    flex: 1;
-    min-width: 280px;
-    border: 3px solid var(--color-apoyo3);
-    padding: 1.5rem;
-    border-radius: 10px;
-    background-color: var(--color-principal); /* Fondo oscuro para resaltar */
-}
-
-.compare-col h3 {
-    text-align: center;
-    color: var(--color-contraste);
-    margin-top: 0;
-}
-
-.compare-col ul {
-    padding-left: 0;
-}
-.compare-col li::before {
-     content: ''; /* Resetear el emoji por defecto */
-     margin-right: 0;
-}
-.compare-col li {
-    padding-left: 1.5em;
-    text-indent: -1.5em; /* Alinear texto después del ícono */
-}
-/* Íconos de check y warning para la comparación */
-.compare-col li::before {
-    font-family: sans-serif; /* O usar FontAwesome si se incluye */
-    margin-right: 0.7em;
-    font-weight: bold;
-}
-.compare-col li:nth-child(1)::before,
-.compare-col li:nth-child(2)::before,
-.compare-col li:nth-child(3)::before,
-.compare-col li:nth-child(4)::before {
-    content: '✅'; /* Check */
-     color: #76c77b; /* Verde suave */
-}
-.compare-col li:nth-child(5)::before {
-    content: '⚠️'; /* Warning */
-     color: #f0ad4e; /* Amarillo/Naranja */
-}
-
-
-.conclusion-comparacion {
-    text-align: center;
-    font-weight: bold;
-    margin-top: 1.5rem;
-    font-size: 1.2rem;
-    color: var(--color-apoyo3);
-}
-
-
-/* Estilo para Call to Action */
-.call-to-action {
-    background: linear-gradient(135deg, var(--color-apoyo3), var(--color-apoyo1));
-    text-align: center;
-}
-
-.call-to-action h2 {
-    color: var(--color-principal); /* Texto oscuro sobre fondo claro */
-    border-bottom: none;
-    font-size: 2.5rem;
-}
-.call-to-action p {
-     color: var(--color-principal);
-     font-weight: 500;
-}
-
-.btn {
-    display: inline-block;
-    background-color: var(--color-contraste);
-    color: var(--color-principal); /* Texto oscuro para contraste */
-    padding: 12px 25px;
-    border-radius: 25px; /* Botones redondeados */
-    text-decoration: none;
-    font-family: var(--font-titulos);
-    font-weight: bold;
-    margin: 0.5rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
-
-.btn:hover {
-    background-color: #8BC34A; /* Un tono ligeramente más oscuro del contraste */
-    transform: scale(1.05); /* Efecto de zoom sutil */
-    color: #000;
-}
-
-.final-motivation {
-    margin-top: 1.5rem;
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: var(--color-principal);
-}
-
-footer {
-    text-align: center;
-    padding: 1.5rem;
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    color: var(--color-apoyo3);
-    border-top: 1px solid var(--color-apoyo2);
-}
-
-/* Media Queries para Responsividad (Ejemplo básico) */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
-    }
-    .card h2 {
-        font-size: 1.8rem;
-    }
-    .io-columns, .comparison {
-        flex-direction: column; /* Apilar columnas en pantallas pequeñas */
-    }
-     .btn {
-          display: block; /* Hacer botones ocupar todo el ancho */
-          margin: 0.8rem auto;
-     }
-}
-</style>

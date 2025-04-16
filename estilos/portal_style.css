@@ -1,0 +1,217 @@
+/* Importar Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Quicksand:wght@500;700&display=swap');
+
+/* Variables de Color - Paleta basada en el Escudo de la I.E. */
+:root {
+    /* Colores extraídos o inspirados en el escudo */
+    --color-escudo-rojo: #A81C1C;      /* Rojo principal del borde y la cruz */
+    --color-escudo-verde: #2E8B57;     /* Verde de las hojas de laurel */
+    --color-escudo-azul: #3498DB;      /* Azul del símbolo de agua */
+    --color-escudo-blanco: #FFFFFF;    /* Blanco de los fondos del escudo */
+    --color-escudo-negro: #333333;     /* Negro/Gris oscuro (inspirado en la rueda dentada) */
+    --color-escudo-dorado: #F39C12;    /* Dorado/Naranja (inspirado en el apretón de manos/hover) */
+
+    /* Aplicación de la paleta del escudo */
+    --color-bg: var(--color-escudo-blanco);         /* Fondo principal - Blanco */
+    --color-header-bg: var(--color-escudo-rojo);    /* Fondo cabecera - Rojo del escudo */
+    --color-header-text: var(--color-escudo-blanco);/* Texto cabecera - Blanco */
+    --color-footer-bg: var(--color-escudo-negro);   /* Fondo pie de página - Negro/Gris oscuro */
+    --color-footer-text: #e9ecef;                   /* Texto pie de página - Gris claro */
+    --color-text-main: var(--color-escudo-negro);   /* Texto principal - Negro/Gris oscuro */
+    --color-accent1: var(--color-escudo-azul);      /* Acento 1 - Azul del escudo (Botón 8 y 10) */
+    --color-accent2: var(--color-escudo-verde);     /* Acento 2 - Verde del escudo (Botón 9 y 11) */
+    --color-accent-hover: var(--color-escudo-dorado);/* Acento Hover - Dorado/Naranja */
+    --color-btn-text: var(--color-escudo-blanco);   /* Texto botones - Blanco */
+
+    --font-titulos: 'Poppins', sans-serif;
+    --font-texto: 'Quicksand', sans-serif;
+}
+
+/* Reset Básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    font-family: var(--font-texto);
+    line-height: 1.6;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el footer quede abajo */
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Estilos de la Cabecera */
+.portal-header {
+    background-color: var(--color-header-bg);
+    color: var(--color-header-text);
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Para pantallas pequeñas */
+    gap: 1rem; /* Espacio entre logo e info */
+}
+
+.school-logo {
+    max-height: 80px; /* Ajusta según el tamaño de tu logo */
+    width: auto;
+    border-radius: 5px; /* Pequeño redondeo si se desea */
+}
+
+.header-info {
+    text-align: right; /* Alinea texto a la derecha */
+    flex-grow: 1; /* Permite que tome el espacio restante */
+}
+
+.header-info h1 {
+    font-family: var(--font-titulos);
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+}
+
+.header-info p {
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+    line-height: 1.4;
+}
+
+/* Estilos del Contenido Principal */
+.portal-main {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    text-align: center;
+    flex-grow: 1; /* Empuja el footer hacia abajo */
+}
+
+.portal-main h2 {
+    font-family: var(--font-titulos);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-header-bg); /* Usa el rojo del header */
+}
+
+.portal-instructions {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    color: #555;
+}
+
+/* Contenedor de Botones de Grado */
+.grade-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Para que se ajusten en pantallas pequeñas */
+    gap: 1.5rem; /* Espacio entre botones */
+}
+
+/* Estilo de los Botones de Grado */
+.grade-btn {
+    display: flex;
+    flex-direction: column; /* Para poner "Grado" encima del número */
+    align-items: center;
+    justify-content: center;
+    width: 150px; /* Ancho fijo */
+    height: 150px; /* Alto fijo */
+    border-radius: 15px; /* Bordes redondeados */
+    color: var(--color-btn-text);
+    text-decoration: none;
+    font-family: var(--font-titulos);
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.grade-btn span {
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.grade-btn strong {
+    font-size: 3rem; /* Número grande */
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* Colores específicos para cada botón (Azul y Verde del escudo) */
+.grade-btn.grade-8,
+.grade-btn.grade-10 {
+    background-color: var(--color-accent1); /* Azul */
+}
+
+.grade-btn.grade-9,
+.grade-btn.grade-11 {
+    background-color: var(--color-accent2); /* Verde */
+}
+
+/* Efecto Hover para los botones (Dorado/Naranja del escudo) */
+.grade-btn:hover {
+    transform: translateY(-5px) scale(1.03); /* Levantar y agrandar ligeramente */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    background-color: var(--color-accent-hover); /* Cambia a Dorado/Naranja */
+    color: var(--color-text-main); /* Texto oscuro en hover */
+}
+
+/* Estilos del Pie de Página */
+.portal-footer {
+    background-color: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto; /* Asegura que se pegue abajo si el contenido es corto */
+    font-size: 0.9rem;
+}
+
+/* Media Queries para Responsividad (Ejemplo básico) */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column; /* Apilar logo e info */
+        text-align: center; /* Centrar todo */
+    }
+    .header-info {
+        text-align: center; /* Centrar texto de info */
+    }
+    .portal-main h2 {
+        font-size: 1.8rem;
+    }
+    .grade-btn {
+        width: 120px;
+        height: 120px;
+    }
+    .grade-btn strong {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .grade-buttons {
+        gap: 1rem;
+    }
+     .grade-btn {
+        width: 100px;
+        height: 100px;
+    }
+    .grade-btn strong {
+        font-size: 2rem;
+    }
+     .header-info h1 {
+        font-size: 1.5rem;
+    }
+}

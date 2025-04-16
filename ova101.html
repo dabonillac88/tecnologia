@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVA - Ciclos While: Concepto y Python</title>
+    <link rel="stylesheet" href="estilos/grado10_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="simple-header">
+        <div class="container header-container">
+            <h1>// OVA: Ciclos While - Concepto y Python</h1>
+            <a href="ovas10.html" class="back-link">&lt; Volver a Grado 10</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>./Introduccion_a_los_Ciclos</h2>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🤔</span> ¿Qué es un Ciclo? La Magia de Repetir</h3>
+            <p>En programación, un <strong>ciclo</strong> (o bucle) es una estructura que nos permite <strong>repetir un conjunto de instrucciones</strong> varias veces, sin tener que escribirlas una y otra vez.</p>
+            <p>Imagina que tuvieras que darle 5 vueltas a la cancha. No piensas "correr paso 1, correr paso 2, ... , correr paso 5000". Simplemente piensas: "<strong>Repetir</strong> 'correr una vuelta' <strong>hasta</strong> completar 5 vueltas". ¡Eso es un ciclo!</p>
+            <p>Los ciclos son fundamentales porque nos ahorran tiempo, reducen la cantidad de código y permiten realizar tareas que serían imposibles manualmente (¡imagina repetir algo un millón de veces!).</p>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🧱</span> Recordando MakeCode: Bloques que Repiten</h3>
+            <p>Si has trabajado con Micro:bit usando MakeCode, probablemente ya has usado ciclos sin darte cuenta. Bloques como `repetir [4] veces` o `mientras [condición] ejecutar` son ciclos.</p>
+            <div style="position:relative;height:0;padding-bottom:70%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/#pub:_fodFx8bVT509" frameborder="0" sandbox="allow-popups allow-forms allow-scripts allow-same-origin"></iframe></div>
+            <p>El bloque `mientras` de MakeCode es el primo hermano del ciclo `while` en Python. Ambos funcionan bajo la misma lógica: <strong>ejecutar un bloque de acciones repetidamente mientras una condición específica se mantenga verdadera</strong>.</p>
+            <p>La diferencia principal está en cómo lo escribimos: MakeCode usa bloques visuales, mientras que Python usa texto (código).</p>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">📊</span> El Diagrama de Flujo: Dibujando la Repetición</h3>
+            <p>Una forma visual de entender cómo funciona un ciclo `while` es mediante un diagrama de flujo. Utiliza símbolos estándar:</p>
+            <ul>
+                <li><strong>Rombo (Decisión):</strong> Representa la condición (`¿condición es Verdadera?`). Tiene dos salidas: 'Sí' y 'No'.</li>
+                <li><strong>Rectángulo (Proceso):</strong> Representa las acciones o instrucciones que se ejecutan dentro del ciclo.</li>
+                <li><strong>Flechas:</strong> Indican el flujo o la secuencia de ejecución.</li>
+            </ul>
+            <p>Un diagrama de flujo típico para un ciclo `while` se vería así:</p>
+            <img src="imagenes/ciclos.png" alt="[Diagrama de flujo de un ciclo while: Flecha entra a Rombo (Condición?), si 'Sí' va a Rectángulo (Acciones) y vuelve al Rombo, si 'No' sale del ciclo]" style="max-width: 450px; margin: 1rem auto; display: block; background-color: #fff; padding: 10px; border-radius: 5px;">
+            <p>Observa cómo si la condición es 'Sí' (Verdadera), se ejecutan las acciones y <strong>se vuelve a comprobar la condición</strong>. Si la condición es 'No' (Falsa), el flujo continúa fuera del ciclo.</p>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🐍</span> El Ciclo `while` en Python: La Estructura Detallada</h3>
+            <p>Ahora sí, veamos cómo se escribe un `while` en Python. ¡Presta atención a cada parte!</p>
+           <iframe src="https://trinket.io/embed/python3/c014781af55f" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+            <p><strong>Desglose de la Estructura:</strong></p>
+            <ol>
+                <li><strong>`while condicion:`</strong>: Empieza con la palabra `while`, seguida de la `condicion` que se evaluará (ej: contador>0). La condición debe resultar en `True` para que el ciclo se ejecute, o `False` para que termine o no empiece. Termina siempre con dos puntos `:`.</li>
+                <li><strong>Bloque Indentado:</strong> Las líneas de código que quieres repetir <strong>deben</strong> tener una indentación (normalmente 2 o 4 espacios, puedes usar la tecla TAB) respecto a la línea del `while`. Python usa esta indentación para saber qué código pertenece al ciclo.</li>
+                <li><strong>Actualización (¡CRÍTICA!):</strong> Dentro del bloque indentado, tiene que haber al menos una instrucción que modifique alguna variable involucrada en la `condicion`. En el ejemplo, `contador = contador - 1` asegura que `contador` disminuya y eventualmente `contador >0` se vuelva `False`. Si olvidas esto, ¡crearás un ciclo infinito! ⚠️</li>
+            </ol>
+            <p>Entender bien estas tres partes es clave para usar los ciclos `while` correctamente.</p>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🔢</span> Ejemplo 1: Contando hasta 5 (Repaso)</h3>
+            <p>Recordemos el ejemplo clásico y apliquemos lo aprendido:</p>
+           <iframe src="https://trinket.io/embed/python3/8caebad3cf57" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+            <div class="interactive-prompt">
+                <strong><span style="font-size: 1.2em; margin-right: 0.5rem;">💡</span> ¡Inténtalo tú!</strong>
+                <ol>
+                    <li> Ejecuta este código.</li>
+                    <li><strong>Modifica:</strong> Cambia la inicialización (`contador = 0`) y la condición para imprimir del 0 al 4.</li>
+                    <li><strong>Experimenta:</strong> ¿Qué pasa si la condición inicial es `contador > 5`? ¿Entra al ciclo alguna vez?</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">⚠️</span> ¡Peligro! Ciclos Infinitos</h3>
+             <p>Como vimos, si la condición de tu `while` NUNCA se vuelve `False` porque olvidas la actualización o por un error lógico, tendrás un <strong>ciclo infinito</strong>.</p>
+            <pre><code class="language-python">
+# ¡Cuidado! Ciclo infinito si no hay actualización
+numero = 10
+while numero > 0:
+    print("El número sigue siendo positivo...")
+    # Falta algo como: numero = numero-1
+            </code></pre>
+            <p>Recuerda `Ctrl + C` para detenerlo y ¡siempre revisa la lógica de salida de tus ciclos!</p>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">⌨️</span> Ejemplo 2: Validando la entrada</h3>
+            <p>Usar `while` para asegurar datos válidos es muy útil.</p>
+       <iframe src="https://trinket.io/embed/python3/a392cb349671" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>     
+             <div class="interactive-prompt">
+                <strong><span style="font-size: 1.2em; margin-right: 0.5rem;">💻</span> ¡Modifica el código!</strong>
+                <ol>
+                    <li>Ejecuta y prueba ingresando números fuera de rango, letras, etc.</li>
+                    <li>Cambia el rango para que pida un número entre 50 y 100.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🚩</span> Ejemplo 3: Usando Banderas (Flags)</h3>
+            <p>Una variable `True`/`False` (bandera) puede controlar el ciclo.</p>
+            <iframe src="https://trinket.io/embed/python3/cf4fc78eddd0" width="100%" height="356" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+             <div class="interactive-prompt">
+                <strong><span style="font-size: 1.2em; margin-right: 0.5rem;">🚀</span> Experimenta</strong>
+                <ol>
+                  <li>Ejecuta el programa y prueba a escribir diferentes cosas</li>
+                    <li>Cambia la palabra clave para salir (por ejemplo, a "fin").</li>
+                    <li>Haz que el programa ignore si el usuario solo presiona Enter (entrada vacía). Pista: `if texto_usuario == "":` Pista 2, usa el comando continue.</li>
+                </ol>
+            </div>
+        </section>
+
+       
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🎯</span> ¡A Practicar se Dijo!</h3>
+            <p>¡Has recorrido un largo camino con los ciclos `while`! Lo esencial:</p>
+            <ul>
+                <li>Repiten <strong>mientras</strong> condición sea `True`.</li>
+                <li>Necesitan <strong>condición</strong>, <strong>bloque indentado</strong> y <strong>salida</strong> </li>
+            </ul>
+            <p>La clave es <strong>PRACTICAR</strong>. ¡Modifica, crea, experimenta!</p>
+            <p><strong>Tarea para practicar:</strong></p>
+            <ol>
+                <li>Imprime números del 10 al 1 hacia atrás usando `while`.</li>
+                <li>Pide al usuario una contraseña. Mientras no sea "secreto123", sigue pidiéndola.</li>
+                <li>Simula tirar un dado (número aleatorio 1-6) hasta que salga un 6. Cuenta cuántos tiros necesitaste. (Usa `import random`).</li>
+            </ol>
+            <p><strong>¡No te rindas y sigue codificando!</strong></p>
+        </section>
+
+    </main>
+
+    <footer class="portal-footer">
+       &copy; Diana Alejandra Bonilla-Cardona Msc - Tecnología e Informática
+    </footer>
+
+</body>
+</html>
