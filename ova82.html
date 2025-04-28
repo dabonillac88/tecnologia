@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVA - ¡Tu Primer Videojuego en Scratch! (Pong)</title>
+    <link rel="stylesheet" href="estilos/grado8_style1.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="simple-header">
+        <div class="container header-container">
+            <h1>1ST GAME: SCRATCH PONG!</h1>
+            <a href="ovas8.html" class="back-link">&lt;&lt; BACK</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>CREANDO UN CLASICO: PONG</h2>
+
+        <section class="tutorial-section">
+            <h3>Fase 1: HOLA SCRATCH! START!</h3>
+            <p>¡Hey! Ya sabes cómo funciona la industria de los juegos. ¡Ahora te toca CREAR! Vamos a usar <strong>SCRATCH</strong>: programación visual con bloques de colores, ¡como LEGOS!</p>
+
+            <h4>LA PANTALLA DE SCRATCH</h4>
+            <p>Mira rápido dónde está todo: el ESCENARIO (donde pasa la acción), la LISTA DE SPRITES (tus personajes/objetos), los BLOQUES (las órdenes) y el AREA DE CODIGO (donde armas las órdenes).</p>
+            <h4>ACCION: PREPARA EL JUEGO</h4>
+            <ol>
+                <li>Entra a Scratch: <a href="https://scratch.mit.edu/create" target="_blank" style="color: var(--color-accent); text-decoration: underline;">CREAR EN SCRATCH</a>.</li>
+                <li><strong>ADIOS GATO:</strong> No necesitamos al gato. Bórralo (clic en la basura sobre su icono en la lista de Sprites).</li>
+                <li><strong>ELIGE FONDO:</strong> Clic en "Elige un fondo". Busca uno tipo "NEON TUNNEL" o "STARS". ¡El que te guste más!</li>
+            </ol>
+            <div class="iframe-placeholder">
+                <iframe src="https://scratch.mit.edu/projects/1165193455/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                </div>
+            <p><strong>REFLEXIONA 🤔:</strong> ¿Por qué crees que empezamos eligiendo un fondo? ¿Cómo ayuda el fondo a la sensación del juego?</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3>Fase 2: LA PELOTA SE MUEVE!</h3>
+            <p>En Scratch, los personajes u objetos se llaman <strong>SPRITES</strong>. Cada Sprite tiene su propio código. ¡Vamos a añadir y programar nuestra pelota!</p>
+            <h4>ACCION: PROGRAMA LA PELOTA</h4>
+            <ol>
+                <li><strong>AÑADE PELOTA (SPRITE):</strong> Clic en "Elige un Sprite". Busca y elige "BALL". ¡Ya tienes tu primer actor en el escenario!</li>
+                <li><strong>CODIGO DE MOVIMIENTO:</strong> Selecciona la "BALL". Arrastra estos bloques:
+                    <ul>
+                        <li>EVENTOS: <code class="scratch-block">AL PRESIONAR BANDERA VERDE</code>. <strong>Piensa:</strong> ¿Qué crees que hace este bloque? ¡Es el "START" de nuestro código!</li>
+                        <li>MOVIMIENTO: <code class="scratch-block">APUNTAR EN DIRECCION (45)</code>. Para que no siempre salga igual.</li>
+                        <li>CONTROL: <code class="scratch-block">POR SIEMPRE</code>. <strong>¡Importante!</strong> Este es un <strong>CICLO</strong> o <strong>BUCLE</strong>. Lo que pongas dentro se repetirá sin parar. ¿Por qué necesitamos que la pelota se mueva *siempre*?</li>
+                        <li>*DENTRO DEL POR SIEMPRE*:</li>
+                        <li>MOVIMIENTO: <code class="scratch-block">MOVER (10) PASOS</code>. Le dice al Sprite que avance.</li>
+                        <li>MOVIMIENTO: <code class="scratch-block">SI TOCA UN BORDE, REBOTAR</code>. ¡Magia para que no se salga!</li>
+                    </ul>
+                </li>
+                <li><strong>¡PRUEBA!:</strong> Clic en la bandera verde (🚩). ¡Observa el <strong>CICLO</strong> en acción! La pelota se mueve y rebota constantemente. Clic en stop (🛑).</li>
+            </ol>
+            <div class="iframe-placeholder">
+               <iframe src="https://scratch.mit.edu/projects/1165194564/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                </div>
+            <p><strong>EXPLORA 🚀:</strong> ¿Qué pasa si cambias el número en <code class="scratch-block">MOVER (10) PASOS</code> a 5? ¿Y a 20? ¿Qué efecto tiene en el juego?</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3>Fase 3: TU CONTROLAS LA PALETA!</h3>
+            <p>¡Necesitamos la paleta (paddle) y que TÚ la controles! Aquí entra la <strong>INTERACCIÓN</strong> del jugador.</p>
+            <h4>ACCION: PROGRAMA LA PALETA</h4>
+            <ol>
+                <li><strong>AÑADE PALETA (SPRITE):</strong> Clic en "Elige un Sprite". Busca "PADDLE". Ponla abajo en el escenario.</li>
+                <li><strong>CODIGO DE MOVIMIENTO:</strong> Selecciona el "PADDLE". Arrastra:
+                    <ul>
+                        <li>EVENTOS: <code class="scratch-block">AL PRESIONAR BANDERA VERDE</code>.</li>
+                        <li>CONTROL: <code class="scratch-block">POR SIEMPRE</code>. ¿Por qué necesitamos otro ciclo aquí? ¡Porque queremos que la paleta reaccione a nuestro movimiento *todo el tiempo*!</li>
+                        <li>*DENTRO DEL POR SIEMPRE*:</li>
+                        <li>MOVIMIENTO: <code class="scratch-block">FIJAR X A (...)</code>. <strong>Piensa:</strong> El escenario es como un mapa con coordenadas. 'X' es la posición horizontal (izquierda-derecha).</li>
+                        <li>SENSORES: <code class="scratch-block">POSICION X DEL RATON</code> (ponlo en el hueco de `FIJAR X A`). Este bloque "siente" dónde está tu ratón horizontalmente.</li>
+                    </ul>
+                </li>
+                <li><strong>¡PRUEBA!:</strong> Bandera verde. Mueve el ratón. ¡La paleta te obedece! Esto es gracias a los <strong>SENSORES</strong> y al <strong>CICLO</strong> que actualiza la posición constantemente. Detén el juego.</li>
+            </ol>
+             <div class="iframe-placeholder">
+                <iframe src="https://scratch.mit.edu/projects/1165198758/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                </div>
+             <p><strong>REFLEXIONA 🤔:</strong> ¿Qué pasaría si solo pusiéramos <code class="scratch-block">FIJAR X A (POSICION X DEL RATON)</code> debajo de la bandera verde, sin el ciclo <code class="scratch-block">POR SIEMPRE</code>? ¡Intenta averiguarlo!</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3>Fase 4: REBOTE Y PUNTOS!</h3>
+            <p>¡La parte clave! Necesitamos que la pelota "sepa" cuándo toca la paleta y reaccione. Usaremos <strong>CONDICIONES</strong> (bloques `SI...ENTONCES`) y <strong>VARIABLES</strong> para guardar la puntuación.</p>
+            <h4>ACCION: PROGRAMA REBOTE Y PUNTOS</h4>
+            <ol>
+                <li><strong>CREA VARIABLE 'PUNTOS':</strong>
+                    <ul>
+                        <li>Ve a VARIABLES. Clic "Crear una variable". Nombre: `Puntos`. Deja "Para todos los sprites". Aceptar. <strong>Piensa:</strong> Una <strong>VARIABLE</strong> es como una caja donde guardamos un valor que puede cambiar. Aquí guardaremos... ¡los puntos!</li>
+                    </ul>
+                </li>
+                <li><strong>PUNTOS A CERO AL INICIO:</strong>
+                    <ul>
+                        <li>Selecciona la **PELOTA**.</li>
+                        <li>Debajo de su <code class="scratch-block">AL PRESIONAR BANDERA VERDE</code>, añade: VARIABLES: <code class="scratch-block">FIJAR [Puntos] A (0)</code>. ¡Siempre empezamos con 0 puntos!</li>
+                    </ul>
+                </li>
+                <li><strong>PROGRAMA EL REBOTE (en la PELOTA):</strong>
+                    <ul>
+                        <li>Selecciona la **PELOTA**.</li>
+                        <li>*DENTRO* de su <code class="scratch-block">POR SIEMPRE</code>, añade:
+                            <ul>
+                                <li>CONTROL: <code class="scratch-block">SI (...) ENTONCES</code>. Este bloque toma una <strong>DECISIÓN</strong>: si la condición en el hueco es verdadera, hace lo que está dentro.</li>
+                                <li>SENSORES: <code class="scratch-block">TOCANDO [Paddle]?</code> (ponlo en el hueco del SI). Este <strong>SENSOR</strong> detecta si la pelota está tocando la paleta.</li>
+                                <li>*DENTRO DEL SI (TOCANDO PADDLE?)*: ¡Aquí van las consecuencias del toque!
+                                    <ul>
+                                        <li>VARIABLES: <code class="scratch-block">SUMAR A [Puntos] (1)</code>. ¡Aumentamos la puntuación!</li>
+                                        <li>MOVIMIENTO: <code class="scratch-block">APUNTAR EN DIRECCION (180 - (DIRECCION))</code>. <strong>¡El truco del rebote!</strong> Usa <strong>OPERADORES</strong> para calcular una nueva dirección opuesta a la que venía.</li>
+                                        <li>*(OPCIONAL)* MOVIMIENTO: <code class="scratch-block">MOVER (15) PASOS</code>. Para "despegarla" rápido.</li>
+                                        <li>*(OPCIONAL)* SONIDO: <code class="scratch-block">TOCAR SONIDO [pop v] HASTA QUE TERMINE</code>. ¡Feedback auditivo!</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>¡A JUGAR!:</strong> Bandera verde. Golpea la pelota. Observa cómo la <strong>CONDICIÓN</strong> <code class="scratch-block">SI TOCANDO PADDLE?</code> se cumple, y se ejecutan las acciones dentro: suma puntos y cambia la dirección.</li>
+            </ol>
+             <div class="iframe-placeholder">
+                <iframe src="https://scratch.mit.edu/projects/1165203023/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                </div>
+             <p><strong>EXPLORA 🚀:</strong> ¿Qué otros bloques de <strong>SENSORES</strong> hay? ¿Podrías hacer que la pelota cambie de color al tocar la paleta usando un bloque de <strong>APARIENCIA</strong> dentro del <code class="scratch-block">SI</code>?</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3>Fase 5: GAME OVER!</h3>
+            <p>Todo juego necesita un final. Si la pelota toca el suelo (el borde inferior), ¡perdemos!</p>
+            <h4>ACCION: PROGRAMA EL GAME OVER</h4>
+            <ol>
+                <li><strong>PROGRAMA LA CONDICION (en la PELOTA):</strong>
+                    <ul>
+                        <li>Selecciona la **PELOTA**.</li>
+                        <li>*DENTRO* de su <code class="scratch-block">POR SIEMPRE</code>, añade OTRO <code class="scratch-block">SI (...) ENTONCES</code>.</li>
+                        <li>OPERADORES: <code class="scratch-block">( ) < ( )</code> (ponlo en el hueco del SI).</li>
+                        <li>MOVIMIENTO: <code class="scratch-block">POSICION Y</code> (ponlo en el primer hueco). <strong>Recuerda:</strong> 'Y' es la posición vertical (arriba-abajo).</li>
+                        <li>Escribe `-170` en el segundo hueco. Esta es otra <strong>CONDICIÓN</strong>: ¿Está la pelota muy abajo?</li>
+                        <li>*DENTRO* de este SI:
+                             <ul>
+                                <li>*(OPCIONAL)* SONIDO: Añade un sonido de perder.</li>
+                                <li>CONTROL: <code class="scratch-block">DETENER [todos v]</code>. ¡Este bloque para todo el juego!</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>¡PRUEBA FINAL!:</strong> Bandera verde. Juega y deja caer la pelota. La <strong>CONDICIÓN</strong> <code class="scratch-block">(POSICION Y) < (-170)</code> se vuelve verdadera y el bloque <code class="scratch-block">DETENER TODOS</code> se ejecuta.</li>
+            </ol>
+             <div class="iframe-placeholder">
+                <iframe src="https://scratch.mit.edu/projects/1165207626/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                </div>
+             <p><strong>REFLEXIONA 🤔:</strong> ¿Por qué usamos <code class="scratch-block">POSICION Y</code> para detectar si se pierde? ¿Podríamos usar <code class="scratch-block">TOCANDO [borde]?</code>? ¿Cuál es la diferencia?</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3>Fase 6: ¡MEJORA TU JUEGO!</h3>
+            <p>¡Ya eres un creador de Pong! Pero... ¿y si lo haces AUN MEJOR? ¡Acepta el desafío!</p>
+            <ul>
+                <li><strong>ESTILO PROPIO:</strong> ¡Cambia todo! Fondo, colores, sprites. ¡Sé original! Crea una portada de inicio para tu juego en donde uses un botón start</li>
+                <li><strong>SONIDOS COOL:</strong> Busca o graba sonidos más impactantes.</li>
+                <li><strong>MAS VELOCIDAD:</strong> ¿Que la pelota acelere? (Usa una variable 'velocidad').</li>
+                <li><strong>CONTROL TECLADO:</strong> Mueve la paleta con flechas. (Usa <code class="scratch-block">SI TECLA [...] PRESIONADA?</code>).</li>
+                <li><strong>MODO 2 JUGADORES (PRO):</strong> ¿Otra paleta arriba con teclas W/S?</li>
+            </ul>
+            <p>¡Experimenta! ¡La programación es probar, fallar y aprender!</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3>Fase 7: ¡NIVEL SUPERADO!</h3>
+            <p><strong>¡FELICIDADES!</strong> ¡Programaste tu primer videojuego!</p>
+            <p>Usaste conceptos CLAVE que usan los profesionales:</p>
+            <ul>
+                <li><strong>SPRITES</strong> (Objetos)</li>
+                <li><strong>EVENTOS</strong> (Inicio)</li>
+                <li><strong>CICLOS</strong> (Repetición)</li>
+                <li><strong>CONDICIONES</strong> (Decisiones)</li>
+                <li><strong>SENSORES</strong> (Detectar)</li>
+                <li><strong>VARIABLES</strong> (Guardar datos)</li>
+                <li><strong>COORDENADAS</strong> (Posición)</li>
+            </ul>
+            <p>¡Scratch es solo el comienzo! ¡Sigue explorando y creando!</p>
+        </section>
+
+        <section class="evidence-section">
+            <h3>EVIDENCIA DE APRENDIZAJE</h3>
+            <p>Muestra lo que hiciste (pregunta a tu profe como):</p>
+            <h4>1. COMPARTE TU PROYECTO</h4>
+            <ul>
+                <li>En Scratch, clic en "Compartir". Copia el enlace.</li>
+                <li>Pega el enlace donde te digan. ¡Muestra tus mejoras!</li>
+            </ul>
+            <h4>2. CAPTURAS DE PANTALLA</h4>
+            <ul>
+                <li>Toma un pantallazo de tu código (ej: el rebote).</li>
+                <li>Guarda y envía la imagen.</li>
+            </ul>
+            <h4>3. PREGUNTAS DE REFLEXION</h4>
+            <p>Responde:</p>
+            <ul>
+                <li>¿Qué bloque mueve la paleta con el ratón?</li>
+                <li>¿Para qué sirve la variable 'Puntos'?</li>
+                <li>¿Qué fue lo más difícil? ¿Por qué?</li>
+                <li>Si mejoraste el juego, ¿qué cambios hiciste?</li>
+            </ul>
+            <h4>4. AUTOEVALUACION</h4>
+            <p>Revisa tu juego:</p>
+            <ul>
+                <li>[ ] Pelota se mueve y rebota en bordes.</li>
+                <li>[ ] Paleta sigue al ratón/teclas.</li>
+                <li>[ ] Pelota rebota en paleta.</li>
+                <li>[ ] Puntos funcionan.</li>
+                <li>[ ] Juego termina si pierdes.</li>
+                <li>[ ] (Opcional) Hice mejoras personales.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer class="portal-footer">
+        <p>Diana Alejandra Bonilla Cardona Msc, Tecnología e informática</p>
+    </footer>
+
+</body>
+</html>

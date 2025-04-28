@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVA - Computación Física con Micro:bit</title>
+    <link rel="stylesheet" href="estilos/grado9_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="simple-header">
+        <div class="container header-container">
+            <h1>// Computación Física: ¡Micro:bit al Rescate!</h1>
+            <a href="ovas9.html" class="back-link">&lt; Volver a Grado 9</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Mundo Digital + Mundo Real = ¡Computación Física!</h2>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🔌</span> Fase 1: ¿Qué Rayos es la Computación Física?</h3>
+            <p>¡Futuros ingenieros y creadores! ¿Alguna vez han pensado cómo un robot sabe cuándo detenerse antes de chocar? ¿O cómo las luces de la calle se encienden solas cuando oscurece? ¡Eso es <strong>Computación Física</strong>!</p>
+            <p>Es la magia de conectar el mundo digital de los computadores y el código con el mundo físico que podemos tocar y ver. Se trata de usar <strong>sensores</strong> para "sentir" el entorno (luz, temperatura, movimiento) y <strong>actuadores</strong> para "hacer" cosas en el mundo real (encender luces, mover motores, mostrar mensajes).</p>
+            <p><strong>¿Por qué es importante?</strong> ¡Está en todas partes! En la robótica, el Internet de las Cosas (IoT), la domótica (casas inteligentes), los videojuegos interactivos... ¡Es el futuro que ustedes construirán!</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🧠</span> Fase 2: Conociendo a Nuestro Cerebro: Micro:bit y MakeCode</h3>
+            <p>Para nuestros experimentos de computación física, usaremos una herramienta increíble: la tarjeta <strong>Micro:bit</strong>. ¡Piensen en ella como un pequeño cerebro programable!</p>
+
+            <h4>El Micro:bit: Un Vistazo Rápido</h4>
+            <p>Esta pequeña tarjeta tiene un montón de cosas incorporadas:</p>
+            <ul>
+                <li>Una <strong>pantalla de 5x5 LEDs</strong>: ¡Para mostrar iconos, animaciones y mensajes!</li>
+                <li><strong>Botones A y B</strong>: Para interactuar con nuestros programas.</li>
+                <li><strong>Sensores</strong>: ¡Puede sentir luz, temperatura, movimiento (acelerómetro) y hasta tiene una brújula!</li>
+                <li><strong>Pines de conexión</strong>: Para conectar componentes externos (¡como veremos más adelante!).</li>
+            </ul>
+            <p><strong>Reflexiona 🤔:</strong> ¿Qué ideas se te ocurren usando solo los LEDs y los botones del Micro:bit?</p>
+
+            <h4>MakeCode: Programando con Bloques</h4>
+            <p>Para darle instrucciones al Micro:bit, usaremos <strong>MakeCode</strong>. Es un editor de programación visual basado en bloques, similar a Scratch. ¡Arrastras y conectas bloques de colores para crear tu código!</p>
+            <div class="makecode-placeholder">
+            <div style="position:relative;height:0;padding-bottom:70%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/#pub:S66267-64860-40869-02310" frameborder="0" sandbox="allow-popups allow-forms allow-scripts allow-same-origin"></iframe></div>
+                </div>
+            <p>Lo genial de MakeCode es que tiene un <strong>simulador</strong>: puedes probar tu código directamente en el navegador antes de pasarlo al Micro:bit real.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">💡</span> Fase 3: ¡El Proyecto! Pantalla Reactiva a la Luz</h3>
+            <p>¡Manos a la obra, ingenieros! Nuestro primer proyecto será crear una "Pantalla Reactiva". Haremos que la pantalla de LEDs del Micro:bit cambie su apariencia dependiendo de cuánta luz detecte su sensor.</p>
+            <p><strong>El Flujo Lógico:</strong></p>
+            <ol>
+                <li><strong>Entrada (Input):</strong> El Micro:bit medirá el nivel de luz ambiental usando su sensor incorporado.</li>
+                <li><strong>Procesamiento (Processing):</strong> Nuestro código en MakeCode tomará ese nivel de luz y decidirá qué mostrar.</li>
+                <li><strong>Salida (Output):</strong> La pantalla de 5x5 LEDs mostrará un patrón o icono diferente según la decisión tomada.</li>
+            </ol>
+            <p>¡Vamos a decirle al Micro:bit cómo reaccionar a su entorno!</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">💻</span> Fase 4: ¡A Programar en MakeCode!</h3>
+            <p>Abre el editor de MakeCode para Micro:bit: <a href="https://makecode.microbit.org/" target="_blank" style="color: var(--color-contraste); text-decoration: underline;">Editor MakeCode Micro:bit</a> y crea un nuevo proyecto.</p>
+
+            <h4>Paso 4.1: Leer el Sensor de Luz</h4>
+            <p>Primero, necesitamos saber cuánta luz hay. El Micro:bit nos da un número: 0 (oscuridad total) hasta 255 (luz muy brillante).</p>
+            <ol>
+                <li>Busca en la categoría <strong>Entrada</strong> (rosa) el bloque <code class="makecode-block">nivel de luz</code>. Este bloque nos da el valor actual del sensor.</li>
+                <li>Para ver ese valor, vamos a mostrarlo continuamente. Necesitamos un ciclo. Ve a <strong>Básico</strong> (azul) y arrastra el bloque <code class="makecode-block">para siempre</code> al área de código.</li>
+                <li>Dentro del <code class="makecode-block">para siempre</code>, arrastra desde <strong>Básico</strong> el bloque <code class="makecode-block">mostrar número (0)</code>.</li>
+                <li>Ahora, arrastra el bloque <code class="makecode-block">nivel de luz</code> y colócalo dentro del hueco del <code class="makecode-block">mostrar número</code>.</li>
+            </ol>
+            <p>Tu código debería verse así:</p>
+            <div class="makecode-placeholder">
+               <div style="position:relative;height:calc(300px + 5em);width:100%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/---codeembed#pub:S57251-51081-32822-11477" allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe></div>
+                </div>
+            <p><strong>¡Prueba en el Simulador!</strong> Verás un control deslizante de luz sobre el Micro:bit simulado. Muévelo y observa cómo cambia el número en la pantalla de LEDs. ¡Estás leyendo un sensor!</p>
+            <p><strong>Reflexiona 🤔:</strong> ¿Por qué pusimos el <code class="makecode-block">mostrar número</code> dentro del <code class="makecode-block">para siempre</code>? ¿Qué pasaría si estuviera fuera?</p>
+
+            <h4>Paso 4.2: Tomando Decisiones con Luz</h4>
+            <p>Ahora, en lugar de solo mostrar el número, vamos a tomar decisiones. Usaremos bloques <code class="makecode-block">si... entonces / si no</code> de la categoría <strong>Lógica</strong> (verde).</p>
+            <ol>
+                <li>Quita el bloque <code class="makecode-block">mostrar número</code> de dentro del <code class="makecode-block">para siempre</code> (puedes arrastrarlo a la paleta para borrarlo).</li>
+                <li>Desde <strong>Lógica</strong>, arrastra un bloque <code class="makecode-block">si <verdadero> entonces / si no</code> y ponlo dentro del <code class="makecode-block">para siempre</code>.</li>
+                <li>Necesitamos una condición. Desde <strong>Lógica</strong>, arrastra un bloque de comparación <code class="makecode-block">(0) < (0)</code> y ponlo en el hueco hexagonal del <code class="makecode-block">si</code>.</li>
+                <li>Desde <strong>Entrada</strong>, arrastra <code class="makecode-block">nivel de luz</code> al primer hueco de la comparación.</li>
+                <li>En el segundo hueco, escribe un número umbral, por ejemplo, `100`. La condición queda: <code class="makecode-block">(nivel de luz) < (100)</code>.</li>
+            </ol>
+             <p><strong>Piensa como ingeniero ⚙️:</strong> Esta condición significa: "Si el nivel de luz es menor que 100 (está algo oscuro)...". ¿Qué queremos que haga en ese caso? ¿Y si no es menor que 100 (está más iluminado)?</p>
+
+            <h4>Paso 4.3: Controlando los LEDs según la Luz</h4>
+            <p>¡Vamos a mostrar diferentes patrones en los LEDs!</p>
+            <ol>
+                <li>Desde <strong>Básico</strong>, arrastra el bloque <code class="makecode-block">mostrar LEDs</code> y ponlo dentro de la sección `entonces` del bloque `si`. Haz clic en los cuadritos para dibujar un patrón simple (ej. un corazón pequeño o un punto).</li>
+                <li>Arrastra otro bloque <code class="makecode-block">mostrar LEDs</code> y ponlo dentro de la sección `si no`. Dibuja un patrón diferente (ej. un sol o un cuadrado grande).</li>
+            </ol>
+            <p>¡Tu código completo se verá parecido a esto!</p>
+             <div class="makecode-placeholder">
+                <div style="position:relative;height:calc(300px + 5em);width:100%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/---codeembed#pub:S70369-66128-71809-03249" allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe></div>
+                 </div>
+            <p><strong>¡Prueba de nuevo en el Simulador!</strong> Mueve el deslizador de luz. ¿Ves cómo cambia el patrón en la pantalla de LEDs cuando cruzas el umbral de 100?</p>
+            <p><strong>Explora 🚀:</strong> Haz clic en el '+' del bloque `si` para añadir más condiciones `si no, si`. ¿Podrías tener tres patrones diferentes (oscuro, medio, brillante) usando dos umbrales (ej. `< 50` y `< 150`)?</p>
+
+        </section>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🔬</span> Fase 5: Probando y Depurando</h3>
+            <p>¡Un buen ingeniero siempre prueba sus creaciones! Si tienes un Micro:bit real, descarga el código (<span style="font-family: var(--font-titles); font-size: 0.9em;">.hex</span>) y pásalo a la tarjeta.</p>
+            <ul>
+                <li>Cubre el sensor de luz con tu dedo. ¿Aparece el patrón de "oscuro"?</li>
+                <li>Apunta una linterna (la del celular sirve) al sensor. ¿Aparece el patrón de "brillante"?</li>
+                <li>¿Funciona como esperabas?</li>
+            </ul>
+            <h4>¿Algo no va bien? (Depuración)</h4>
+            <p>Si no funciona, ¡no te preocupes! Depurar (encontrar y corregir errores) es parte del proceso:</p>
+            <ul>
+                <li><strong>Revisa los bloques:</strong> ¿Están conectados correctamente? ¿Están dentro del <code class="makecode-block">para siempre</code>?</li>
+                <li><strong>Revisa la lógica:</strong> ¿La condición `<` es la correcta? ¿Los números umbral (ej. 100) tienen sentido? Quizás necesitas ajustarlos según la luz de tu habitación.</li>
+                <li><strong>Simplifica:</strong> Si añadiste muchas condiciones, prueba quitando algunas temporalmente para ver si una parte más simple funciona.</li>
+            </ul>
+            <p>¡La experimentación es clave! Cambia los números, los patrones, ¡y observa qué pasa!</p>
+        </section>
+
+        <section class="evaluation-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🏆</span> Fase 6: ¡Demuestra tu Poder de Ingeniero! (Evaluación)</h3>
+            <p>¡Es hora de mostrar lo aprendido y seguir creando!</p>
+
+            <h4>Evaluación Formativa (Mientras Aprendes)</h4>
+            <ul>
+                <li><strong>Responde las Reflexiones:</strong> ¿Pensaste en las preguntas 🤔, 🚀 y ⚙️ que aparecieron antes? Coméntalas con tu profe o compañeros.</li>
+                <li><strong>Modifica el Código:</strong> Realiza el desafío de la Fase 4 (usar 3 niveles de luz con `si no, si`). ¿Qué patrones elegiste?</li>
+                <li><strong>Predice:</strong> Si cambias la condición principal a `(nivel de luz) > (100)`, ¿cómo se comportará el Micro:bit ahora? ¡Pruébalo!</li>
+            </ul>
+
+            <h4>Evaluación Sumativa (Para Mostrar tu Dominio)</h4>
+           
+            <ol>
+                <li><strong>Comparte tu Creación:</strong> Guarda tu proyecto de MakeCode marcado con tu nombrey comparte el enlace para agregarlo a classroom. ¡Asegúrate de que incluya tus modificaciones personales!</li>
+                <li><strong>Nuevo Reto - Termómetro Visual:</strong> Describe (o intenta programar) cómo harías para que el Micro:bit muestre un icono de frío 🥶 si la temperatura (bloque <code class="makecode-block">temperatura (°C)</code> en Entrada) es menor a 20°C y un icono de calor 🥵 si es mayor o igual a 20°C. ¿Qué bloques usarías?</li>
+                <li><strong>Conceptos Clave:</strong> Responde:
+                    <ul>
+                        <li>¿Qué es la computación física? Da un ejemplo.</li>
+                        <li>¿Qué hace el bloque <code class="makecode-block">para siempre</code>?</li>
+                        <li>¿Para qué sirve un bloque <code class="makecode-block">si... entonces / si no</code>?</li>
+                        <li>¿Qué sensor del Micro:bit usamos en este proyecto?</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🚀</span> Fase 7: ¡El Comienzo de tu Viaje como Ingeniero!</h3>
+            <p><strong>¡Felicitaciones!</strong> Has completado tu primera misión en computación física. Has logrado que un dispositivo digital (Micro:bit) "sienta" el mundo real (nivel de luz) y reaccione cambiando su salida (pantalla de LEDs).</p>
+            <p>Has usado conceptos esenciales:</p>
+            <ul>
+                <li>Entrada de Sensores</li>
+                <li>Lógica Condicional (Decisiones)</li>
+                <li>Salida Visual</li>
+                <li>Ciclos Continuos</li>
+            </ul>
+            <p>Esto es solo el principio. Imagina controlar motores, usar la radio para comunicar Micro:bits, crear instrumentos musicales... ¡El límite es tu curiosidad y ganas de experimentar!</p>
+            <p><strong>¡Sigue explorando MakeCode, sigue probando ideas, sigue pensando como un ingeniero!</strong></p>
+        </section>
+
+    </main>
+
+    <footer class="portal-footer">
+        <p>Diana Alejandra Bonilla Cardona Msc - Tecnología e informática</p>
+    </footer>
+
+</body>
+</html>

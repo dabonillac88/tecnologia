@@ -1,0 +1,231 @@
+/* Importar Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Quicksand:wght@500;700&display=swap');
+
+/* Variables de Color - Paleta Grado 9 */
+:root {
+    --color-principal: #223240; /* Azul oscuro/gris - Fondo principal */
+    --color-apoyo1: #3B8C66;    /* Verde medio - Fondo tarjetas/secciones */
+    --color-apoyo2: #347355;    /* Verde oscuro - Fondo header/footer */
+    --color-apoyo3: #60BF81;    /* Verde claro - Texto secundario/bordes */
+    --color-contraste: #9FD948; /* Verde lima brillante - Acentos/Títulos */
+    --color-texto: #F0F0F0;     /* Gris muy claro / Blanco - Texto principal */
+    --color-texto-oscuro: #11181f; /* Para texto sobre fondos claros (botones) */
+    --color-border: var(--color-apoyo1); /* Borde general */
+
+
+    --font-titulos: 'Poppins', sans-serif;
+    --font-texto: 'Quicksand', sans-serif;
+}
+
+/* Reset Básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-principal);
+    color: var(--color-texto);
+    font-family: var(--font-texto);
+    line-height: 1.7; /* Mejorado */
+    font-size: 17px; /* Ligeramente mayor */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px; /* Ancho para cuadrícula */
+    margin: 0 auto;
+    padding: 0 1.5rem; /* Más padding */
+}
+
+/* --- Estilos para el Portal/Página de Índice de Grado --- */
+
+/* Estilo del Encabezado Simple (Usado en la página índice/portal) */
+.simple-header {
+    background-color: var(--color-apoyo2); /* Verde oscuro */
+    padding: 1.2rem 0;
+    border-bottom: 3px solid var(--color-contraste); /* Borde lima */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.simple-header h1 {
+    font-family: var(--font-titulos);
+    font-size: 1.6rem;
+    color: var(--color-contraste); /* Verde lima */
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.back-link {
+    color: var(--color-texto);
+    text-decoration: none;
+    font-family: var(--font-titulos);
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-texto);
+    border-radius: 20px; /* Botón redondeado */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.back-link:hover {
+    background-color: var(--color-contraste);
+    color: var(--color-texto-oscuro);
+    border-color: var(--color-contraste);
+}
+
+/* Estilos del Contenido Principal (Portal/Índice) */
+main { /* Estilo general para el main */
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+    flex-grow: 1;
+}
+
+main h2 { /* Título principal de la página (Portal o Índice) */
+    font-family: var(--font-titulos);
+    font-size: 2.2rem;
+    color: var(--color-contraste);
+    text-align: center;
+    margin-bottom: 1rem; /* Ajustado */
+    font-weight: 700;
+}
+
+.page-description { /* Descripción debajo del título principal */
+    text-align: center;
+    font-size: 1.15rem; /* Ligeramente mayor */
+    margin-bottom: 3rem; /* Más espacio */
+    color: var(--color-apoyo3); /* Verde claro */
+    opacity: 0.9;
+}
+
+/* --- Estilos Específicos para la Cuadrícula de OVAs (Índice) --- */
+
+.ova-grid {
+    display: grid;
+    /* Crea columnas automáticas: mínimo 280px, máximo 1 fracción del espacio */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.8rem; /* Un poco más de espacio */
+}
+
+/* Estilo de cada Tarjeta OVA */
+.ova-card {
+    background-color: var(--color-apoyo1); /* Verde medio */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25); /* Sombra más notable */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ova-card:hover {
+    transform: translateY(-6px); /* Elevación mayor */
+    box-shadow: 0 9px 22px rgba(0, 0, 0, 0.35);
+}
+
+.ova-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 2px solid var(--color-apoyo2); /* Borde inferior oscuro */
+}
+
+.ova-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ova-content h3 {
+    font-family: var(--font-titulos);
+    color: var(--color-contraste);
+    font-size: 1.4rem;
+    margin-top: 0; /* Asegurar que no haya margen superior */
+    margin-bottom: 0.8rem; /* Espacio ajustado */
+    font-weight: 700; /* Asegurar peso */
+    line-height: 1.3;
+}
+
+.ova-content p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    color: var(--color-texto); /* Asegurar color texto */
+    opacity: 0.95;
+}
+
+/* Estilo del Botón dentro de la tarjeta */
+.btn {
+    display: inline-block;
+    background-color: var(--color-contraste);
+    color: var(--color-texto-oscuro); /* Texto oscuro para contraste */
+    padding: 10px 22px; /* Padding ajustado */
+    border-radius: 25px; /* Botón píldora */
+    text-decoration: none;
+    font-family: var(--font-titulos);
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin-top: auto;
+    align-self: center; /* Centrar botón */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.btn:hover {
+    background-color: #8BC34A; /* Tono ligeramente más oscuro del contraste */
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    color: #000;
+}
+
+/* --- Estilos del Pie de Página (Común para Portal e Índice) --- */
+.portal-footer {
+    background-color: var(--color-apoyo2); /* Verde oscuro */
+    color: var(--color-texto);
+    text-align: center;
+    padding: 1.2rem 0;
+    margin-top: auto;
+    font-size: 0.9rem;
+    border-top: 3px solid var(--color-contraste); /* Lima */
+    opacity: 0.9;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    body { font-size: 16px; }
+    main h2 { font-size: 2rem; }
+    .simple-header h1 { font-size: 1.4rem; }
+    .ova-content h3 { font-size: 1.3rem; }
+    .ova-content p { font-size: 0.95rem; }
+    .btn { font-size: 0.85rem; padding: 9px 20px;}
+}
+
+@media (max-width: 480px) {
+     body { font-size: 15px; }
+     main h2 { font-size: 1.8rem; }
+     .simple-header { padding: 1rem 0;}
+     .simple-header h1 { font-size: 1.2rem; }
+     .container { padding: 0 1rem; }
+     .page-description { font-size: 1.05rem; }
+     .ova-grid { grid-template-columns: 1fr; gap: 1.5rem;} /* Una columna */
+     .ova-content h3 { font-size: 1.2rem; }
+     .ova-content p { font-size: 0.9rem; }
+     .portal-footer { font-size: 0.85rem; }
+}
+

@@ -1,0 +1,252 @@
+/* Importar Fuentes Modernas */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Nunito+Sans:wght@400;600&display=swap');
+
+/* Variables de Color - Paleta Moderna Grado 11 */
+:root {
+    --color-bg: #1a1a2e;         /* Fondo - Azul/Púrpura muy oscuro */
+    --color-section-bg: #1f1f38;  /* Fondo Secciones - Ligeramente más claro */
+    --color-header-bg: #0f3460;   /* Fondo Cabecera/Footer - Azul profundo */
+    --color-accent1: #e94560;    /* Acento Principal - Rosa/Rojo vibrante */
+    --color-accent2: #f0a500;    /* Acento Secundario - Amarillo/Dorado cálido */
+    --color-text: #f5f5f5;        /* Texto Principal - Blanco roto */
+    --color-text-muted: #a0a0c0;  /* Texto Secundario - Gris/Lavanda claro */
+    --color-text-dark: #1a1a2e;   /* Texto Oscuro (para botones claros) */
+    --color-border: #4a4a6a;      /* Bordes sutiles */
+    --color-prompt-bg: rgba(233, 69, 96, 0.08); /* Fondo prompt rosa translúcido */
+    --color-prompt-border: var(--color-accent1); /* Borde prompt rosa */
+
+    /* Fuentes */
+    --font-titles: 'Poppins', sans-serif;    /* Fuente para títulos */
+    --font-body: 'Nunito Sans', sans-serif; /* Fuente para texto principal */
+}
+
+/* Reset Básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    font-size: 17px; /* Tamaño base cómodo */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px; /* Ancho generoso */
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Estilo del Encabezado Simple */
+.simple-header {
+    background-color: var(--color-header-bg);
+    padding: 1.3rem 0;
+    border-bottom: 3px solid var(--color-accent1); /* Borde Rosa */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.simple-header h1 {
+    font-family: var(--font-titles);
+    font-size: 1.7rem; /* Tamaño título principal */
+    color: var(--color-text);
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.back-link {
+    color: var(--color-text);
+    background-color: transparent;
+    text-decoration: none;
+    font-family: var(--font-titles);
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem; /* Padding botón */
+    border: 1px solid var(--color-text);
+    border-radius: 25px; /* Botón píldora */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.back-link:hover {
+    background-color: var(--color-accent1); /* Fondo Rosa */
+    color: var(--color-text);
+    border-color: var(--color-accent1);
+}
+
+
+/* Estilos del Contenido Principal */
+main {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    flex-grow: 1;
+}
+
+main h2 {
+    font-family: var(--font-titles);
+    font-size: 2.4rem; /* Título del OVA */
+    color: var(--color-accent1); /* Rosa */
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+}
+
+/* Estilos para las secciones del tutorial */
+.phase-section {
+    background-color: var(--color-section-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 10px; /* Bordes más redondeados */
+    padding: 2rem 2.5rem; /* Más padding interno */
+    margin-bottom: 3rem; /* Más espacio entre fases */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.phase-section h3 {
+    font-family: var(--font-titles);
+    color: var(--color-accent2); /* Amarillo/Dorado */
+    font-size: 1.7rem; /* Títulos de fase */
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--color-accent1); /* Línea inferior Rosa */
+    padding-bottom: 0.8rem;
+}
+
+.phase-section h4 {
+    font-family: var(--font-titles);
+    color: var(--color-text);
+    font-size: 1.3rem; /* Subtítulos */
+    margin-top: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    border-left: 4px solid var(--color-accent2); /* Barra lateral Amarilla */
+    padding-left: 0.8rem;
+}
+
+
+.phase-section p, .phase-section ul, .phase-section ol {
+    margin-bottom: 1.3rem;
+    font-size: 1.1rem; /* Tamaño texto normal */
+    line-height: 1.8; /* Interlineado generoso */
+    color: var(--color-text-muted); /* Texto ligeramente más suave */
+}
+.phase-section strong { /* Resaltar texto importante */
+    color: var(--color-text);
+    font-weight: 600;
+}
+.phase-section ul, .phase-section ol {
+    padding-left: 2.5rem;
+}
+.phase-section li {
+    margin-bottom: 0.7rem;
+}
+
+/* Estilo para destacar roles */
+.role-focus {
+    background-color: rgba(15, 52, 96, 0.3); /* Fondo azul profundo translúcido */
+    border: 1px dashed var(--color-header-bg);
+    padding: 0.8rem 1.2rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+.role-focus strong {
+    color: var(--color-accent2); /* Amarillo */
+}
+
+/* Estilo para herramientas */
+.tool-mention {
+    font-family: var(--font-titles);
+    background-color: var(--color-header-bg);
+    color: var(--color-text);
+    padding: 0.2em 0.6em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    margin: 0 0.2em;
+}
+
+/* Estilo para la sección de Evaluación */
+.evaluation-section {
+    background-color: var(--color-prompt-bg);
+    border: 1px solid var(--color-prompt-border);
+    border-left: 5px solid var(--color-prompt-border);
+    padding: 1.8rem 2.5rem;
+    margin-top: 2rem;
+    border-radius: 8px;
+}
+
+.evaluation-section h3 {
+    color: var(--color-accent1); /* Rosa */
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+    font-size: 1.7rem; /* Mismo tamaño que otros h3 */
+}
+
+.evaluation-section h4 {
+     color: var(--color-text);
+     font-size: 1.3rem;
+     margin-top: 1.5rem;
+     margin-bottom: 0.8rem;
+     border-left: 4px solid var(--color-accent1); /* Barra lateral Rosa */
+     padding-left: 0.8rem;
+}
+.evaluation-section p, .evaluation-section ul, .evaluation-section ol {
+    font-size: 1rem;
+    color: var(--color-text); /* Texto más brillante en esta sección */
+}
+
+
+/* Estilos del Pie de Página */
+.portal-footer {
+    background-color: var(--color-header-bg);
+    color: var(--color-text-muted);
+    text-align: center;
+    padding: 1.3rem 0;
+    margin-top: auto;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    border-top: 3px solid var(--color-accent1); /* Rosa */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    body { font-size: 16px; }
+    main h2 { font-size: 2.1rem; }
+    .simple-header h1 { font-size: 1.5rem; }
+    .phase-section { padding: 1.5rem; }
+    .phase-section h3 { font-size: 1.5rem; }
+    .phase-section h4 { font-size: 1.2rem; }
+    .phase-section p, .phase-section ul, .phase-section ol { font-size: 1rem; }
+    .evaluation-section { padding: 1.5rem; }
+    .evaluation-section h3 { font-size: 1.5rem; }
+    .evaluation-section h4 { font-size: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+     body { font-size: 15px; }
+     main h2 { font-size: 1.9rem; }
+     .simple-header { padding: 1.1rem 0;}
+     .simple-header h1 { font-size: 1.3rem; }
+     .container { padding: 0 1rem; }
+     .phase-section { padding: 1.2rem; }
+     .phase-section h3 { font-size: 1.4rem; }
+     .phase-section h4 { font-size: 1.1rem; }
+     .phase-section p, .phase-section ul, .phase-section ol { font-size: 0.95rem; }
+     .portal-footer { font-size: 0.85rem; }
+}
