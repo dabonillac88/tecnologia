@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVA - Colecciones en Python</title>
+    <link rel="stylesheet" href="estilos/grado10_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="simple-header">
+        <div class="container header-container">
+            <h1>// Colecciones: Listas, Tuplas y Diccionarios</h1>
+            <a href="ovas10.html" class="back-link">&lt; Volver a Grado 10</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>./Organizando_Datos_en_Python</h2>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">📦</span> ¿Por qué necesitamos "cajas" para guardar cosas?</h3>
+            <p>¡Hola, futuros desarrolladores! Ya saben usar variables para guardar un dato, como un número o un nombre (`edad = 15`, `nombre = "Ana"`). Pero, ¿qué pasa si necesitan guardar <strong>muchos</strong> datos juntos? ¿La lista de compras? ¿Las notas de todos los estudiantes? ¿Los datos de un contacto (nombre, teléfono, email)?</p>
+            <p>Para eso existen las <strong>colecciones</strong> en Python. Son como "cajas" especiales o estructuras que nos permiten agrupar y organizar múltiples datos de forma eficiente. Hoy exploraremos tres tipos fundamentales: <strong>Listas</strong>, <strong>Tuplas</strong> y <strong>Diccionarios</strong>.</p>
+            <p>Entenderlas es clave para manejar información más compleja y crear programas más potentes. ¡Vamos a organizar ese desorden!</p>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">📋</span> Listas (`list`): ¡Flexibles y Ordenadas!</h3>
+            <p>Una <strong>lista</strong> en Python es como una lista de compras o una lista de amigos: es una colección <strong>ordenada</strong> de elementos, y lo más importante, ¡es <strong>mutable</strong> (puedes cambiarla después de crearla: añadir, quitar, modificar elementos)!</p>
+            <p>Se definen usando corchetes `[` `]` y separando los elementos con comas.</p>
+
+            <h4>Creando Listas</h4>
+            <pre><code class="language-python">
+# Lista de números
+numeros_primos = [2, 3, 5, 7, 11]
+
+# Lista de strings (texto)
+frutas = ["manzana", "banana", "pera", "naranja"]
+
+# Lista mezclada (¡se puede!)
+mi_lista_loca = [10, "hola", True, 3.14]
+
+# Lista vacía (para llenarla después)
+tareas_pendientes = []
+
+# Imprimir listas para verlas
+print(numeros_primos)
+print(frutas)
+print(mi_lista_loca)
+print(tareas_pendientes)
+            </code></pre>
+
+            <h4>Accediendo a Elementos (Indexación)</h4>
+            <p>Como las listas están ordenadas, cada elemento tiene una posición o <strong>índice</strong>. ¡Ojo! En Python (y muchos lenguajes), la numeración empieza en <strong>CERO (0)</strong>.</p>
+            <pre><code class="language-python">
+frutas = ["manzana", "banana", "pera", "naranja"]
+# Indices:    0          1         2        3
+
+# Acceder al primer elemento (índice 0)
+primera_fruta = frutas[0]
+print(f"La primera fruta es: {primera_fruta}") # Salida: manzana
+
+# Acceder al tercer elemento (índice 2)
+tercera_fruta = frutas[2]
+print(f"La tercera fruta es: {tercera_fruta}") # Salida: pera
+
+# Acceder al ÚLTIMO elemento (índice -1, ¡un truco útil!)
+ultima_fruta = frutas[-1]
+print(f"La última fruta es: {ultima_fruta}") # Salida: naranja
+            </code></pre>
+            <p><strong>Reflexiona 🤔:</strong> Si intentas acceder a un índice que no existe (ej. `frutas[10]`), ¿qué crees que pasará? ¡Pruébalo!</p>
+
+            <h4>Operaciones Básicas</h4>
+            <ul>
+                <li><strong>Añadir al final (<code class="makecode-block">append()</code>):</strong> Agrega un elemento nuevo al final de la lista.</li>
+                <li><strong>Longitud (<code class="makecode-block">len()</code>):</strong> Te dice cuántos elementos tiene la lista.</li>
+                <li><strong>Modificar un elemento:</strong> Puedes cambiar el valor en un índice específico.</li>
+            </ul>
+            <pre><code class="language-python">
+tareas = ["Estudiar Python", "Hacer ejercicio"]
+print(f"Tareas iniciales: {tareas}")
+print(f"Número de tareas: {len(tareas)}") # Salida: 2
+
+# Añadir una nueva tarea
+tareas.append("Llamar a la abuela")
+print(f"Tareas después de añadir: {tareas}")
+print(f"Nuevo número de tareas: {len(tareas)}") # Salida: 3
+
+# Modificar la primera tarea (índice 0)
+tareas[0] = "Dominar Python ;)"
+print(f"Tareas modificadas: {tareas}")
+            </code></pre>
+
+            <h4>¡A Practicar con Listas!</h4>
+            <p>Abre el siguiente Trinket, ejecuta el código, y luego intenta los desafíos propuestos en los comentarios.</p>
+            <div class="makecode-placeholder">
+                [ Espacio para el iframe de Trinket: Ejemplo básico de listas ]
+                <p><strong>(Aquí iría el Trinket interactivo con el código de listas)</strong></p>
+                <p><strong>Instrucciones:</strong> Haz clic en "Run". Observa la salida. Luego, modifica el código para:</p>
+                <ol>
+                    <li>Añadir tu comida favorita a la lista `comidas`.</li>
+                    <li>Imprimir el segundo elemento de la lista `numeros`.</li>
+                    <li>Cambiar el valor `False` en `mixta` por tu edad.</li>
+                </ol>
+            </div>
+            <div class="interactive-prompt">
+                <strong>✍️ En tu Bitácora:</strong>
+                <ol>
+                    <li>Pega el enlace a tu Trinket modificado.</li>
+                    <li>Escribe con tus palabras: ¿Qué es una lista en Python y para qué sirve?</li>
+                    <li>¿Cuál es el índice del primer elemento de una lista? ¿Y del último?</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🔒</span> Tuplas (`tuple`): ¡Ordenadas pero Inmutables!</h3>
+            <p>Una <strong>tupla</strong> es muy parecida a una lista: es una colección <strong>ordenada</strong> de elementos. La gran diferencia es que las tuplas son <strong>inmutables</strong>. Una vez que creas una tupla, ¡no puedes cambiarla (ni añadir, ni quitar, ni modificar elementos)!</p>
+            <p>Se definen usando paréntesis `(` `)` y separando elementos con comas.</p>
+
+            <h4>Creando Tuplas</h4>
+            <pre><code class="language-python">
+# Tupla de coordenadas
+punto_3d = (10, 25, -5)
+
+# Tupla de colores RGB
+color_primario = (255, 0, 0) # Rojo
+
+# Tupla con un solo elemento (¡ojo con la coma!)
+mi_tupla_unica = ("elemento",) # La coma es necesaria
+
+# Tupla vacía
+tupla_vacia = ()
+
+print(punto_3d)
+print(color_primario)
+print(mi_tupla_unica)
+            </code></pre>
+
+            <h4>Accediendo a Elementos</h4>
+            <p>Funciona exactamente igual que con las listas, usando índices empezando desde 0.</p>
+            <pre><code class="language-python">
+punto_3d = (10, 25, -5)
+# Indices:   0   1    2
+
+coordenada_x = punto_3d[0]
+print(f"Coordenada X: {coordenada_x}") # Salida: 10
+
+coordenada_z = punto_3d[2]
+print(f"Coordenada Z: {coordenada_z}") # Salida: -5
+            </code></pre>
+
+            <h4>¿Por qué usar Tuplas si no se pueden cambiar?</h4>
+            <ul>
+                <li><strong>Seguridad/Integridad:</strong> Garantizan que los datos no se modifiquen accidentalmente (ej. coordenadas fijas, colores definidos).</li>
+                <li><strong>Uso como Claves:</strong> Las tuplas (si contienen elementos inmutables) se pueden usar como claves en los diccionarios (¡veremos después!), las listas no.</li>
+                <li><strong>A veces más rápidas:</strong> Python puede optimizarlas un poco más que las listas.</li>
+            </ul>
+            <p><strong>Intenta esto (¡dará error!):</strong></p>
+            <pre><code class="language-python">
+color = (0, 0, 255) # Azul
+# color[0] = 100 # <-- ¡Esto causará un TypeError! No puedes modificar una tupla.
+            </code></pre>
+
+            <h4>¡A Practicar con Tuplas!</h4>
+            <p>Abre el siguiente Trinket. Ejecuta y observa. Luego, intenta los desafíos.</p>
+             <div class="makecode-placeholder">
+                [ Espacio para el iframe de Trinket: Ejemplo básico de tuplas ]
+                <p><strong>(Aquí iría el Trinket interactivo con el código de tuplas)</strong></p>
+                <p><strong>Instrucciones:</strong> Haz clic en "Run". Observa la salida. Luego:</p>
+                <ol>
+                    <li>Intenta descomentar (quitar el `#`) la línea que intenta modificar la tupla `dias`. ¿Qué error te da? Vuelve a comentarla.</li>
+                    <li>Crea una nueva tupla llamada `meses` con los nombres de tres meses.</li>
+                    <li>Imprime el segundo mes de tu tupla `meses`.</li>
+                </ol>
+            </div>
+            <div class="interactive-prompt">
+                <strong>✍️ En tu Bitácora:</strong>
+                <ol>
+                    <li>Pega el enlace a tu Trinket modificado.</li>
+                    <li>¿Cuál es la principal diferencia entre una lista y una tupla?</li>
+                    <li>¿En qué situación podría ser útil usar una tupla en lugar de una lista?</li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🔑</span> Diccionarios (`dict`): ¡Pares Clave-Valor!</h3>
+            <p>Un <strong>diccionario</strong> es diferente. No se basa en el orden (aunque en versiones recientes de Python recuerdan el orden de inserción), sino en <strong>pares clave-valor</strong>. Piensa en un diccionario real: buscas una <strong>palabra (clave)</strong> para encontrar su <strong>definición (valor)</strong>.</p>
+            <p>Son extremadamente útiles para almacenar información relacionada donde cada dato tiene un nombre o identificador único. Son <strong>mutables</strong>.</p>
+            <p>Se definen usando llaves `{` `}` con pares `clave: valor` separados por comas.</p>
+
+            <h4>Creando Diccionarios</h4>
+            <pre><code class="language-python">
+# Diccionario para información de un estudiante
+estudiante = {
+    "nombre": "Carlos",
+    "edad": 16,
+    "curso": "10B",
+    "materias": ["Matemáticas", "Física", "Tecnología"] # ¡Puedes tener listas dentro!
+}
+
+# Diccionario de capitales
+capitales = {
+    "Colombia": "Bogotá",
+    "Argentina": "Buenos Aires",
+    "Francia": "París"
+}
+
+# Diccionario vacío
+configuracion = {}
+
+print(estudiante)
+print(capitales)
+            </code></pre>
+            <p><strong>Importante:</strong> Las <strong>claves</strong> deben ser únicas e inmutables (strings, números, tuplas son comunes). Los <strong>valores</strong> pueden ser cualquier cosa (números, strings, listas, otros diccionarios...).</p>
+
+            <h4>Accediendo a Valores por Clave</h4>
+            <p>No usamos índices numéricos, usamos la <strong>clave</strong> entre corchetes `[` `]`.</p>
+            <pre><code class="language-python">
+estudiante = {
+    "nombre": "Carlos",
+    "edad": 16,
+    "curso": "10B",
+}
+
+# Obtener el nombre
+nombre_estudiante = estudiante["nombre"]
+print(f"Nombre: {nombre_estudiante}") # Salida: Carlos
+
+# Obtener la edad
+edad_estudiante = estudiante["edad"]
+print(f"Edad: {edad_estudiante}") # Salida: 16
+
+# ¿Qué pasa si la clave no existe? ¡Error! (KeyError)
+# print(estudiante["apellido"]) # <-- Esto daría error
+            </code></pre>
+
+            <h4>Operaciones Básicas</h4>
+            <ul>
+                <li><strong>Añadir/Actualizar par:</strong> Simplemente asigna un valor a una clave nueva o existente.</li>
+                <li><strong>Obtener claves (<code class="makecode-block">.keys()</code>):</strong> Te da una vista de todas las claves.</li>
+                <li><strong>Longitud (<code class="makecode-block">len()</code>):</strong> Te dice cuántos pares clave-valor hay.</li>
+            </ul>
+             <pre><code class="language-python">
+capitales = {
+    "Colombia": "Bogotá",
+    "Perú": "Lima"
+}
+print(f"Capitales iniciales: {capitales}")
+
+# Añadir una nueva capital
+capitales["Chile"] = "Santiago"
+print(f"Después de añadir Chile: {capitales}")
+
+# Actualizar una capital existente (corregir un error?)
+capitales["Colombia"] = "Bogotá D.C."
+print(f"Después de actualizar Colombia: {capitales}")
+
+# Ver las claves
+print(f"Países registrados: {capitales.keys()}")
+
+# Ver cuántos pares hay
+print(f"Número de capitales: {len(capitales)}")
+            </code></pre>
+
+             <h4>¡A Practicar con Diccionarios!</h4>
+             <p>Abre el Trinket, ejecuta y experimenta con los desafíos.</p>
+             <div class="makecode-placeholder">
+                 [ Espacio para el iframe de Trinket: Ejemplo básico de diccionarios ]
+                 <p><strong>(Aquí iría el Trinket interactivo con el código de diccionarios)</strong></p>
+                 <p><strong>Instrucciones:</strong> Haz clic en "Run". Observa la salida. Luego:</p>
+                 <ol>
+                     <li>Añade un nuevo par clave-valor al diccionario `producto` (ej. `"disponible": True`).</li>
+                     <li>Imprime el valor asociado a la clave `"email"` del diccionario `contacto`.</li>
+                     <li>Intenta cambiar el valor de la clave `"precio"` en `producto`.</li>
+                 </ol>
+             </div>
+             <div class="interactive-prompt">
+                 <strong>✍️ En tu Bitácora:</strong>
+                 <ol>
+                     <li>Pega el enlace a tu Trinket modificado.</li>
+                     <li>¿Cómo accedes a un valor en un diccionario? ¿Usas un índice o una clave?</li>
+                     <li>¿Para qué tipo de información crees que son más útiles los diccionarios? Da un ejemplo.</li>
+                 </ol>
+             </div>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🤔</span> ¿Lista, Tupla o Diccionario? ¿Cuándo usar cuál?</h3>
+            <p>¡Buena pregunta! Aquí una guía rápida:</p>
+            <ul>
+                <li>Usa una <strong>Lista</strong> si:
+                    <ul>
+                        <li>Necesitas una colección <strong>ordenada</strong>.</li>
+                        <li>Necesitas <strong>modificar</strong> (añadir, quitar, cambiar) elementos frecuentemente.</li>
+                        <li>El orden de los elementos importa.</li>
+                        <li>Ej: Lista de tareas, resultados de exámenes, nombres de jugadores.</li>
+                    </ul>
+                </li>
+                <li>Usa una <strong>Tupla</strong> si:
+                    <ul>
+                        <li>Necesitas una colección <strong>ordenada</strong>.</li>
+                        <li>Los datos <strong>no deben cambiar</strong> una vez creados (inmutables).</li>
+                        <li>Necesitas usarla como clave de diccionario.</li>
+                        <li>Ej: Coordenadas (x, y, z), colores RGB (R, G, B), fechas fijas.</li>
+                    </ul>
+                </li>
+                <li>Usa un <strong>Diccionario</strong> si:
+                    <ul>
+                        <li>Necesitas asociar <strong>claves únicas</strong> con <strong>valores</strong>.</li>
+                        <li>El <strong>orden no es lo más importante</strong> (aunque ahora lo mantiene).</li>
+                        <li>Necesitas buscar valores rápidamente por su nombre o identificador (la clave).</li>
+                        <li>Ej: Información de contacto (nombre: "X", tel: "Y"), configuración de un juego (dificultad: "fácil"), inventario (item: cantidad).</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>¡Con la práctica te volverás un experto en elegir la colección adecuada!</p>
+        </section>
+
+        <section class="evaluation-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">✔️</span> Evaluación: ¡Demuestra tu Poder Organizativo!</h3>
+            <p>Es hora de consolidar lo aprendido sobre estas estructuras de datos.</p>
+
+            <h4>Evaluación Formativa (Reflexión en tu Bitácora)</h4>
+            <p>Responde estas preguntas en tu <span class="tool-mention">Bitácora de Clase</span>:</p>
+            <ol>
+                <li>¿Cuál es la diferencia clave entre una lista y una tupla respecto a la modificación de sus elementos?</li>
+                <li>Si quisieras guardar los nombres de tus 3 mejores amigos en orden de amistad, ¿usarías una lista o una tupla? ¿Por qué?</li>
+                <li>Si quisieras guardar la información de un libro (título, autor, año), ¿qué colección usarías (lista, tupla o diccionario)? ¿Cómo la estructurarías?</li>
+                <li>¿Qué pasa si intentas acceder a un elemento de una lista usando un índice que no existe?</li>
+                <li>¿Qué pasa si intentas acceder a un valor de un diccionario usando una clave que no existe?</li>
+            </ol>
+
+            <h4>Evaluación Sumativa (Práctica y Evidencia en Bitácora)</h4>
+            <p>Realiza los siguientes pasos y registra la evidencia en tu <span class="tool-mention">Bitácora de Clase</span>:</p>
+            <ol>
+                <li><strong>Ejercicio Práctico en Trinket:</strong>
+                    <ul>
+                        <li>Crea un nuevo Trinket de Python.</li>
+                        <li>Crea una <strong>lista</strong> llamada `mis_hobbies` con al menos 3 de tus hobbies.</li>
+                        <li>Añade un hobbie más a la lista usando `append()`.</li>
+                        <li>Crea una <strong>tupla</strong> llamada `coordenadas_casa` con dos números (latitud y longitud inventadas).</li>
+                        <li>Crea un <strong>diccionario</strong> llamado `mi_mascota` con al menos 3 pares clave-valor (ej: "nombre", "especie", "edad").</li>
+                        <li>Imprime las tres colecciones (`mis_hobbies`, `coordenadas_casa`, `mi_mascota`).</li>
+                        <li>Imprime el primer hobbie de tu lista.</li>
+                        <li>Imprime el valor asociado a la clave "nombre" de tu diccionario `mi_mascota`.</li>
+                    </ul>
+                </li>
+                <li><strong>Registro en Bitácora:</strong>
+                    <ul>
+                        <li>Pega el <strong>enlace</strong> a tu Trinket con el ejercicio práctico resuelto.</li>
+                        <li>Explica brevemente por qué elegiste lista, tupla y diccionario para cada caso en el ejercicio.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h4>Rúbrica de Calificación (0.0 - 5.0)</h4>
+            <p>Tu desempeño en la Evaluación Sumativa se valorará así:</p>
+            <ul>
+                <li><strong>Nota 3.0 (Básico):</strong> Completas correctamente el Ejercicio Práctico en Trinket (creación e impresión básica de las 3 colecciones) Y pegas el enlace funcional en tu Bitácora.</li>
+                <li><strong>Nota 3.5 (Intermedio):</strong> Cumples con el nivel 3.0 Y además, explicas de forma clara y correcta en tu Bitácora por qué elegiste cada tipo de colección (lista, tupla, diccionario) en el ejercicio práctico.</li>
+                <li><strong>Nota 4.0 (Bueno):</strong> Cumples con el nivel 3.5 Y además, respondes de forma completa y coherente a por lo menos <strong>3 de las 5</strong> preguntas de la Evaluación Formativa en tu Bitácora.</li>
+                <li><strong>Nota 4.5 (Sobresaliente):</strong> Cumples con el nivel 3.5 Y además, respondes de forma completa, coherente y correcta a <strong>TODAS (5 de 5)</strong> las preguntas de la Evaluación Formativa en tu Bitácora.</li>
+                <li><strong>Nota 5.0 (Excelente):</strong> Cumples con el nivel 4.5 Y además, tu Autoevaluación refleja una comprensión sólida y honesta de todos los conceptos O demuestras iniciativa y comprensión extra realizando modificaciones interesantes y funcionales en el Trinket del ejercicio práctico (¡y lo explicas en la bitácora!).</li>
+            </ul>
+            <h4>Autoevaluación (Marca en tu Bitácora)</h4>
+            <p>Reflexiona sobre tu aprendizaje:</p>
+            <ul>
+                <li>[ ] Entiendo qué es una lista y cómo añadirle elementos.</li>
+                <li>[ ] Sé cómo acceder a elementos de una lista/tupla usando índices.</li>
+                <li>[ ] Entiendo la diferencia principal entre lista y tupla (mutabilidad).</li>
+                <li>[ ] Entiendo qué es un diccionario y cómo funciona con claves y valores.</li>
+                <li>[ ] Sé cómo acceder a valores en un diccionario usando claves.</li>
+                <li>[ ] Puedo identificar cuándo podría ser mejor usar una lista, tupla o diccionario.</li>
+                <li>[ ] Completé el ejercicio práctico en Trinket.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🚀</span> ¡Organización Desbloqueada!</h3>
+            <p>¡Felicidades! Has dominado los fundamentos de las colecciones más importantes en Python: listas, tuplas y diccionarios. Estas estructuras son la base para manejar casi cualquier tipo de información en tus programas.</p>
+            <p>Recuerda que la práctica constante es clave. Sigue experimentando, crea tus propias colecciones, combínalas (¡listas de diccionarios, diccionarios con tuplas como claves!) y verás cómo tus habilidades de programación se disparan.</p>
+            <p><strong>¡Sigue explorando el universo Python!</strong></p>
+        </section>
+
+    </main>
+
+    <footer class="portal-footer">
+        <p>Diana Alejandra Bonilla Cardona | Tecnología e Informática </p>
+    </footer>
+
+</body>
+</html>
