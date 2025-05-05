@@ -17,6 +17,11 @@
     --color-code-border: #444;    /* Borde para bloques de código */
     --color-prompt-bg: rgba(3, 166, 120, 0.08); /* Fondo prompt interactivo */
     --color-prompt-border: var(--color-accent); /* Borde prompt interactivo */
+    /* Nuevas variables para evaluación */
+    --color-eval-bg: rgba(125, 69, 140, 0.1); /* Fondo evaluación morado translúcido */
+    --color-eval-border: var(--color-border); /* Borde evaluación morado */
+    --color-rubric-bg: rgba(0,0,0,0.15); /* Fondo sutil para rúbrica */
+    --color-rubric-border: #666; /* Borde sutil para rúbrica */
 
 
     /* Fuentes estilo programación */
@@ -43,7 +48,7 @@ body {
 }
 
 .container {
-    max-width: 960px; /* Ancho optimizado para lectura de texto/código */
+    max-width: 960px;
     margin: 0 auto;
     padding: 0 1rem;
 }
@@ -97,16 +102,16 @@ main {
 
 main h2 {
     font-family: var(--font-titles);
-    font-size: 1.8rem; /* Tamaño principal ajustado */
+    font-size: 1.8rem;
     color: var(--color-accent);
     text-align: center;
-    margin-bottom: 2rem; /* Más espacio después del título principal */
+    margin-bottom: 2rem;
     font-weight: 700;
 }
 
-.page-description { /* Usado también para introducciones de sección */
-    text-align: left; /* Alinear a la izquierda para lectura */
-    font-size: 1.1rem; /* Tamaño ajustado */
+.page-description {
+    text-align: left;
+    font-size: 1.1rem;
     margin-bottom: 2rem;
     color: var(--color-text-light);
     opacity: 0.9;
@@ -115,37 +120,34 @@ main h2 {
 
 /* Estilos para secciones de contenido dentro del OVA */
 .content-section {
-    background-color: var(--color-section-bg); /* Fondo sutil para la sección */
-    border: 1px solid var(--color-code-border); /* Borde muy sutil */
+    background-color: var(--color-section-bg);
+    border: 1px solid var(--color-code-border);
     border-radius: 5px;
-    padding: 1.5rem 2rem; /* Más padding interno */
-    margin-bottom: 2.5rem; /* Espacio entre secciones */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3); /* Sombra suave */
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
-
-/* Quitar borde inferior que ya no es necesario */
-/* .content-section:last-child { border-bottom: none; } */
 
 .content-section h3 {
     font-family: var(--font-titles);
     color: var(--color-accent);
-    font-size: 1.4rem; /* Un poco más grande */
+    font-size: 1.4rem;
     margin-bottom: 1.2rem;
     font-weight: 700;
-    border-left: none; /* Quitar borde izquierdo */
+    border-left: none;
     padding-left: 0;
-    border-bottom: 2px solid var(--color-border); /* Línea inferior morada */
+    border-bottom: 2px solid var(--color-border);
     padding-bottom: 0.5rem;
-    display: block; /* Ocupar todo el ancho */
+    display: block;
 }
 
 .content-section p, .content-section ul, .content-section ol {
-    margin-bottom: 1.2rem; /* Más espacio entre párrafos/listas */
+    margin-bottom: 1.2rem;
     font-size: 1.05rem;
     line-height: 1.7;
 }
 .content-section ul, .content-section ol {
-    padding-left: 2.5rem; /* Más indentación */
+    padding-left: 2.5rem;
 }
 .content-section li {
     margin-bottom: 0.6rem;
@@ -155,44 +157,129 @@ main h2 {
 pre {
     background-color: var(--color-code-bg);
     border: 1px solid var(--color-code-border);
-    border-left: 5px solid var(--color-accent); /* Borde izquierdo Teal */
+    border-left: 5px solid var(--color-accent);
     padding: 1rem 1.5rem;
     border-radius: 4px;
-    overflow-x: auto; /* Scroll horizontal si el código es largo */
+    overflow-x: auto;
     margin: 1.5rem 0;
-    box-shadow: inset 0 0 8px rgba(0,0,0,0.6); /* Sombra interna más pronunciada */
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
 }
 
 code {
-    font-family: var(--font-body); /* Asegurar fuente monoespaciada */
-    font-size: 1rem; /* Tamaño de código */
-    color: var(--color-text-light); /* Color del texto del código */
-    line-height: 1.6; /* Ajustar interlínea del código */
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
 }
 
-/* Estilo para prompts interactivos */
+/* Estilo para nombres de bloques (usado en OVA anterior, mantenido por si acaso) */
+.makecode-block {
+    font-family: var(--font-body);
+    background-color: #555;
+    color: #fff;
+    padding: 0.15em 0.5em;
+    border-radius: 4px;
+    font-size: 0.95em;
+    white-space: nowrap;
+    border: 1px solid #777;
+}
+
+/* Estilo para placeholders de iframes/imágenes */
+.makecode-placeholder, .diagram-placeholder {
+    border: 2px dashed var(--color-code-border);
+    padding: 2rem;
+    text-align: center;
+    margin: 1.5rem 0;
+    background-color: var(--color-code-bg);
+    border-radius: 5px;
+    font-style: italic;
+    color: var(--color-text-light);
+    opacity: 0.8;
+}
+
+/* Estilo para prompts interactivos (Bitácora) */
 .interactive-prompt {
     background-color: var(--color-prompt-bg);
     border: 1px solid var(--color-prompt-border);
-    padding: 1.5rem; /* Más padding */
-    margin: 2rem 0; /* Más margen */
+    padding: 1.5rem;
+    margin: 2rem 0;
     border-radius: 4px;
-    box-shadow: 0 0 10px rgba(3, 166, 120, 0.2); /* Resplandor suave Teal */
+    box-shadow: 0 0 10px rgba(3, 166, 120, 0.2);
 }
 
 .interactive-prompt strong {
-    display: block; /* Título en bloque */
+    display: block;
     color: var(--color-accent);
     font-family: var(--font-titles);
-    font-size: 1.1rem; /* Título del prompt más grande */
+    font-size: 1.1rem;
     margin-bottom: 1rem;
     font-weight: 700;
 }
 .interactive-prompt ol {
-    padding-left: 1.5rem; /* Menos indentación interna */
+    padding-left: 1.5rem;
 }
 .interactive-prompt li {
     margin-bottom: 0.5rem;
+}
+
+
+/* --- Estilos para la Sección de Evaluación --- */
+.evaluation-section {
+    background-color: var(--color-eval-bg); /* Fondo morado translúcido */
+    border: 1px solid var(--color-eval-border); /* Borde morado */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 1.5rem 2rem; /* Padding interno */
+    margin-top: 3rem; /* Más espacio arriba */
+    box-shadow: 0 4px 10px rgba(125, 69, 140, 0.15); /* Sombra suave morada */
+}
+
+.evaluation-section h3 { /* Título principal de la sección */
+    color: var(--color-border); /* Morado */
+    border-bottom: 2px solid var(--color-border); /* Línea inferior morada */
+    padding-bottom: 0.6rem;
+    margin-bottom: 1.5rem; /* Más espacio después del título */
+    font-size: 1.5rem;
+    font-family: var(--font-titles);
+    font-weight: 700;
+}
+
+.evaluation-section h4 { /* Subtítulos (Formativa, Sumativa, Rúbrica, Autoevaluación) */
+     color: var(--color-text-light); /* Texto claro */
+     font-size: 1.2rem;
+     margin-top: 1.5rem;
+     margin-bottom: 1rem;
+     font-family: var(--font-titles);
+     font-weight: 600;
+     border-left: 4px solid var(--color-border); /* Barra lateral morada */
+     padding-left: 0.8rem;
+}
+
+.evaluation-section p,
+.evaluation-section ol,
+.evaluation-section ul {
+    font-size: 1rem; /* Tamaño de texto estándar para evaluación */
+    color: var(--color-text-light); /* Asegurar texto claro */
+    margin-bottom: 1rem;
+}
+.evaluation-section ol,
+.evaluation-section ul {
+    padding-left: 2rem; /* Indentación estándar */
+}
+.evaluation-section li {
+    margin-bottom: 0.5rem;
+}
+
+/* Estilo específico para la lista de la Rúbrica */
+.evaluation-section h4 + ul { /* Selecciona el UL que sigue inmediatamente a un H4 (la rúbrica) */
+    background-color: var(--color-rubric-bg); /* Fondo oscuro sutil */
+    border: 1px solid var(--color-rubric-border); /* Borde gris sutil */
+    padding: 1rem 1rem 1rem 2.5rem; /* Padding + indentación */
+    border-radius: 4px;
+}
+
+.evaluation-section h4 + ul li strong { /* Resaltar la nota en la rúbrica */
+    color: var(--color-accent); /* Verde/Teal */
+    font-family: var(--font-titles);
 }
 
 
@@ -294,6 +381,11 @@ code {
     .content-section p, .content-section li { font-size: 1rem; }
     code { font-size: 0.95rem; }
     .interactive-prompt strong { font-size: 1rem; }
+    .evaluation-section { padding: 1.2rem 1.5rem; }
+    .evaluation-section h3 { font-size: 1.3rem; }
+    .evaluation-section h4 { font-size: 1.1rem; }
+    .evaluation-section p, .evaluation-section ol, .evaluation-section ul { font-size: 0.95rem; }
+
 }
 
 @media (max-width: 480px) {
@@ -305,5 +397,9 @@ code {
      .content-section h3 { font-size: 1.1rem; }
      .content-section p, .content-section li { font-size: 0.95rem; }
      code { font-size: 0.9rem; }
+     .evaluation-section { padding: 1rem; }
+     .evaluation-section h3 { font-size: 1.2rem; }
+     .evaluation-section h4 { font-size: 1rem; }
+     .evaluation-section p, .evaluation-section ol, .evaluation-section ul { font-size: 0.9rem; }
      .portal-footer { font-size: 0.8rem; }
 }
