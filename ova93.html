@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVA - Micro:bit: Proyecto Seguidor de Luz</title>
+    <link rel="stylesheet" href="estilos/grado9_style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="simple-header">
+        <div class="container header-container">
+            <h1>// Micro:bit: Creando un Seguidor de Luz</h1>
+            <a href="grado9.html" class="back-link">&lt; Volver a Grado 9</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>./Proyecto_Ingenieria_Seguidor_De_Luz</h2>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🚀</span> Fase 0: ¡Equipo de Ingenieros al Mando!</h3>
+            <p>¡Saludos, futuros innovadores de Colombia! Han explorado los fundamentos de la Micro:bit. Ahora, es momento de un desafío mayor: ¡construir un <strong>Seguidor de Luz</strong>! Este proyecto combina sensores para "ver" y actuadores para "reaccionar", un pilar de la robótica y la automatización.</p>
+            <p>Trabajarán en equipos para diseñar, construir y programar un dispositivo que oriente un servomotor basándose en la intensidad de la luz detectada. ¡Imaginen paneles solares que siguen al sol o robots que buscan la luz!</p>
+
+            <h4>Conformación de Equipos y Roles (¡4 Cracks!):</h4>
+            <p>Cada equipo tendrá 4 integrantes con roles definidos. ¡Todos son cruciales para el éxito!</p>
+            <ul>
+                <li><strong>Líder del Proyecto:</strong> Coordina al equipo, gestiona la <span class="tool-mention">Bitácora de Trabajo Grupal</span>, asegura que se cumplan los objetivos y tiempos. ¡Mantiene la nave en curso!</li>
+                <li><strong>Ingeniero/a de Programación:</strong> Lidera el desarrollo del código en MakeCode, traduce la lógica del proyecto en bloques, ayuda a depurar errores. ¡El cerebro digital!</li>
+                <li><strong>Ingeniero/a Electrónico:</strong> Se encarga del diseño y montaje de los circuitos en la protoboard, asegura las conexiones correctas y seguras de los sensores y actuadores. ¡El maestro de los cables!</li>
+                <li><strong>Comunicador/a y Documentador/a:</strong> Registra los hallazgos, diseña la presentación final, explica el proyecto y sus aplicaciones. ¡La voz del equipo!</li>
+            </ul>
+            <p><strong>Tarea (Líder):</strong> Completa y entrega el formulario de conformación de equipos que te proporcionará tu docente.</p>
+
+            <h4>Herramientas del Ingeniero:</h4>
+            <ul>
+                <li>Micro:bit y cable USB, Computador con MakeCode.</li>
+                <li>Protoboard y cables de conexión (Jumpers y caimán-caimán) .</li>
+                <li><strong>Sensor LDR (Fotorresistencia)</strong> y una <strong>Resistencia</strong> (1kΩ es un buen valor).</li>
+                <li>Un <strong>LED</strong> estándar y una <strong>Resistencia</strong> (220Ω o 330Ω).</li>
+                <li><strong>Servomotor SG90</strong>.</li>
+                <li><span class="tool-mention">Bitácora de Trabajo</span> </li>
+            </ul>
+            <h4>¡Seguridad Ante Todo!</h4>
+            <p>Recuerden: conexiones incorrectas (especialmente 3V y GND invertidos) pueden dañar sus componentes. ¡Verifiquen siempre antes de conectar!</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">☀️</span> Fase 1: ¡Sintiendo la Luz! Conexión y Calibración del LDR</h3>
+            <p>El primer paso es darle "ojos" a nuestra Micro:bit. Usaremos un <strong>LDR (Light Dependent Resistor)</strong>, una resistencia que cambia su valor según la cantidad de luz que recibe: mucha luz = baja resistencia, poca luz = alta resistencia.</p>
+
+            <h4>Conexión del LDR (Divisor de Voltaje):</h4>
+            <p>Para que la Micro:bit lea el LDR, necesitamos un circuito simple llamado "divisor de voltaje".</p>
+            <ol>
+                <li>Conecta un extremo de la resistencia de 10kΩ al pin <strong>3V</strong> de la Micro:bit.</li>
+                <li>Conecta el otro extremo de esa resistencia a una fila de la protoboard.</li>
+                <li>En esa misma fila, conecta una pata del LDR.</li>
+                <li>La otra pata del LDR conéctala al pin <strong>GND</strong> de la Micro:bit.</li>
+                <li>El punto de unión entre la resistencia de 10kΩ y el LDR es donde leeremos el voltaje. Conecta este punto al pin analógico <strong>P0</strong> de la Micro:bit.</li>
+            </ol>
+            <div class="diagram-placeholder">
+                <img/ src="imagenes/microbitLDR.png">
+            </div>
+            <div class="role-focus">
+                <strong>Tareas de Rol:</strong>
+                <ul>
+                    <li><strong>Ing. Electrónico:</strong> Lidera el montaje del circuito. ¡Verifica todas las conexiones!</li>
+                    <li><strong>Ing. de Programación:</strong> Prepara el código inicial para leer el sensor.</li>
+                    <li><strong>Comunicador:</strong> Dibuja el diagrama de conexión en la bitácora.</li>
+                    <li><strong>Líder:</strong> Supervisa y registra el proceso en la bitácora grupal.</li>
+                </ul>
+            </div>
+
+            <h4>Calibración del Sensor LDR en MakeCode:</h4>
+            <p>Vamos a leer el valor del LDR y mostrarlo en la matriz de LEDs para entender cómo responde a diferentes niveles de luz.</p>
+                        <div class="makecode-placeholder">
+                <div style="position:relative;height:calc(300px + 5em);width:100%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/---codeembed#pub:_51qLUyTz41Mc" allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe></div>
+            </div>
+            <p><strong>Actividad de Calibración (Equipo):</strong></p>
+            <ol>
+                <li>Descarguen el código a la Micro:bit.</li>
+                <li>Expongan el LDR a diferentes condiciones de luz:
+                    <ul>
+                        <li>Totalmente cubierto (oscuridad).</li>
+                        <li>Luz ambiente normal de la sala.</li>
+                        <li>Luz directa de una linterna (¡sin apuntar a los ojos!).</li>
+                    </ul>
+                </li>
+                <li><strong>En la Bitácora Grupal (Líder registra, todos aportan):</strong> Anoten los valores numéricos aproximados que muestra la Micro:bit para cada condición (ej. "Oscuridad: ~50-150", "Luz Sala: ~400-600", "Linterna: ~800-1000"). Estos valores serán su <strong>calibración</strong>.</li>
+            </ol>
+            <p><strong>Reflexiona 🤔 (Individual en Bitácora):</strong> ¿Por qué crees que los valores del LDR cambian con la luz? ¿Qué relación tiene con la resistencia?</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🚨</span> Fase 2: ¡Luz de Alerta! Activando un LED Externo</h3>
+            <p>Ahora, usaremos la información del LDR para encender un LED externo cuando haya poca luz.</p>
+
+            <h4>Conexión del LED Externo:</h4>
+            <ol>
+                <li>Conecta la pata larga (ánodo, +) del LED a una resistencia (220Ω o 330Ω).</li>
+                <li>Conecta el otro extremo de la resistencia al pin digital <strong>P1</strong> de la Micro:bit.</li>
+                <li>Conecta la pata corta (cátodo, -) del LED al pin <strong>GND</strong> de la Micro:bit.</li>
+            </ol>
+            <div class="diagram-placeholder">
+                <img src="imagenes/microbitLDRyled.png"/>
+            </div>
+             <div class="role-focus">
+                <strong>Tareas de Rol:</strong>
+                <ul>
+                    <li><strong>Ing. Electrónico:</strong> Realiza la conexión del LED.</li>
+                    <li><strong>Ing. de Programación:</strong> Modifica el código anterior.</li>
+                </ul>
+            </div>
+
+            <h4>Código en MakeCode: LED Reactivo a la Luz</h4>
+           
+            <div class="makecode-placeholder">
+                <div style="position:relative;height:calc(300px + 5em);width:100%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/---codeembed#pub:_iE3H3s3j2Jzy" allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe></div>
+            </div>
+            <p><strong>¡Prueba y Ajusta!</strong> Cubre el LDR. ¿Se enciende el LED? Descúbrelo. ¿Se apaga? Si no, ajusta el valor `90` en el `if` según tu calibración.</p>
+            <p><strong>Reflexiona 🤔 (Individual en Bitácora):</strong> ¿Qué es una señal digital? ¿Cómo se diferencia de la señal analógica que leímos del LDR?</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">⚙️</span> Fase 3: ¡Movimiento Preciso con Servomotores!</h3>
+            <p>Un <strong>servomotor SG90</strong> nos permite controlar un ángulo exacto, ¡perfecto para nuestro seguidor de luz!</p>
+            <h4>Conexión del Servomotor SG90:</h4>
+            <ul>
+                <li>Cable Rojo (VCC) -> Pin <strong>3V</strong> de la Micro:bit.</li>
+                <li>Cable Marrón/Negro (GND) -> Pin <strong>GND</strong> de la Micro:bit.</li>
+                <li>Cable Naranja/Amarillo (Señal) -> Pin <strong>P2</strong> de la Micro:bit (u otro pin PWM).</li>
+            </ul>
+            <div class="diagram-placeholder">
+               <img src="imagenes/microbitServo.png"/>
+            </div>
+            <div class="role-focus">
+                <strong>Tareas de Rol:</strong>
+                <ul>
+                    <li><strong>Ing. Electrónico:</strong> Conecta el servomotor. ¡Cuidado con la polaridad!</li>
+                    <li><strong>Ing. de Programación:</strong> Prepara el código de prueba.</li>
+                </ul>
+            </div>
+
+            <h4>Probando el Servo con Botones en MakeCode:</h4>
+            <p>Primero, asegúrate de tener la extensión "<strong>servo</strong>" en MakeCode (Avanzado > Extensiones).</p>
+         
+            <div class="makecode-placeholder">
+               <div style="position:relative;height:calc(300px + 5em);width:100%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/---codeembed#pub:_bgziLw838iTx" allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe></div>
+            </div>
+            <p><strong>¡Prueba los Límites!</strong> Presiona A y B. ¿El servo se mueve a 0 y 180 grados? Observa su rango de movimiento.</p>
+            <p><strong>Reflexiona 🤔 (Individual en Bitácora):</strong> ¿Para qué sirve la señal PWM en el control de un servo? ¿Por qué es importante conocer los límites (0-180 grados) del servo?</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">☀️<span style="font-size: 0.7em; vertical-align: middle;">➡️</span>⚙️</span> Fase 4: ¡El Seguidor de Luz Completo!</h3>
+            <p>¡Llegó el momento cumbre, ingenieros! Vamos a integrar el LDR, el LED y el servomotor para crear nuestro Seguidor de Luz. La idea es que el servo se mueva a diferentes posiciones según la intensidad de luz detectada por el LDR, y el LED nos siga indicando si hay poca luz.</p>
+
+            <h4>Lógica del Seguidor de Luz (con un LDR):</h4>
+            <p>Como tenemos un solo LDR, el servo no "seguirá" una fuente de luz en movimiento, sino que reaccionará a la intensidad general de luz. Podemos definir rangos:</p>
+            <ul>
+                <li><strong>Oscuridad (ej. valor LDR < 90):</strong> LED encendido, Servo a 0 grados (posición de "descanso" o "buscando luz").</li>
+                <li><strong>Luz Media (ej. 90 <= valor LDR < 200):</strong> LED apagado, Servo a 90 grados (posición "encontró algo de luz").</li>
+                <li><strong>Mucha Luz (ej. valor LDR >= 200):</strong> LED apagado, Servo a 180 grados (posición "máxima luz detectada").</li>
+            </ul>
+            <p>¡Estos valores son ejemplos! Deben usar los que obtuvieron en su <strong>calibración</strong>.</p>
+            <div class="role-focus">
+                <strong>Tareas de Rol:</strong>
+                <ul>
+                    <li><strong>Ing. de Programación:</strong> Lidera la integración del código. ¡Este es el desafío principal!</li>
+                    <li><strong>Ing. Electrónico:</strong> Asegura que todas las conexiones (LDR, LED, Servo) estén correctas y funcionando juntas.</li>
+                    <li><strong>Comunicador:</strong> Documenta la lógica del programa y los rangos de luz definidos.</li>
+                    <li><strong>Líder:</strong> Coordina las pruebas y la depuración. ¡Actualiza la bitácora con los avances!</li>
+                </ul>
+            </div>
+
+            <h4>Código en MakeCode para el Seguidor de Luz:</h4>
+          
+            <div class="makecode-placeholder">
+               <div style="position:relative;height:calc(300px + 5em);width:100%;overflow:hidden;"><iframe style="position:absolute;top:0;left:0;width:100%;height:100%;" src="https://makecode.microbit.org/---codeembed#pub:_22J6wPhHpFV5" allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-scripts allow-same-origin"></iframe></div>
+            </div>
+            <p><strong>¡Pruebas Finales y Ajustes!</strong></p>
+            <ol>
+                <li>Descarguen el código.</li>
+                <li>Prueben con diferentes niveles de luz (cubriendo el LDR, usando linterna).</li>
+                <li>¿El LED se enciende/apaga correctamente?</li>
+                <li>¿El servo se mueve a las posiciones esperadas según la luz?</li>
+                <li><strong>Ajusten los valores</strong> en los `if` (`200`, `700`) y los ángulos del servo (`0`, `90`, `180`) hasta que su seguidor funcione como desean. ¡Esta es la calibración fina!</li>
+            </ol>
+            <p><strong>En la Bitácora Grupal:</strong> Anoten los valores finales de calibración para el LED y para cada posición del servo. Describan cualquier problema que tuvieron y cómo lo solucionaron.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🌍</span> Fase 5: ¿Y Esto Para Qué Sirve? Aplicaciones Reales</h3>
+            <p>¡Han construido un sistema inteligente! Pero, ¿dónde podríamos usar un seguidor de luz en el mundo real?</p>
+            <p><strong>Actividad de Investigación (Equipo):</strong></p>
+            <ol>
+                <li>Investiguen en internet al menos <strong>TRES aplicaciones reales</strong> de seguidores de luz o sistemas que reaccionan a la intensidad lumínica.</li>
+                <li>Algunas pistas: paneles solares, alumbrado público inteligente, robots que siguen líneas de luz, sistemas de apertura/cierre de persianas automáticas, juguetes interactivos...</li>
+                <li><strong>En la Bitácora Grupal (Comunicador/a lidera la redacción):</strong> Para cada aplicación encontrada:
+                    <ul>
+                        <li>Nombre de la aplicación.</li>
+                        <li>Breve descripción de cómo funciona.</li>
+                        <li>¿Cómo se relaciona con el proyecto que acaban de construir?</li>
+                    </ul>
+                </li>
+            </ol>
+            <p><strong>Reflexiona 🤔 (Individual en Bitácora):</strong> ¿Se te ocurre alguna idea original para usar un seguidor de luz en tu casa, colegio o comunidad?</p>
+        </section>
+
+        <section class="evaluation-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🏆</span> Fase 6: ¡Demuestra tu Genio Ingenieril!</h3>
+            <p>Es momento de consolidar su aprendizaje y mostrar el increíble proyecto que han construido.</p>
+
+            <h4>Evaluación Formativa (Registra en tu Bitácora)</h4>
+            <ol>
+                <li>Describe el circuito divisor de voltaje que usaste para el LDR. ¿Por qué es necesario?</li>
+               
+                <li>Si tu seguidor de luz no se mueve como esperas, ¿cuáles serían los primeros 3 pasos que seguirías para depurar el problema (revisando hardware y software)?</li>
+                <li>Desde tu rol en el equipo, ¿cuál fue tu mayor contribución al proyecto y qué fue lo más importante que aprendiste?</li>
+            </ol>
+
+            <h4>Evaluación Sumativa (Evidencia en Bitácora Grupal y Presentación)</h4>
+            <p>(Tu docente definirá los entregables exactos)</p>
+            <h5>Rúbrica de Calificación General (0.0 - 5.0)</h5>
+            <ul>
+                <li><strong>Nota 3.0 (Básico - "Funciona"):</strong>
+                    <ul>
+                        <li>El seguidor de luz (LDR, LED, Servo) está montado y el código MakeCode hace que el servo reaccione al menos a dos niveles de luz diferentes y el LED se encienda/apague correctamente.</li>
+                        <li>Bitácora grupal con: diagrama de conexión básico, código MakeCode funcional (enlace), y valores de calibración iniciales del LDR.</li>
+                    </ul>
+                </li>
+                <li><strong>Nota 3.5 (Intermedio - "Bien Calibrado"):</strong>
+                    <ul>
+                        <li>Cumple con el nivel 3.0.</li>
+                        <li>El servo reacciona claramente a TRES niveles de luz distintos (oscuro, medio, brillante) basados en una calibración del LDR bien documentada en la bitácora.</li>
+                        <li>La bitácora incluye una explicación clara de la lógica del código final.</li>
+                    </ul>
+                </li>
+                <li><strong>Nota 4.0 (Bueno - "Investigado"):</strong>
+                    <ul>
+                        <li>Cumple con el nivel 3.5.</li>
+                        <li>La bitácora incluye la investigación completa de las aplicaciones de seguidores de luz (Fase 5), con descripciones claras.</li>
+                        <li>Las respuestas individuales a la Evaluación Formativa están completas y demuestran comprensión.</li>
+                    </ul>
+                </li>
+                <li><strong>Nota 4.5 (Sobresaliente - "Documentado y Reflexivo"):</strong>
+                    <ul>
+                        <li>Cumple con el nivel 4.0.</li>
+                        <li>La bitácora grupal está excepcionalmente bien organizada, detallada, y refleja un proceso de trabajo colaborativo y resolución de problemas.</li>
+                        <li>El equipo presenta su proyecto de forma clara y concisa (si se requiere presentación).</li>
+                    </ul>
+                </li>
+                <li><strong>Nota 5.0 (Excelente - "Innovador"):</strong>
+                    <ul>
+                        <li>Cumple con el nivel 4.5.</li>
+                        <li>El equipo implementa una <strong>mejora significativa o una variación creativa</strong> al proyecto base (ej. usar el acelerómetro para una función adicional, controlar dos servos, diseñar una estructura física para el seguidor) Y lo documenta perfectamente (diseño, código, funcionamiento).</li>
+                        <li>O, el equipo realiza un análisis profundo de una aplicación real y propone cómo su seguidor de luz podría adaptarse o mejorarse para esa aplicación.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Coevaluación del Equipo </h4>
+            <p>Evalúa honestamente a cada miembro de tu equipo (incluyéndote a ti) en una escala de 0 a 5 (0=Nada, 5=Mucho) en los siguientes aspectos. Sé constructivo. Usa este enlace: <a href="https://forms.gle/MS3KRuBY7f3ECAew6"> FORMULARIO DE COEVALUACIÓN </a></p> 
+            <div style="overflow-x:auto;">
+                <table border="1" style="width:100%; border-collapse: collapse; margin-bottom: 1rem;">
+                    <thead>
+                        <tr style="background-color: var(--color-apoyo2);">
+                            <th style="padding: 8px;">Criterio / Compañero</th>
+                            <th style="padding: 8px;">[Nombre Comp. 1]</th>
+                            <th style="padding: 8px;">[Nombre Comp. 2]</th>
+                            <th style="padding: 8px;">[Nombre Comp. 3]</th>
+                            <th style="padding: 8px;">Yo Mismo/a</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 8px;">Participación activa en discusiones</td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">Cumplimiento de tareas asignadas a su rol</td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">Aporte de ideas y soluciones</td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">Colaboración y ayuda a los demás</td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><strong>Comentario Positivo / Sugerencia:</strong></td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                            <td style="padding: 8px;"> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            
+
+        <section class="tutorial-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🌟</span> Fase 7: ¡Constructor de Futuro!</h3>
+            <p><strong>¡MISIÓN COMPLETADA, EQUIPO DE INGENIEROS!</strong> Han diseñado, construido, programado y probado un sistema de computación física funcional. Han aprendido a usar sensores para interpretar el entorno y actuadores para interactuar con él, ¡habilidades esenciales para cualquier innovador tecnológico!</p>
+            <p>No olviden: cada proyecto, cada desafío, cada "error" que solucionan, los hace mejores ingenieros. La curiosidad, la colaboración y la persistencia son sus herramientas más poderosas.</p>
+            <p><strong>El mundo necesita mentes creativas como las suyas, capaces de imaginar y construir soluciones. ¡Sigan explorando, sigan aprendiendo y sigan creando el futuro!</strong></p>
+        </section>
+
+    </main>
+
+    <footer class="portal-footer">
+        <p>Diana Alejandra Bonilla Cardona Msc | Tecnología e Informática | Grado 9 </p>
+    </footer>
+
+</body>
+</html>
