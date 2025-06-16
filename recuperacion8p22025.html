@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Recuperación - Grado 8: Videojuegos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: #ecfdf5; /* green-50 */
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            max-width: 350px;
+            margin: auto;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+                max-width: 380px;
+            }
+        }
+        .tab-active {
+            background-color: #22c55e; /* green-500 */
+            color: white;
+            font-weight: bold;
+        }
+        .tab-inactive {
+            background-color: #d1fae5; /* green-100 */
+            color: #10b981; /* green-600 */
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto px-4 md:px-8 py-12 max-w-6xl">
+        
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-black text-[#1e40af]">¡Tu Plan de Recuperación de Videojuegos!</h1>
+            <p class="text-xl text-[#065f46] mt-2 font-bold">Grado 8: Roles, Tipos y Scratch</p>
+        </header>
+
+        <section id="intro" class="mb-16 bg-white p-8 rounded-xl shadow-lg border-l-4 border-[#3b82f6]">
+            <h2 class="text-3xl font-bold mb-4 text-[#1e40af]">¡A Subir de Nivel! 🚀</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                Este plan te ayudará a reforzar todo lo que vimos sobre el increíble mundo de los videojuegos. Es una oportunidad para aprender a tu ritmo, usando tu creatividad para investigar y ¡hasta crear tus propios juegos en Scratch! Prepárate para dibujar, pensar y programar de una forma súper divertida.
+            </p>
+        </section>
+
+        <section id="phases" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#1e40af]">Las 2 Misiones del Plan</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-blue-100 p-8 rounded-lg shadow-md text-center">
+                    <span class="text-5xl">🏡</span>
+                    <h3 class="text-2xl font-bold text-blue-800 mb-2 mt-4">Misión 1: Trabajo en Casa</h3>
+                    <p class="text-blue-700">Explorarás, investigarás y trabajarás a mano en tus hojas cuadriculadas. ¡También programarás en Scratch!</p>
+                </div>
+                <div class="bg-amber-100 p-8 rounded-lg shadow-md text-center">
+                    <span class="text-5xl">🗣️</span>
+                    <h3 class="text-2xl font-bold text-amber-800 mb-2 mt-4">Misión 2: Sustentación en Clase</h3>
+                    <p class="text-amber-700">Presentarás tu trabajo al profesor, explicarás lo que aprendiste y mostrarás tus creaciones en Scratch.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="module-theory" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#1e40af]">Módulo Teórico: El Mundo de los Videojuegos (¡A Mano!)</h2>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                <p class="text-center mb-6 text-lg text-gray-700">Todas las tareas de este módulo deben ser realizadas a mano en tus **hojas de block tamaño carta cuadriculada**.</p>
+                
+                <div class="mb-8">
+                    <h3 class="2xl font-bold text-[#065f46] mb-4">Misión 1.1: ¡Conoce a los Héroes de la Industria! (Roles)</h3>
+                    <p class="mb-4 text-gray-700">Investiga y describe las funciones principales de al menos **3 roles** importantes en la creación de videojuegos. ¡Usa tus propias palabras y dibuja un pequeño ícono para cada uno!</p>
+                    <ul class="list-disc list-inside space-y-2 text-lg text-gray-700 pl-4">
+                        <li>🎮 **Diseñador de Juegos:** ¿Qué hacen para que el juego sea divertido?</li>
+                        <li>💻 **Programador:** ¿Cómo hacen que el juego funcione?</li>
+                        <li>🎨 **Artista (animador/modelador):** ¿Cómo le dan vida visual al juego?</li>
+                        <li>🔎 **Probador (Tester):** ¿Cuál es su misión secreta para que no haya errores?</li>
+                        <li>📈 **Productor:** ¿Quién es el capitán del barco del proyecto?</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="2xl font-bold text-[#065f46] mb-4">Misión 1.2: ¡Clasifica tus Juegos Favoritos! (Tipos de Videojuegos)</h3>
+                    <p class="mb-4 text-gray-700">Explora los diferentes tipos de videojuegos. Para al menos **3 tipos diferentes**, describe sus características principales y menciona **2 ejemplos** de juegos populares de ese tipo. Puedes usar las categorías de las pestañas como guía para tu investigación.</p>
+                    
+                    <div id="game-type-tabs" class="flex flex-wrap justify-center gap-2 mb-6">
+                        <button data-target="type-platform" class="game-type-tab tab-active px-4 py-2 rounded-md transition-all duration-300">Plataformas</button>
+                        <button data-target="type-strategy" class="game-type-tab tab-inactive px-4 py-2 rounded-md transition-all duration-300">Estrategia</button>
+                        <button data-target="type-rpg" class="game-type-tab tab-inactive px-4 py-2 rounded-md transition-all duration-300">Rol (RPG)</button>
+                        <button data-target="type-sports" class="game-type-tab tab-inactive px-4 py-2 rounded-md transition-all duration-300">Deportes</button>
+                        <button data-target="type-adventure" class="game-type-tab tab-inactive px-4 py-2 rounded-md transition-all duration-300">Aventura</button>
+                    </div>
+
+                    <div id="game-type-content" class="bg-gray-50 p-6 rounded-lg border">
+                        <div id="type-platform" class="game-type-panel">
+                            <h4 class="font-bold text-xl mb-2 text-blue-700">Juegos de Plataformas</h4>
+                            <p class="text-gray-700">Investiga y escribe aquí las características principales de este tipo de juego, y menciona 2 ejemplos.</p>
+                            <p class="mt-2 font-semibold">Características:</p>
+                            <ul class="list-disc list-inside ml-4 text-gray-600">
+                                <li>(Escribe aquí las características que investigaste)</li>
+                            </ul>
+                            <p class="mt-2 font-semibold">Ejemplos:</p>
+                            <ul class="list-disc list-inside ml-4 text-gray-600">
+                                <li>(Escribe aquí el primer ejemplo)</li>
+                                <li>(Escribe aquí el segundo ejemplo)</li>
+                            </ul>
+                        </div>
+                        <div id="type-strategy" class="game-type-panel hidden">
+                            <h4 class="font-bold text-xl mb-2 text-blue-700">Juegos de Estrategia</h4>
+                            <p class="text-gray-700">Investiga y escribe aquí las características principales de este tipo de juego, y menciona 2 ejemplos.</p>
+                            <p class="mt-2 font-semibold">Características:</p>
+                            <ul class="list-disc list-inside ml-4 text-gray-600">
+                                <li>(Escribe aquí las características que investigaste)</li>
+                            </ul>
+                            <p class="mt-2 font-semibold">Ejemplos:</p>
+                            <ul class="list-disc list-inside ml-4 text-gray-600">
+                                <li>(Escribe aquí el primer ejemplo)</li>
+                                <li>(Escribe aquí el segundo ejemplo)</li>
+                            </ul>
+                        </div>
+                        <div id="type-rpg" class="game-type-panel hidden">
+                            <h4 class="font-bold text-xl mb-2 text-blue-700">Juegos de Rol (RPG)</h4>
+                            <p class="text-gray-700">Investiga y escribe aquí las características principales de este tipo de juego, y menciona 2 ejemplos.</p>
+                            <p class="mt-2 font-semibold">Características:</p>
+                            <ul class="list-disc list-inside ml-4 text-gray-600">
+                                <li>(Escribe aquí las características que investigaste)</li>
+                            </ul>
+                            <p class="mt-2 font-semibold">Ejemplos:</p>
+                            <ul class="list-disc list-inside ml-4 text-gray-600">
+                                <li>(Escribe aquí el primer ejemplo)</li>
+                                <li>(Escribe aquí el segundo ejemplo)</li>
+                            </ul>
+                        </div>
+                        <div id="type-sports" class="game-type-panel hidden">
+                            <h4 class="font-bold text-xl mb-2 text-blue-700">Juegos de Deportes</h4>
+                            <p class="text-gray-700">Investiga y escribe aquí las características principales de este tipo de juego, y menciona 2 ejemplos.</p>
+                            <p class="mt-2 font-semibold">Características:</p>
+                            <ul class="list-disc list-inside ml-4 text-gray-600">
+                                <li>(Escribe aquí las características que investigaste)</li>
+                            </ul>
+                            <p class="mt-2 font-semibold">Ejemplos:</p>
+                            <ul class="list-disc list-inside ml-4 text-gray-600">
+                                <li>(Escribe aquí el primer ejemplo)</li>
+                                <li>(Escribe aquí el segundo ejemplo)</li>
+                            </ul>
+                        </div>
+                        <div id="type-adventure" class="game-type-panel hidden">
+                            <h4 class="font-bold text-xl mb-2 text-blue-700">Juegos de Aventura</h4>
+                            <p class="text-gray-700">Investiga y escribe aquí las características principales de este tipo de juego, y menciona 2 ejemplos.</p>
+                            <p class="mt-2 font-semibold">Características:</p>
+                            <ul class="list-disc list-inside ml-4 text-gray-600">
+                                <li>(Escribe aquí las características que investigaste)</li>
+                            </ul>
+                            <p class="mt-2 font-semibold">Ejemplos:</p>
+                            <ul class="list-disc list-inside ml-4 text-gray-600">
+                                <li>(Escribe aquí el primer ejemplo)</li>
+                                <li>(Escribe aquí el segundo ejemplo)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="module-scratch" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#1e40af]">Módulo Práctico: ¡Crea en Scratch! (Online)</h2>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                <p class="mb-4 text-lg text-gray-700">Ahora es tu turno de programar. Crea **2 proyectos sencillos** en Scratch inspirados en la guía que trabajamos. Recuerda que no necesitas instalar nada, ¡puedes usar Scratch desde tu navegador!</p>
+                <p class="text-center font-bold text-[#22c55e] text-xl mb-4">Accede a Scratch aquí: <a href="https://scratch.mit.edu/" target="_blank" class="text-blue-600 hover:underline">scratch.mit.edu</a></p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="2xl font-bold text-[#065f46] mb-4">Proyecto 1: ¡Anima tu Nombre o Palabra Favorita!</h3>
+                        <p class="mb-2 text-gray-700">Elige al menos 3 letras de tu nombre o una palabra que te guste y haz que cada letra tenga una animación diferente. Sigue las ideas de las "7 cartas" de la guía.</p>
+                        <ol class="list-decimal list-inside space-y-2 text-lg text-gray-700 pl-4">
+                            <li>Elige al menos 3 letras de la librería de Scratch.</li>
+                            <li>Para cada letra, elige una animación de la lista y programa los bloques necesarios:
+                                <ul class="list-disc list-inside ml-4 mt-1">
+                                    <li>**Cambiar color:** Al hacer clic en la letra.</li>
+                                    <li>**Rotar:** Al presionar una tecla.</li>
+                                    <li>**Reproducir sonido:** Al hacer clic en la letra y añadir la extensión de sonido.</li>
+                                    <li>**Bailar (mover y tocar percusión):** Al hacer clic en la letra y añadir la extensión de música.</li>
+                                    <li>**Cambiar tamaño:** Al presionar una tecla (crecer y encoger).</li>
+                                    <li>**Deslizar alrededor:** Al hacer clic en la bandera verde para que se mueva a posiciones aleatorias.</li>
+                                </ul>
+                            </li>
+                            <li><span class="font-bold text-red-500">¡Comparte el ENLACE de tu proyecto Scratch!</span></li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h3 class="2xl font-bold text-[#065f46] mb-4">Proyecto 2: ¡Juego de Perseguir Puntos!</h3>
+                        <p class="mb-2 text-gray-700">Crea un juego simple donde tu personaje persiga un objeto para ganar puntos. Usa los bloques de movimiento y variables.</p>
+                        <ol class="list-decimal list-inside space-y-2 text-lg text-gray-700 pl-4">
+                            <li>Elige un personaje (sprite) y un objeto que será el "premio" (ej. una estrella).</li>
+                            <li>Programa tu personaje para que se mueva con las flechas del teclado (arriba, abajo, izquierda, derecha).</li>
+                            <li>Programa el "premio" para que se mueva aleatoriamente o se deslice por la pantalla.</li>
+                            <li>Crea una variable llamada "Puntuación".</li>
+                            <li>Añade bloques "si tocando..." para que, cuando tu personaje toque el premio, la puntuación sume 1 y el premio se mueva a otra posición.</li>
+                            <li>Opcional: Añade un sonido cuando el personaje toca el premio.</li>
+                            <li><span class="font-bold text-red-500">¡Comparte el ENLACE de tu proyecto Scratch!</span></li>
+                        </ol>
+                    </div>
+                </div>
+                <p class="mt-8 text-center text-xl font-semibold text-[#1e40af]">¡Recuerda! Guarda tus proyectos en Scratch y comparte los enlaces con tu profesor. </p>
+            </div>
+        </section>
+
+        <section id="evaluation" class="bg-gray-800 text-white p-8 md:p-12 rounded-2xl shadow-2xl">
+            <h2 class="text-3xl font-bold text-center mb-8">¡Así será tu Evaluación Final!</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="chart-container">
+                    <canvas id="evaluationChart"></canvas>
+                </div>
+                <div>
+                    <p class="text-lg text-gray-300 mb-6">Tu calificación se basará en el esfuerzo de tu trabajo, la calidad de tus creaciones y lo bien que expliques lo que aprendiste.</p>
+                    <ul class="space-y-3 text-lg">
+                        <li class="flex items-center"><div class="w-4 h-4 rounded-full bg-[#fcd34d] mr-3"></div><span class="font-bold">40%</span> - Sustentación Oral (¡Tu gran momento!)</li>
+                        <li class="flex items-center"><div class="w-4 h-4 rounded-full bg-[#3b82f6] mr-3"></div><span class="font-bold">30%</span> - Trabajos Escritos a Mano (Módulo Teórico)</li>
+                        <li class="flex items-center"><div class="w-4 h-4 rounded-full bg-[#10b981] mr-3"></div><span class="font-bold">30%</span> - Proyectos en Scratch (Módulo Práctico)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gameTypeTabs = document.querySelectorAll('.game-type-tab');
+            const gameTypePanels = document.querySelectorAll('.game-type-panel');
+
+            gameTypeTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    gameTypeTabs.forEach(item => {
+                        item.classList.remove('tab-active');
+                        item.classList.add('tab-inactive');
+                    });
+                    tab.classList.add('tab-active');
+                    tab.classList.remove('tab-inactive');
+                    
+                    const target = tab.getAttribute('data-target');
+                    gameTypePanels.forEach(panel => {
+                        if (panel.id === target) {
+                            panel.classList.remove('hidden');
+                        } else {
+                            panel.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            const wrapLabel = (label, maxWidth = 16) => {
+                if (typeof label !== 'string' || label.length <= maxWidth) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            };
+
+            const originalLabels = ['Sustentación Oral', 'Trabajos Escritos a Mano', 'Proyectos en Scratch'];
+            const wrappedLabels = originalLabels.map(label => wrapLabel(label));
+
+            const ctx = document.getElementById('evaluationChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: wrappedLabels,
+                    datasets: [{
+                        label: 'Ponderación',
+                        data: [40, 30, 30],
+                        backgroundColor: ['#fcd34d', '#3b82f6', '#10b981'], /* yellow-400, blue-500, green-600 */
+                        borderColor: '#2d3748', /* gray-800 */
+                        borderWidth: 3,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    return originalLabels[item.dataIndex] || '';
+                                },
+                                label: function(context) {
+                                    return ` ${context.raw}%`;
+                                }
+                            },
+                            backgroundColor: '#1a202c',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 4,
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
