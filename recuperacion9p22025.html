@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Mejora Interactivo: Electrónica y Pensamiento Computacional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutrals -->
+    <!-- Application Structure Plan: Se ha diseñado una SPA con navegación por secciones para transformar el documento lineal en una herramienta explorable. La estructura es: 1) Visión General con un resumen y gráfico de evaluación; 2) Fase 1: Trabajo en Casa, una sección interactiva con un selector de actividades para ver los detalles de cada una; 3) Fase 2: Sustentación, que detalla la evaluación presencial; 4) Evaluación y Recursos, que consolida los criterios y materiales. Esta arquitectura permite al docente acceder rápidamente a la información que necesita (p. ej., consultar una actividad específica) sin tener que leer todo el documento, mejorando la usabilidad y la planificación. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Criterios de evaluación (30%, 40%, 30%). Goal: Informar/Comparar. Viz: Gráfico de Donut (Chart.js). Interaction: Tooltip al pasar el cursor. Justification: Visualmente más atractivo y rápido de interpretar que el texto. Library: Chart.js (Canvas).
+        - Report Info: Actividades de la Fase 1. Goal: Organizar/Explorar. Viz: Pestañas para módulos y tarjetas de contenido dinámico. Interaction: Clic en el nombre de la actividad para mostrar/ocultar sus detalles. Justification: Evita una página larga y abrumadora, permitiendo al usuario enfocarse en una sola tarea. Method: HTML/CSS/JS.
+        - Report Info: Diagrama de flujo (semáforo). Goal: Organizar/Ilustrar. Viz: Diagrama construido con HTML/CSS (divs y bordes). Interaction: Ninguna, es una visualización estática. Justification: Más claro y estructurado que un párrafo de texto. Method: HTML/CSS/Tailwind.
+        - Report Info: Pseudocódigo (puerta automática, paso a paso literal). Goal: Organizar/Ilustrar. Viz: Bloque de texto preformateado con pasos literales. Interaction: Ninguna, es una visualización estática. Justification: Hace la lógica más accesible para estudiantes sin experiencia en pseudocódigo formal. Method: HTML/CSS/Tailwind.
+        - Report Info: Protoboard. Goal: Educar/Ilustrar. Viz: Se ha eliminado la visualización interactiva por no ajustarse a la realidad del componente. Se mantiene la instrucción de dibujo. Justification: Evita confusiones y se alinea con el enfoque manual del plan. Method: HTML/CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        /* .protoboard-grid styles removed */
+
+        .nav-link.active {
+            color: #1e40af;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-amber-50 text-stone-800">
+
+    <div class="container mx-auto max-w-6xl px-4 py-8 md:py-12">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-amber-900">Plan de Mejora Interactivo</h1>
+            <p class="mt-2 text-lg text-amber-700">Electrónica Básica y Pensamiento Computacional para Grado 9</p>
+        </header>
+
+        <nav class="sticky top-0 z-10 bg-amber-50/80 backdrop-blur-sm py-4 mb-12 border-b border-amber-200">
+            <ul class="flex justify-center items-center gap-4 md:gap-8 text-sm md:text-base font-medium text-amber-800">
+                <li><a href="#overview" class="nav-link p-2 hover:text-blue-800 transition-colors">Visión General</a></li>
+                <li><a href="#phase1" class="nav-link p-2 hover:text-blue-800 transition-colors">Fase 1: Taller</a></li>
+                <li><a href="#phase2" class="nav-link p-2 hover:text-blue-800 transition-colors">Fase 2: Sustentación</a></li>
+                <li><a href="#evaluation" class="nav-link p-2 hover:text-blue-800 transition-colors">Evaluación y Recursos</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="overview" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-amber-900 mb-6 text-center">Visión General del Plan</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-amber-100">
+                        <h3 class="text-xl font-semibold text-amber-800 mb-3">💡 Filosofía del Plan</h3>
+                        <p class="text-stone-700">Este plan se fundamenta en la idea de que el aprendizaje profundo no depende de la tecnología, sino de la conceptualización, el dibujo preciso y la lógica. Al trabajar a mano, los estudiantes construyen una comprensión sólida de los sistemas electrónicos y afianzan el pensamiento computacional, desarrollando habilidades críticas para la resolución de problemas de manera tangible y duradera.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-amber-100">
+                         <h3 class="text-xl font-semibold text-amber-800 mb-3 text-center">Ponderación de la Evaluación</h3>
+                        <div class="chart-container">
+                            <canvas id="evaluationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="phase1" class="mb-16 scroll-mt-24">
+                <h2 class="text-3xl font-bold text-amber-900 mb-6 text-center">Fase 1: Trabajo en Casa (Taller Manual)</h2>
+                <p class="text-center text-stone-600 max-w-3xl mx-auto mb-8">Esta fase se desarrolla individualmente en casa. El estudiante deberá completar las siguientes actividades en sus **hojas de block tamaño carta cuadriculada**, usando solo lápiz, colores y regla. Haga clic en cada actividad para ver los detalles.</p>
+                <div class="flex justify-center gap-4 mb-8">
+                    <button id="btn-mod1" class="px-6 py-2 bg-amber-600 text-white font-semibold rounded-lg shadow-md hover:bg-amber-700 transition-all">Módulo 1: Fundamentos</button>
+                    <button id="btn-mod2" class="px-6 py-2 bg-white text-amber-700 font-semibold rounded-lg shadow-md hover:bg-amber-100 transition-all">Módulo 2: Microcontroladores</button>
+                </div>
+                
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div id="activities-list" class="md:col-span-4">
+                    </div>
+                    <div id="activity-details" class="md:col-span-8 bg-white p-6 rounded-xl shadow-lg border border-amber-100 min-h-[300px]">
+                        <p class="text-center text-stone-500">Seleccione una actividad de la lista para ver su descripción.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="phase2" class="mb-16 scroll-mt-24">
+                 <h2 class="text-3xl font-bold text-amber-900 mb-8 text-center">Fase 2: Sustentación Presencial</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-amber-100">
+                        <h3 class="text-xl font-semibold text-amber-800 mb-3">1. Presentación del Trabajo</h3>
+                        <p class="text-stone-600">El estudiante presenta sus **hojas de block tamaño carta cuadriculada** o carpeta. Se valora la claridad de los dibujos, la organización, limpieza y la profundidad de las explicaciones escritas.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-amber-100">
+                        <h3 class="text-xl font-semibold text-amber-800 mb-3">2. Explicación Conceptual</h3>
+                        <p class="text-stone-600">El docente seleccionará al azar actividades del taller para que el estudiante explique la función de un componente, la conexión de un circuito o la lógica de un algoritmo.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-amber-100">
+                        <h3 class="text-xl font-semibold text-amber-800 mb-3">3. Desafío Práctico</h3>
+                        <p class="text-stone-600">Se le pedirá al estudiante que diseñe y dibuje en el momento una solución a un problema simple, aplicando los conceptos aprendidos (ej. un LED parpadeante).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="evaluation" class="scroll-mt-24">
+                <h2 class="text-3xl font-bold text-amber-900 mb-8 text-center">Evaluación y Recursos</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-amber-100">
+                        <h3 class="text-xl font-semibold text-amber-800 mb-3">⚙️ Materiales Requeridos</h3>
+                        <ul class="list-disc list-inside space-y-2 text-stone-700">
+                            <li>**Hojas de block tamaño carta cuadriculada** o carpeta con hojas blancas.</li>
+                            <li>Lápices de colores para diferenciar conexiones.</li>
+                            <li>Lápiz, borrador y regla.</li>
+                            <li>Guías impresas proporcionadas por el docente con material de apoyo.</li>
+                        </ul>
+                    </div>
+                     <div class="bg-white p-6 rounded-xl shadow-md border border-amber-100">
+                        <h3 class="text-xl font-semibold text-amber-800 mb-3">🎯 Criterios de Evaluación</h3>
+                        <ul class="space-y-3 text-stone-700">
+                            <li><span class="font-bold text-amber-900">30% - Calidad del Trabajo Manual:</span> Precisión, organización y claridad del taller.</li>
+                            <li><span class="font-bold text-amber-900">40% - Explicación Conceptual:</span> Comprensión demostrada en la sustentación.</li>
+                            <li><span class="font-bold text-amber-900">30% - Resolución del Desafío:</span> Lógica y aplicación de conceptos en el desafío práctico.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const activities = {
+        mod1: [
+            { 
+                title: '1.1: El ABC de los Componentes', 
+                content: `
+                    <h4 class="font-bold text-lg mb-2">Tarea:</h4>
+                    <p class="mb-4">Dibuja detalladamente los siguientes componentes, indicando sus símbolos y explicando su función principal en un circuito:</p>
+                    <ul class="list-disc list-inside grid grid-cols-2 gap-2 text-stone-600">
+                        <li>Resistencia</li>
+                        <li>LED</li>
+                        <li>Pulsador</li>
+                        <li>Potenciómetro</li>
+                        <li>Sensor de Luz (LDR)</li>
+                        <li>Sensor de Temperatura LM35</li>
+                        <li>Servomotor</li>
+                        <li>Buzzer</li>
+                    </ul>
+                    <h4 class="font-bold text-lg mt-4 mb-2">Desempeño Esperado:</h4>
+                    <p>Identifica y describe los componentes electrónicos y su función.</p>
+                `
+            },
+            {
+                title: '1.2: El Protoboard al Detalle',
+                content: `
+                    <h4 class="font-bold text-lg mb-2">Tarea:</h4>
+                    <p class="mb-2">1. Dibuja un protoboard a gran escala, mostrando claramente sus conexiones internas (líneas y columnas).</p>
+                    <p class="mb-4">2. Sobre el dibujo, simula un circuito que encienda un LED con una resistencia y una pila. Explica tus conexiones.</p>
+                    <h4 class="font-bold text-lg mt-4 mb-2">Desempeño Esperado:</h4>
+                    <p>Conecta correctamente un circuito en protoboard (de forma dibujada).</p>
+                `
+            },
+            {
+                title: '1.3: Circuitos Simulados a Mano',
+                content: `
+                    <h4 class="font-bold text-lg mb-2">Tarea:</h4>
+                    <p class="mb-2">Dibuja el esquema eléctrico y la representación en protoboard para tres circuitos:</p>
+                    <ol class="list-decimal list-inside space-y-1 text-stone-600 mb-4">
+                        <li><b>Encendido/Apagado:</b> Un pulsador que controla un LED.</li>
+                        <li><b>Control de Brillo:</b> Un potenciómetro que ajusta el brillo de un LED.</li>
+                        <li><b>Activado por Luz:</b> Un sensor LDR que enciende un LED en la oscuridad.</li>
+                    </ol>
+                    <p>Para cada uno, describe su funcionamiento y las normas de seguridad a tener en cuenta.</p>
+                    <h4 class="font-bold text-lg mt-4 mb-2">Desempeño Esperado:</h4>
+                    <p>Conecta circuitos y aplica normas de seguridad (teóricas).</p>
+                `
+            }
+        ],
+        mod2: [
+            { 
+                title: '2.1: El Cerebro del Robot', 
+                content: `
+                    <h4 class="font-bold text-lg mb-2">Tarea:</h4>
+                    <p class="mb-2">1. Dibuja un micro:bit y un Arduino Uno. Identifica y nombra sus pines de entrada/salida y componentes principales.</p>
+                    <p>2. Explica con tus propias palabras qué es un microcontrolador y por qué es útil para controlar dispositivos.</p>
+                    <h4 class="font-bold text-lg mt-4 mb-2">Desempeño Esperado:</h4>
+                    <p>Identifica y describe microcontroladores y su función.</p>
+                `
+            },
+            {
+                title: '2.2: Descomposición y Abstracción',
+                content: `
+                    <h4 class="font-bold text-lg mb-2">Tarea: El Semáforo Simple</h4>
+                    <p class="mb-4">Imagina un semáforo de dos luces (rojo y verde) para peatones.</p>
+                    <ul class="list-disc list-inside space-y-2 mb-4">
+                        <li><b>Descomposición:</b> Enumera y describe cada una de las partes que conformarían este sistema (luces, botón de cruce, lógica de control).</li>
+                        <li><b>Abstracción:</b> Dibuja un diagrama de flujo simple o una secuencia de pasos que represente la lógica de funcionamiento del semáforo (ej. "Luz verde encendida, si se pulsa botón, después de un tiempo, luz roja encendida..."). No uses código, solo la lógica.</li>
+                    </ul>
+                    
+                    <hr class="my-6 border-amber-200">
+                    <h4 class="font-bold text-lg mb-2">Ejemplo : Pasos para una Puerta Automática</h4>
+                    <p class="mb-4">Para entender cómo funciona la lógica en un sistema real, aquí tienes los pasos para una puerta automática de una tienda:</p>
+                    <div class="bg-gray-100 p-4 rounded-lg font-mono text-sm text-stone-800">
+                        <pre>
+Paso 1: La puerta empieza CERRADA.
+Paso 2: La puerta está constantemente "mirando" si hay alguien cerca usando un sensor.
+
+Paso 3: Si el sensor detecta que HAY una persona cerca Y la puerta está CERRADA,
+    entonces la puerta debe ABRIRSE.
+    Una vez abierta, la puerta ESPERA un tiempo corto (por ejemplo, 5 segundos) para que la persona pase.
+
+Paso 4: Si el sensor detecta que NO HAY una persona cerca Y la puerta está ABIERTA,
+    entonces la puerta debe CERRARSE.
+
+Paso 5: La puerta repite los pasos 3 y 4 una y otra vez para funcionar de forma continua.
+                        </pre>
+                    </div>
+                    <h4 class="font-bold text-lg mt-4 mb-2">Desempeño Esperado:</h4>
+                    <p>Aplica descomposición y abstracción en el análisis de sistemas.</p>
+                `
+            },
+            {
+                title: '2.3: Diseño y Simulación de Algoritmos en MakeCode',
+                content: `
+                    <h4 class="font-bold text-lg mb-2">Tarea:</h4>
+                    <p class="mb-2">Vas a "programar" y simular usando el editor MakeCode para Micro:bit. Luego, documentarás tu trabajo en tus **hojas de block tamaño carta cuadriculada**.</p>
+                    <ol class="list-decimal list-inside space-y-3 text-stone-600">
+                        <li>
+                            <p class="font-bold">Acceso al Simulador:</p>
+                            <p class="ml-4">Ve al sitio web de MakeCode para Micro:bit: <a href="https://makecode.microbit.org/" target="_blank" class="text-blue-600 hover:underline">makecode.microbit.org</a></p>
+                        </li>
+                        <li>
+                            <p class="font-bold">Realiza 3 Simulaciones:</p>
+                            <p class="ml-4 mb-2">Elige 3 de los siguientes escenarios (o propón uno propio y discútelo con tu profesor):</p>
+                            <ul class="list-disc list-inside ml-8 space-y-1">
+                                <li><b>Termómetro con Matriz de LEDs:</b> Programa la Micro:bit para mostrar la temperatura en la matriz de LEDs. Si la temperatura sube de un límite (ej. 30°C), activa un sonido (buzzer).</li>
+                                <li><b>Luz Nocturna Automática:</b> Programa la Micro:bit para que encienda los LEDs cuando detecte oscuridad (usando el sensor de luz integrado) y los apague cuando haya suficiente luz.</li>
+                                <li><b>Contador de Movimiento Simple:</b> Usa el sensor de movimiento (acelerómetro) de la Micro:bit para contar "movimientos" o "pasos" (agitaciones). Muestra el conteo en la matriz de LEDs. Al presionar el botón 'A', el contador debe reiniciarse.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-bold">Documenta tu Trabajo (a mano):</p>
+                            <p class="ml-4 mb-2">Para cada una de las 3 simulaciones, en tus **hojas de block tamaño carta cuadriculada**:</p>
+                            <ul class="list-disc list-inside ml-8 space-y-1">
+                                <li><b>Dibuja los Bloques de Código:</b> Realiza un boceto de los principales bloques de código que utilizaste en MakeCode para esa simulación. Puedes simplificarlos, pero que se entienda la lógica.</li>
+                                <li><b>Explica la Lógica:</b> Describe con tus propias palabras qué hace cada parte importante del programa (cada grupo de bloques).</li>
+                                <li><b>Describe la Simulación:</b> Explica qué ocurre en el simulador de MakeCode al ejecutar tu programa. ¿Qué ves en la matriz de LEDs? ¿Hay sonidos? ¿Cómo reacciona a los sensores?</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    <h4 class="font-bold text-lg mt-4 mb-2">Desempeño Esperado:</h4>
+                    <p>Programa un microcontrolador (en simulador) para interactuar con sensores y actuadores, utilizando el pensamiento computacional para controlar entradas y salidas de manera efectiva, y documenta el algoritmo.</p>
+                `
+            }
+        ]
+    };
+
+    const activitiesListEl = document.getElementById('activities-list');
+    const activityDetailsEl = document.getElementById('activity-details');
+    const btnMod1 = document.getElementById('btn-mod1');
+    const btnMod2 = document.getElementById('btn-mod2');
+    let currentModule = 'mod1';
+    let currentActivityIndex = -1;
+
+    function renderActivitiesList() {
+        activitiesListEl.innerHTML = activities[currentModule].map((activity, index) => `
+            <button data-index="${index}" class="activity-btn w-full text-left p-4 rounded-lg mb-2 transition-all ${index === currentActivityIndex ? 'bg-amber-600 text-white font-semibold' : 'bg-amber-100 hover:bg-amber-200'}">
+                ${activity.title}
+            </button>
+        `).join('');
+        
+        document.querySelectorAll('.activity-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentActivityIndex = parseInt(btn.dataset.index);
+                renderActivityDetails();
+                renderActivitiesList(); // to update active state
+            });
+        });
+    }
+
+    function renderActivityDetails() {
+        if (currentActivityIndex !== -1) {
+            activityDetailsEl.innerHTML = activities[currentModule][currentActivityIndex].content;
+        }
+    }
+
+    btnMod1.addEventListener('click', () => {
+        currentModule = 'mod1';
+        currentActivityIndex = 0;
+        btnMod1.classList.add('bg-amber-600', 'text-white');
+        btnMod1.classList.remove('bg-white', 'text-amber-700');
+        btnMod2.classList.add('bg-white', 'text-amber-700');
+        btnMod2.classList.remove('bg-amber-600', 'text-white');
+        renderActivitiesList();
+        renderActivityDetails();
+    });
+
+    btnMod2.addEventListener('click', () => {
+        currentModule = 'mod2';
+        currentActivityIndex = 0;
+        btnMod2.classList.add('bg-amber-600', 'text-white');
+        btnMod2.classList.remove('bg-white', 'text-amber-700');
+        btnMod1.classList.add('bg-white', 'text-amber-700');
+        btnMod1.classList.remove('bg-amber-600', 'text-white');
+        renderActivitiesList();
+        renderActivityDetails();
+    });
+
+    renderActivitiesList();
+    if(activities[currentModule].length > 0){
+        currentActivityIndex = 0;
+        renderActivitiesList();
+        renderActivityDetails();
+    }
+
+    const ctx = document.getElementById('evaluationChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Calidad del Trabajo Manual', 'Explicación Conceptual', 'Resolución del Desafío'],
+            datasets: [{
+                data: [30, 40, 30], /* Updated percentages here */
+                backgroundColor: [
+                    'rgba(217, 119, 6, 0.8)',   // amber-600
+                    'rgba(251, 191, 36, 0.8)', // amber-400
+                    'rgba(252, 211, 77, 0.8)'  // amber-300
+                ],
+                borderColor: [
+                    'rgba(217, 119, 6, 1)',
+                    'rgba(251, 191, 36, 1)',
+                    'rgba(252, 211, 77, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                     labels: {
+                        color: '#44403c' // stone-700
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed !== null) {
+                                label += context.parsed + '%';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('main section');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 120) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+});
+</script>
+
+</body>
+</html>
