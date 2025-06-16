@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Mejora Interactivo - Grado 11</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Academic Blue & Warmth -->
+    <!-- Application Structure Plan: The SPA is designed as a top-down narrative to guide the user (student/teacher) through the improvement plan. It starts with the 'why' (Introduction/Philosophy), details the 'what' (Modules and Activities), and ends with the 'how it's measured' (Evaluation). This linear, thematic flow is more intuitive for a curriculum plan than a complex dashboard. Navigation is primarily through scrolling, with interactive elements like tabs for the SCAMPER method to make dense information more manageable and engaging. The structure follows the report's logic but enhances it with interactive UI for better usability. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Two main phases (At Home, In Class). Goal: Organize. Viz/Method: Side-by-side cards with icons using HTML/CSS to clearly separate the two core parts of the plan.
+        - Report Info: SCAMPER method steps. Goal: Organize/Inform. Viz/Method: Interactive tabs built with JavaScript. This breaks a long list into digestible, user-controlled chunks, improving engagement without overwhelming the user.
+        - Report Info: Project Intro Checklist. Goal: Inform/Interact. Viz/Method: An HTML checklist styled with Tailwind, structured hierarchically to guide content preparation. It visually represents the required components and feels more like a tangible tool for the student.
+        - Report Info: APA Citation examples. Goal: Inform. Viz/Method: Styled cards (blockquotes) to clearly distinguish examples from explanatory text, making them easy to reference.
+        - Report Info: Evaluation breakdown (40% Trabajo de Grado al día, 30% Ejercicios SCAMPER y Citación, 30% Sustentación). Goal: Compare. Viz/Method: A Chart.js Donut chart. This is the ideal visualization to show parts of a whole, providing a quick, clear understanding of the final grade composition. Library: Chart.js (Canvas). The mandatory label wrapping and tooltip callback are implemented.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+     -->
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f7fafc; /* gray-100 */
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            max-width: 350px;
+            margin: auto;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+                max-width: 380px;
+            }
+        }
+        .tab-active {
+            background-color: #3182ce; /* blue-500 */
+            color: white;
+            font-weight: bold;
+        }
+        .tab-inactive {
+            background-color: #e2e8f0; /* gray-200 */
+            color: #4a5568; /* gray-700 */
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto px-4 md:px-8 py-12 max-w-6xl">
+        
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-black text-gray-800">Plan de Mejora: Grado 11</h1>
+            <p class="text-xl text-blue-600 mt-2 font-bold">Investigación y Pensamiento Creativo</p>
+        </header>
+
+        <section id="intro" class="mb-16 bg-white p-8 rounded-xl shadow-lg border-l-4 border-blue-500">
+            <h2 class="text-3xl font-bold mb-4">Filosofía del Plan: Aprender con las Manos</h2>
+            <p class="text-lg text-gray-700 leading-relaxed">
+                Este plan está diseñado para fortalecer tus habilidades de investigación, creatividad y documentación, que son clave para tu proyecto de grado. Nos enfocaremos en el trabajo manual en <span class="font-bold text-blue-600">hojas de block cuadriculadas</span> para fomentar la reflexión, la organización y el dominio de herramientas de investigación esenciales. Al interactuar físicamente con las ideas, construirás un entendimiento más profundo y duradero.
+            </p>
+        </section>
+
+        <section id="phases" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Fases del Plan de Mejora</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-blue-100 p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-2">Fase 1: Trabajo en Casa</h3>
+                    <p class="text-blue-700">Desarrollarás talleres de forma individual, aplicando técnicas de creatividad y aprendiendo a estructurar y referenciar tu investigación.</p>
+                </div>
+                <div class="bg-green-100 p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-green-800 mb-2">Fase 2: Sustentación</h3>
+                    <p class="text-green-700">Presentarás tu portafolio manual, discutirás tus ideas y demostrarás tu comprensión de los conceptos en el aula.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="module1" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Módulo 1: Pensamiento Creativo (SCAMPER)</h2>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                <p class="text-center mb-6 text-lg">Selecciona **UNO** de los siguientes objetos cotidianos para aplicar el método SCAMPER y generar ideas innovadoras. Puedes explorar las preguntas de cada paso usando las pestañas a continuación.</p>
+                <div class="flex flex-wrap justify-center gap-4 mb-6 text-blue-700 font-semibold">
+                    <span>Opciones:</span>
+                    <ul class="list-disc list-inside flex flex-wrap gap-x-6">
+                        <li>Un clip de papel</li>
+                        <li>Una taza de café</li>
+                        <li>Un control remoto</li>
+                        <li>Un reloj de pared</li>
+                        <li>Un par de gafas</li>
+                    </ul>
+                </div>
+                
+                <div id="scamper-tabs" class="flex flex-wrap justify-center gap-2 mb-6">
+                    <button data-target="scamper-s" class="scamper-tab tab-active px-4 py-2 rounded-md transition-all duration-300">Sustituir</button>
+                    <button data-target="scamper-c" class="scamper-tab tab-inactive px-4 py-2 rounded-md transition-all duration-300">Combinar</button>
+                    <button data-target="scamper-a" class="scamper-tab tab-inactive px-4 py-2 rounded-md transition-all duration-300">Adaptar</button>
+                    <button data-target="scamper-m" class="scamper-tab tab-inactive px-4 py-2 rounded-md transition-all duration-300">Modificar</button>
+                    <button data-target="scamper-p" class="scamper-tab tab-inactive px-4 py-2 rounded-md transition-all duration-300">Poner otros usos</button>
+                    <button data-target="scamper-e" class="scamper-tab tab-inactive px-4 py-2 rounded-md transition-all duration-300">Eliminar</button>
+                    <button data-target="scamper-r" class="scamper-tab tab-inactive px-4 py-2 rounded-md transition-all duration-300">Reordenar</button>
+                </div>
+
+                <div id="scamper-content" class="bg-gray-50 p-6 rounded-lg border">
+                    <div id="scamper-s" class="scamper-panel">
+                        <h4 class="font-bold text-xl mb-2 text-blue-700">S - Sustituir</h4>
+                        <p>¿Qué podrías sustituir en el objeto? Piensa en materiales, partes, procesos, personas, lugares o funciones.</p>
+                    </div>
+                    <div id="scamper-c" class="scamper-panel hidden">
+                        <h4 class="font-bold text-xl mb-2 text-blue-700">C - Combinar</h4>
+                        <p>¿Qué podrías combinar con tu objeto? Piensa en fusionarlo con otro objeto, idea o propósito para crear algo nuevo.</p>
+                    </div>
+                    <div id="scamper-a" class="scamper-panel hidden">
+                        <h4 class="font-bold text-xl mb-2 text-blue-700">A - Adaptar</h4>
+                        <p>¿Cómo podrías adaptar el objeto para otro contexto o propósito? ¿Qué ideas de otros campos podrías incorporar?</p>
+                    </div>
+                    <div id="scamper-m" class="scamper-panel hidden">
+                        <h4 class="font-bold text-xl mb-2 text-blue-700">M - Modificar</h4>
+                        <p>¿Qué podrías modificar? Cambia el tamaño, la forma, el color, el sonido, la textura o cualquier otro atributo.</p>
+                    </div>
+                    <div id="scamper-p" class="scamper-panel hidden">
+                        <h4 class="font-bold text-xl mb-2 text-blue-700">P - Poner en otros usos</h4>
+                        <p>¿Para qué más podría servir? Imagina usos completamente diferentes a su función original.</p>
+                    </div>
+                    <div id="scamper-e" class="scamper-panel hidden">
+                        <h4 class="font-bold text-xl mb-2 text-blue-700">E - Eliminar</h4>
+                        <p>¿Qué podrías quitar o simplificar? Piensa en eliminar partes, reducir la complejidad, el peso o el costo.</p>
+                    </div>
+                    <div id="scamper-r" class="scamper-panel hidden">
+                        <h4 class="font-bold text-xl mb-2 text-blue-700">R - Reordenar</h4>
+                        <p>¿Qué pasaría si inviertes el proceso, cambias el orden de las partes o la secuencia de uso?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="module2" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">Módulo 2: Investigación y Normas APA</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4">Ejercicios de Citación APA</h3>
+                    <p class="mb-4">Para dominar las citas APA, sigue estos pasos en tus <span class="font-bold text-blue-600">hojas de block tamaño carta cuadriculada</span>:</p>
+                    <ol class="list-decimal list-inside space-y-4 text-lg text-gray-700 pl-4">
+                        <li>
+                            <p><span class="font-bold text-blue-700">Paso 1: Encuentra 3 fragmentos.</span></p>
+                            <p class="mt-2">Busca en libros o revistas impresas (o si tienes acceso esporádico a internet, puedes transcribirlos) 3 fragmentos de texto (máximo 5 líneas cada uno) que te parezcan interesantes sobre cualquier tema.</p>
+                            <p class="mt-2">Ejemplo de fragmento encontrado:</p>
+                            <blockquote class="border-l-4 border-gray-300 pl-4 py-2 italic bg-gray-50 rounded-md">
+                                "La creatividad es un proceso mental que implica la generación de nuevas ideas o conceptos, o nuevas asociaciones entre ideas y conceptos conocidos, que normalmente producen soluciones originales."
+                            </blockquote>
+                        </li>
+                        <li>
+                            <p><span class="font-bold text-blue-700">Paso 2: Realiza una Cita Textual Corta.</span></p>
+                            <p class="mt-2">Para cada fragmento, escríbelo primero. Luego, crea una **cita textual corta** (menos de 40 palabras) de ese fragmento, siguiendo las normas APA (Apellido, Año, p. [número de página]).</p>
+                            <blockquote class="border-l-4 border-blue-200 pl-4 py-2 italic bg-blue-50 rounded-md mt-2">
+                                "La creatividad es un proceso mental que implica la generación de nuevas ideas o conceptos..." (Rodríguez, 2022, p. 45).
+                            </blockquote>
+                        </li>
+                        <li>
+                            <p><span class="font-bold text-blue-700">Paso 3: Realiza una Cita Parafraseada.</span></p>
+                            <p class="mt-2">Para el mismo fragmento, realiza una **cita parafraseada**. Esto significa que explicas la idea con tus propias palabras, y solo necesitas mencionar el apellido del autor y el año (Apellido, Año).</p>
+                            <blockquote class="border-l-4 border-green-200 pl-4 py-2 bg-green-50 rounded-md mt-2">
+                                Según Rodríguez (2022), la creatividad es la capacidad de producir ideas originales combinando conceptos existentes.
+                            </blockquote>
+                        </li>
+                        <li>
+                            <p><span class="font-bold text-blue-700">Paso 4: Añade la Referencia Completa.</span></p>
+                            <p class="mt-2">Al final de cada página donde trabajes un fragmento (o en una sección de "Referencias" al final de esta actividad), añade la **referencia completa** del libro o revista de donde tomaste el fragmento, siguiendo el formato APA. Aquí te dejamos las plantillas:</p>
+                            <div class="bg-gray-100 p-4 rounded-md mt-2">
+                                <p class="font-semibold text-blue-700 mb-1">Para un Libro:</p>
+                                <p class="font-mono text-sm">Apellido, A. A. (Año). <em>Título del libro en cursiva.</em> Editorial.</p>
+                                <p class="font-semibold text-green-700 mt-4 mb-1">Para un Artículo de Revista:</p>
+                                <p class="font-mono text-sm">Apellido, A. A. (Año). Título del artículo. <em>Nombre de la Revista en Cursiva, Volumen</em>(Número), páginas.</p>
+                            </div>
+                        </li>
+                    </ol>
+                    <h4 class="font-bold text-xl mt-6 text-blue-700">Lo que debes entregar (para cada uno de los 3 fragmentos):</h4>
+                    <ul class="list-disc list-inside ml-4 space-y-1 text-gray-700">
+                        <li>El fragmento original transcrito.</li>
+                        <li>Tu cita textual corta.</li>
+                        <li>Tu cita parafraseada.</li>
+                        <li>La referencia completa de la fuente al final de la actividad.</li>
+                    </ul>
+                    <h4 class="font-bold text-xl mt-6 text-blue-700">Desempeño Esperado:</h4>
+                    <p class="text-gray-700">Aplicas correctamente los formatos de citación textual corta y parafraseada, y construyes referencias bibliográficas básicas en estilo APA de forma manual.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4">Checklist de Avance del Proyecto de Grado</h3>
+                    <p class="mb-4">Usa este checklist para verificar que en tu documento de trabajo de grado se encuentran ya listos los siguientes ítems:</p>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-xl text-blue-700 mb-3">1. Introducción:</h4>
+                            <ul class="space-y-2 text-lg text-gray-700 pl-4">
+                                <li class="flex items-start">
+                                    <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1 mr-3" disabled>
+                                    <div>
+                                        <span class="font-semibold">Descripción del Problema:</span> ¿Está claro cuál es el problema que tu proyecto busca abordar?
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1 mr-3" disabled>
+                                    <div>
+                                        <span class="font-semibold">Causas del Problema:</span> ¿Se identifican las razones principales por las que existe el problema?
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1 mr-3" disabled>
+                                    <div>
+                                        <span class="font-semibold">Consecuencias del Problema:</span> ¿Se describen los efectos negativos que el problema genera?
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1 mr-3" disabled>
+                                    <div>
+                                        <span class="font-semibold">Descripción del Usuario/Beneficiario:</span> ¿Está claro quiénes son las personas a las que afecta el problema o a quienes beneficiaría la solución?
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1 mr-3" disabled>
+                                    <div>
+                                        <span class="font-semibold">Hipótesis de Solución:</span> ¿Se presenta una idea inicial de cómo se podría resolver el problema? (Tu primera aproximación)
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-xl text-blue-700 mb-3">2. Información General:</h4>
+                            <p class="text-lg text-gray-700 mb-2">Identifica 3-5 aspectos clave de tu problema que deben ser consultados (ejemplo: leyes, conceptos o definiciones). Para cada aspecto, anota una o dos ideas o hechos relevantes que hayas consultado (puedes usar libros, enciclopedias, o si tienes acceso, información de portales educativos o científicos).</p>
+                            <p class="text-lg text-gray-700 mb-4">Asegúrate de que al menos 3 de estos hechos estén respaldados con una cita APA (puedes parafrasear).</p>
+                            <ul class="space-y-2 text-gray-700 pl-4">
+                                <li class="flex items-start">
+                                    <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1 mr-3" disabled>
+                                    <div>Aspectos clave del problema consultados.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1 mr-3" disabled>
+                                    <div>Al menos 3 hechos con cita APA.</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="font-bold text-xl text-blue-700 mb-3">3. Trabajos Relacionados (con posibles soluciones):</h4>
+                            <p class="text-lg text-gray-700 mb-2">Identifica 2-3 soluciones o proyectos existentes que sean similares o aborden aspectos de tu problema.</p>
+                            <p class="text-lg text-gray-700 mb-4">Para cada "trabajo relacionado", anota su nombre/descripción y cómo se relaciona con tu problema. Asegúrate de que cada "trabajo relacionado" incluya una cita APA de su fuente.</p>
+                            <ul class="space-y-2 text-gray-700 pl-4">
+                                <li class="flex items-start">
+                                    <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1 mr-3" disabled>
+                                    <div>2-3 soluciones o proyectos existentes identificados y descritos.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 mt-1 mr-3" disabled>
+                                    <div>Cada trabajo relacionado incluye cita APA de su fuente.</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <p class="text-lg text-gray-700 font-semibold mt-6">Referencias:</p>
+                        <p class="text-lg text-gray-700">Al final de esta actividad, crea una lista de Referencias en formato APA para todas las fuentes utilizadas en esta actividad (tanto de Información General como de Trabajos Relacionados).</p>
+                        <p class="text-lg text-gray-700 font-semibold mt-6">Desempeño Esperado:</p>
+                        <p class="text-gray-700">Consulta y organiza información relevante para tu proyecto, y demuestra la capacidad de citar y referenciar fuentes en formato APA, incluyendo la simulación del uso de portales científicos.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="evaluation" class="bg-gray-800 text-white p-8 md:p-12 rounded-2xl shadow-2xl">
+            <h2 class="text-3xl font-bold text-center mb-8">Criterios de Evaluación</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="chart-container">
+                    <canvas id="evaluationChart"></canvas>
+                </div>
+                <div>
+                    <p class="text-lg text-gray-300 mb-6">Tu calificación final se basará en la calidad de tu portafolio, tu capacidad para argumentar tus ideas y tu dominio de los conceptos clave.</p>
+                    <ul class="space-y-3 text-lg">
+                        <li class="flex items-center"><div class="w-4 h-4 rounded-full bg-yellow-400 mr-3"></div><span class="font-bold">40%</span> - Trabajo de Grado al día</li>
+                        <li class="flex items-center"><div class="w-4 h-4 rounded-full bg-blue-400 mr-3"></div><span class="font-bold">30%</span> - Ejercicios de SCAMPER y Citación</li>
+                        <li class="flex items-center"><div class="w-4 h-4 rounded-full bg-green-400 mr-3"></div><span class="font-bold">30%</span> - Sustentación</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // SCAMPER Tabs Logic
+            const tabs = document.querySelectorAll('.scamper-tab');
+            const panels = document.querySelectorAll('.scamper-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(item => {
+                        item.classList.remove('tab-active');
+                        item.classList.add('tab-inactive');
+                    });
+                    tab.classList.add('tab-active');
+                    tab.classList.remove('tab-inactive');
+                    
+                    const target = tab.getAttribute('data-target');
+                    panels.forEach(panel => {
+                        if (panel.id === target) {
+                            panel.classList.remove('hidden');
+                        } else {
+                            panel.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // Chart.js Logic
+            const wrapLabel = (label, maxWidth = 16) => {
+                if (typeof label !== 'string' || label.length <= maxWidth) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            };
+
+            // Updated originalLabels to reflect the new categories from the user's request
+            const originalLabels = ['Trabajo de Grado al día', 'Ejercicios de SCAMPER y Citación', 'Sustentación'];
+            const wrappedLabels = originalLabels.map(label => wrapLabel(label));
+
+            const ctx = document.getElementById('evaluationChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: wrappedLabels,
+                    // The data values correspond to the updated percentages: 40%, 30%, 30%
+                    datasets: [{
+                        label: 'Ponderación',
+                        data: [40, 30, 30], // Updated data based on user request
+                        backgroundColor: ['#f6e05e', '#63b3ed', '#68d391'], // yellow-400, blue-400, green-400
+                        borderColor: '#2d3748', // gray-800
+                        borderWidth: 3,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    return originalLabels[item.dataIndex] || '';
+                                },
+                                label: function(context) {
+                                    return ` Ponderación: ${context.raw}%`;
+                                }
+                            },
+                            backgroundColor: '#1a202c',
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            padding: 10,
+                            cornerRadius: 4,
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
