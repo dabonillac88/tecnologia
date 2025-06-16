@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Mejora: Reforzamiento en Programación Python</title>
+    <!-- Incluye Tailwind CSS CDN para estilos rápidos y responsivos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados para la fuente Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Un gris claro para el fondo */
+            color: #374151; /* Color de texto principal */
+        }
+        /* Estilo para los bloques de código */
+        pre {
+            background-color: #1f2937; /* Gris oscuro para el fondo del código */
+            color: #f9fafb; /* Color de texto claro para el código */
+            padding: 1rem;
+            border-radius: 0.5rem; /* Bordes redondeados */
+            overflow-x: auto; /* Permite desplazamiento horizontal en caso de código largo */
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 lg:p-12">
+    <!-- Contenedor principal centrado con ancho máximo y padding -->
+    <div class="container mx-auto bg-white shadow-lg rounded-xl p-6 md:p-10 lg:p-12 mb-8">
+
+        <!-- Encabezado de la página -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-4">
+                Plan de Mejora: Reforzamiento en Programación Python
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600">
+                Taller Autodirigido para Estudiantes de Grado 10
+            </p>
+            <p class="text-md text-gray-500 mt-2">
+                Enfoque en Ciclos While y Estructuras de Datos (Listas, Tuplas, Diccionarios)
+            </p>
+        </header>
+
+        <!-- Introducción al taller -->
+        <section class="mb-10">
+            <h2 class="text-2xl md:text-3xl font-semibold text-indigo-600 mb-4">Introducción</h2>
+            <p class="mb-4 leading-relaxed">
+                Este taller ha sido meticulosamente diseñado para proporcionar a los estudiantes de décimo grado una oportunidad estructurada de consolidar y profundizar su comprensión de los conceptos fundamentales de programación en Python, específicamente los **ciclos `while`** y las **estructuras de datos (listas, tuplas y diccionarios)**. Se concibe como una actividad autodirigida a ser ejecutada durante el período vacacional, utilizando herramientas accesibles como el informe escrito y un dispositivo móvil con conexión a internet.
+            </p>
+            <p class="leading-relaxed">
+                Es fundamental abordar este proceso con una mentalidad proactiva y perseverante. La programación, al igual que cualquier disciplina compleja, demanda práctica constante y una disposición para superar los desafíos inherentes al aprendizaje. El progreso se medirá por el esfuerzo invertido en cada ejercicio y la resolución de las incertidumbres que puedan surgir.
+            </p>
+        </section>
+
+        <!-- Recursos Necesarios -->
+        <section class="mb-10 p-6 bg-blue-50 rounded-lg shadow-inner">
+            <h2 class="text-2xl md:text-3xl font-semibold text-indigo-600 mb-4">Recursos Necesarios</h2>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                <li><strong class="text-indigo-700">Hojas cuadriculadas tamaño carta:</strong> Deberá presentar su trabajo en hojas cuadriculadas tamaño carta, asegurándose de que estén bien presentadas y encuadernadas con una portada. Este será su "consola" y su "editor de código". Aquí escribirá sus apuntes, pseudocódigo y soluciones.</li>
+                <li><strong class="text-indigo-700">Lápiz y borrador:</strong> Herramientas esenciales para la escritura y corrección manual.</li>
+                <li><strong class="text-indigo-700">Dispositivo móvil con acceso a internet:</strong> Necesario para consultar los materiales de referencia y, opcionalmente, para la experimentación con compiladores de Python en línea.</li>
+                <li><strong class="text-indigo-700">Disposición y perseverancia:</strong> Actitudes clave para el éxito en este proceso de aprendizaje autónomo.</li>
+            </ul>
+            <h3 class="text-xl font-medium text-gray-800 mt-6 mb-3">Recursos Complementarios (OVA)</h3>
+            <p class="mb-3 text-gray-700">Se recomienda encarecidamente revisar los siguientes Objetos Virtuales de Aprendizaje (OVA) si aún tiene acceso a ellos, prestando especial atención a las secciones que previamente representaron un desafío:</p>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                <li><strong class="text-indigo-700">OVA - Ciclos While: Concepto y Python</strong></li>
+                <li><strong class="text-indigo-700">OVA - Colecciones en Python</strong></li>
+            </ul>
+        </section>
+
+        <!-- Fases del Taller -->
+        <section class="mb-10">
+            <h2 class="text-2xl md:text-3xl font-semibold text-indigo-600 mb-6">Fases del Taller: Guía Detallada</h2>
+            <p class="mb-6 leading-relaxed text-gray-700">
+                A continuación, se presentan las actividades estructuradas que deberá completar. Es imperativo documentar cada paso en su informe escrito, preservando todo el material desarrollado para la sustentación final.
+            </p>
+
+            <!-- Fase 1 -->
+            <div class="mb-8 p-6 bg-white rounded-lg shadow-md border border-gray-200">
+                <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">Fase 1: Diagnóstico y Fundamentos</h3>
+
+                <h4 class="text-lg md:text-xl font-semibold text-gray-700 mb-3">Actividad 1: Autoevaluación Diagnóstica (1 hora)</h4>
+                <ol class="list-decimal pl-5 space-y-2 text-gray-700 mb-4">
+                    <li>En su informe escrito, designe una sección titulada "Mi Diagnóstico de Programación".</li>
+                    <li>Describa las dificultades específicas encontradas en la comprensión de los <strong class="text-indigo-700">ciclos `while`</strong>.</li>
+                    <li>Realice el mismo ejercicio para las <strong class="text-indigo-700">listas</strong>, <strong class="text-indigo-700">tuplas</strong> y <strong class="text-indigo-700">diccionarios</strong>, detallando los puntos de confusión.</li>
+                    <li>Intente responder a las siguientes preguntas en su informe escrito (sin consultar fuentes externas inicialmente, a fin de evaluar su conocimiento previo):
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>¿Cuál es la diferencia fundamental entre una lista y una tupla?</li>
+                            <li>¿Cuál es la función principal de una <strong class="text-indigo-700">clave</strong> en un diccionario?</li>
+                            <li>¿Qué implicaciones tiene un ciclo `while` si su condición de terminación nunca se satisface?</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h4 class="text-lg md:text-xl font-semibold text-gray-700 mb-3">Actividad 2: Reafirmación de Conceptos Básicos (1 hora)</h4>
+                <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                    <li><strong class="text-indigo-700">Repaso de Variables y Tipos de Datos:</strong> Defina el concepto de <strong class="text-indigo-700">variable</strong> en el contexto de la programación y proporcione tres ejemplos de diferentes <strong class="text-indigo-700">tipos de datos</strong> (ej. enteros, cadenas de texto). Incluya un ejemplo práctico para cada uno.</li>
+                    <li><strong class="text-indigo-700">Conceptualización Lógica:</strong> Los algoritmos se fundamentan en una lógica estructurada. Elabore tres <strong class="text-indigo-700">diagramas de flujo</strong> simples que representen procesos cotidianos. Ejemplos sugeridos:
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Diagrama para la decisión de llevar paraguas.</li>
+                            <li>Diagrama para determinar si es posible ver un programa de televisión (condicionado a la finalización de tareas).</li>
+                            <li>Diagrama para el proceso de preparación de una bebida caliente.</li>
+                        </ul>
+                        Asegúrese de emplear los símbolos convencionales de los diagramas de flujo (óvalos para inicio/fin, rectángulos para procesos, rombos para decisiones).
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Fase 2 -->
+            <div class="mb-8 p-6 bg-white rounded-lg shadow-md border border-gray-200">
+                <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">Fase 2: Profundización y Práctica Guiada</h3>
+
+                <h4 class="text-lg md:text-xl font-semibold text-gray-700 mb-3">Actividad 3: Dominio del Ciclo While (2-3 horas)</h4>
+                <ol class="list-decimal pl-5 space-y-2 text-gray-700 mb-4">
+                    <li><strong class="text-indigo-700">Análisis del `while`:</strong> En su informe escrito, formule una descripción personal del ciclo `while` y explique su propósito. Represente su estructura sintáctica básica.</li>
+                    <li><strong class="text-indigo-700">Seguimiento de Código (Traceo):</strong> Analice el siguiente fragmento de código. Documente en su informe escrito el valor que asumirá la variable `contador` en cada iteración del ciclo y el resultado final impreso.
+                        <pre><code class="language-python">contador = 1
+while contador &lt; 5:
+    print("El contador es:", contador)
+    contador = contador + 1
+print("Fin del ciclo")</code></pre>
+                    </li>
+                    <li><strong class="text-indigo-700">Desarrollo de Programas con `while` (en informe escrito):</strong> Elabore el pseudocódigo y, posteriormente, el código Python (escrito a mano) para los siguientes escenarios:
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li><strong class="text-indigo-700">Problema 1:</strong> Desarrolle un programa que imprima los números enteros del 1 al 7.</li>
+                            <li><strong class="text-indigo-700">Problema 2:</strong> Diseñe un programa que solicite al usuario un número entero y, subsiguientemente, realice un conteo regresivo desde dicho número hasta el 1.</li>
+                            <li><strong class="text-indigo-700">Problema 3:</strong> Implemente un simulador de inicio de sesión. El programa debe solicitar una contraseña. Si esta coincide con "secreto123", se imprimirá un mensaje de bienvenida. En caso contrario, la solicitud de contraseña se repetirá hasta que la entrada sea correcta.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h4 class="text-lg md:text-xl font-semibold text-gray-700 mb-3">Actividad 4: Exploración de Listas y Tuplas (2-3 horas)</h4>
+                <ol class="list-decimal pl-5 space-y-2 text-gray-700 mb-4">
+                    <li><strong class="text-indigo-700">Listas:</strong> En su informe escrito, defina qué es una <strong class="text-indigo-700">lista</strong> y cómo se instancia. Ilustre con un ejemplo de una lista que contenga cinco elementos. Detalle cómo se accede al tercer elemento, cómo se añade un nuevo elemento al final y cómo se elimina un elemento específico.</li>
+                    <li><strong class="text-indigo-700">Tuplas:</strong> En su informe escrito, explique el concepto de <strong class="text-indigo-700">tupla</strong> y su diferencia fundamental con una lista. Proporcione un ejemplo de una tupla con tres elementos.</li>
+                    <li><strong class="text-indigo-700">Desarrollo de Programas con Listas (en informe escrito):</strong> Elabore el pseudocódigo y el código Python (escrito a mano) para:
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li><strong class="text-indigo-700">Problema 1:</strong> Genere una lista con sus cinco frutas preferidas. Emplee un ciclo `while` (utilizando un índice incremental) para imprimir cada fruta de la lista.</li>
+                            <li><strong class="text-indigo-700">Problema 2:</strong> Solicite al usuario el ingreso de tres nombres de amigos y almacénelos en una lista. Posteriormente, imprima la lista completa.</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h4 class="text-lg md:text-xl font-semibold text-gray-700 mb-3">Actividad 5: Dominio de Diccionarios (2-3 horas)</h4>
+                <ol class="list-decimal pl-5 space-y-2 text-gray-700 mb-4">
+                    <li><strong class="text-indigo-700">Diccionarios:</strong> En su informe escrito, conceptualice un <strong class="text-indigo-700">diccionario</strong> y la importancia de la relación <strong class="text-indigo-700">clave-valor</strong>. Ilustre con un ejemplo de un diccionario que contenga al menos tres elementos (ej. contactos con nombre y número telefónico). Especifique cómo se recupera un valor asociado a una clave, cómo se añade un nuevo par clave-valor y cómo se modifica un valor existente.</li>
+                    <li><strong class="text-indigo-700">Desarrollo de Programas con Diccionarios (en informe escrito):</strong> Elabore el pseudocódigo y el código Python (escrito a mano) para:
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li><strong class="text-indigo-700">Problema 1:</strong> Cree un diccionario denominado `inventario` con tres productos y sus respectivas cantidades (ej. `"manzanas": 10, "peras": 5`). Imprima cada producto con su cantidad.</li>
+                            <li><strong class="text-indigo-700">Problema 2:</strong> En el diccionario `inventario` previamente creado, simule la "venta" de 2 unidades de manzanas (es decir, reste 2 a la cantidad existente). Con posterioridad, añada un nuevo producto con su cantidad correspondiente. Imprima el `inventario` actualizado.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Fase 3 -->
+            <div class="p-6 bg-white rounded-lg shadow-md border border-gray-200">
+                <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">Fase 3: Integración y Preparación para la Sustentación</h3>
+
+                <h4 class="text-lg md:text-xl font-semibold text-gray-700 mb-3">Actividad 6: Integración de Conceptos (2-3 horas)</h4>
+                <p class="text-gray-700 mb-3">En esta etapa, se combinan todos los conocimientos adquiridos. En su informe escrito, desarrolle el pseudocódigo y el código Python (escrito a mano) para los siguientes problemas:</p>
+                <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                    <li><strong class="text-indigo-700">Problema 1 (Lista y While):</strong> Construya un programa que solicite al usuario el ingreso de números enteros. Cada número deberá ser almacenado en una <strong class="text-indigo-700">lista</strong>. El programa continuará solicitando números hasta que el usuario introduzca la palabra "fin" (se recomienda el uso de `input()` y una condición `while` para la terminación del ciclo). Finalmente, el programa deberá imprimir todos los números registrados por el usuario.</li>
+                    <li><strong class="text-indigo-700">Problema 2 (Diccionario, Lista y While):</strong> Simule un sistema de registro de estudiantes. El programa deberá solicitar el <strong class="text-indigo-700">nombre</strong> y la <strong class="text-indigo-700">nota</strong> de cada estudiante. Esta información se deberá encapsular en un <strong class="text-indigo-700">diccionario</strong> (ej. `{"nombre": "Ana", "nota": 4.5}`). Cada uno de estos diccionarios de estudiantes deberá ser agregado a una <strong class="text-indigo-700">lista</strong>. El proceso de solicitud de datos se repetirá hasta que el usuario indique que no desea ingresar más estudiantes. Al finalizar, el programa deberá iterar sobre la lista e imprimir el nombre y la nota de cada estudiante.</li>
+                </ol>
+
+                <h4 class="text-lg md:text-xl font-semibold text-gray-700 mb-3 mt-6">Actividad 7: Preparación para la Sustentación (1 hora)</h4>
+                <ol class="list-decimal pl-5 space-y-2 text-gray-700">
+                    <li><strong class="text-indigo-700">Revisión Exhaustiva:</strong> Realice una revisión minuciosa de todo el contenido de su informe escrito, asegurándose de que las explicaciones, pseudocódigos y códigos presenten claridad y estén completos.</li>
+                    <li><strong class="text-indigo-700">Articulación de la Explicación:</strong> Reflexione sobre cómo articularía la explicación de cada ejercicio. Considere justificar el uso de estructuras como el ciclo `while` y la manipulación de listas o diccionarios. Anticípese a posibles preguntas sobre el manejo de entradas inesperadas por parte del usuario.</li>
+                    <li><strong class="text-indigo-700">Simulación Oral:</strong> Practique la explicación de sus soluciones en voz alta. Este ejercicio contribuirá a fortalecer su confianza y fluidez para el día de la sustentación.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Sección de Sustentación -->
+        <section class="p-6 bg-red-50 rounded-lg shadow-md border border-red-200">
+            <h2 class="text-2xl md:text-3xl font-semibold text-red-700 mb-4">La Sustentación Final (40% de la Calificación)</h2>
+            <p class="mb-4 leading-relaxed text-gray-700">
+                Al retorno a las actividades académicas, se llevará a cabo una sustentación individual, la cual constituirá el <strong>40% de su calificación final</strong>. Este momento será crucial para demostrar la comprensión y la aplicación de los conocimientos adquiridos durante el taller.
+            </p>
+
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3">Formato de la Sustentación:</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                <li><strong class="text-indigo-700">Presentación del Taller Escrito:</strong> Deberá exhibir el trabajo desarrollado a mano en su informe escrito. Se evaluará la exhaustividad de las actividades, la coherencia de las explicaciones, la lógica de los pseudocódigos y la exactitud de los códigos transcritos.</li>
+                <li><strong class="text-indigo-700">Resolución de Problema In Situ y Explicación Oral:</strong> Se le asignará un problema de programación de complejidad similar a los abordados en el taller, que involucre un ciclo `while` y una o más estructuras de datos.
+                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                        <li>Deberá resolverlo <strong class="text-indigo-700">manualmente en papel</strong> (mediante pseudocódigo o código Python).</li>
+                        <li>Posteriormente, realizará una <strong class="text-indigo-700">explicación oral</strong> de su solución, justificando las decisiones adoptadas y detallando el funcionamiento de su lógica algorítmica. Se formularán preguntas específicas para verificar la profundidad de su comprensión conceptual.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mt-6 mb-3">Criterios de Evaluación para la Sustentación:</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                <li><strong class="text-indigo-700">Claridad y Coherencia Lógica:</strong> Evaluación de la estructuración y la lógica subyacente en el pseudocódigo/código.</li>
+                <li><strong class="text-indigo-700">Aplicación de Conceptos:</strong> Verificación de la correcta implementación del ciclo `while` y el uso apropiado de las estructuras de datos.</li>
+                <li><strong class="text-indigo-700">Manejo de Casos:</strong> Consideración de la condición de terminación del ciclo y la gestión (básica) de posibles entradas inesperadas.</li>
+                <li><strong class="text-indigo-700">Habilidad de Explicación Oral:</strong> Capacidad para articular la solución de manera clara y responder a interrogantes sobre los conceptos, demostrando un entendimiento sólido.</li>
+            </ul>
+           
+        </section>
+
+    </div>
+</body>
+</html>
