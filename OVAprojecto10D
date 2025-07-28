@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OVA - Prototipo de App con App Inventor</title>
     <!-- Enlace al archivo CSS de Grado 10 -->
-    <link rel="stylesheet" href="grado10_appinventor_style.css">
+    <link rel="stylesheet" href="estilos/grado10_appinventor_style.css">
     <!-- Enlace a Google Fonts (Poppins y Nunito Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
