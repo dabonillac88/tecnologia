@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVA - Prototipo de App con App Inventor</title>
+    <!-- Enlace al archivo CSS de Grado 10 -->
+    <link rel="stylesheet" href="grado10_appinventor_style.css">
+    <!-- Enlace a Google Fonts (Poppins y Nunito Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="simple-header">
+        <div class="container header-container">
+            <h1>// Prototipo de App con App Inventor</h1>
+            <!-- Enlace corregido para Grado 10 -->
+            <a href="grado10.html" class="back-link">&lt; Volver a Grado 10</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>./MISION_APP_INVENTOR_5_SEMANAS</h2>
+
+        <!-- Introducción -->
+        <section class="phase-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🚀</span> Misión: ¡De la Idea a la App en 5 Semanas!</h3>
+            <p>¡Saludos, futuros líderes tecnológicos! Han investigado, ideado y definido un problema. Ahora, es momento de materializar esa visión. Su misión, si deciden aceptarla, es <strong>diseñar y construir un prototipo funcional de una aplicación móvil en 5 semanas usando App Inventor</strong>.</p>
+            <p>Este no es solo un ejercicio de programación; es un sprint de desarrollo de producto. Aprenderán a planificar, diseñar, programar y probar en equipo, enfrentando los mismos desafíos que un startup tecnológico. ¡El objetivo es tener una app que funcione y que presente una solución clara a un problema real!</p>
+        </section>
+
+        <!-- Fase 1: Temas y Equipos -->
+        <section class="phase-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🌍</span> Fase 1: Temas con Impacto y Equipos de Élite</h3>
+            <p>Su aplicación buscará ser creativa, útil y entretenida. Como equipo, elijan <strong>UNA</strong> de las siguientes ideas de proyecto para desarrollar:</p>
+            
+            <h4>Temas Sugeridos:</h4>
+            <ul>
+                <li><strong>Juego de Laberinto: "Laberinto Cósmico"</strong>
+                    <ul><li><strong>Idea de Proyecto:</strong> Un juego donde el jugador controla una nave espacial (con los sensores del celular o botones) para navegar por laberintos cada vez más difíciles, recogiendo estrellas y evitando asteroides. La app podría incluir un contador de tiempo o puntos.</li></ul>
+                </li>
+                <li><strong>Salud Mental: "Mi Diario de Calma"</strong>
+                    <ul><li><strong>Idea de Proyecto:</strong> Una app simple para el bienestar emocional. Permite al usuario escribir notas diarias sobre cómo se siente, ofrece ejercicios de respiración guiados (con un temporizador y animaciones simples) y muestra frases motivadoras al azar.</li></ul>
+                </li>
+                 <li><strong>Moda y Creatividad: "Outfit Creator"</strong>
+                    <ul><li><strong>Idea de Proyecto:</strong> Una app que permite a los usuarios crear outfits virtuales. El usuario puede seleccionar diferentes tipos de prendas (camisas, pantalones, zapatos) de una galería y combinarlas en un "maniquí" virtual para ver cómo quedan juntas.</li></ul>
+                </li>
+            </ul>
+            <p><strong>Tarea:</strong> Discutan en equipo y elijan el tema y la idea que más les apasione. ¡Pueden adaptar o mejorar las sugerencias!</p>
+
+            <h4>Conformación de Equipos y Roles:</h4>
+            <p>Formarán equipos de 4 personas, cada una con un rol especializado. ¡La colaboración es clave!</p>
+            <ul>
+                <li><strong>Líder:</strong> Gestiona el cronograma (Gantt) y la Bitácora. Mantiene al equipo enfocado y motivado.</li>
+                <li><strong>Diseñador/a UI/UX:</strong> Es el arquitecto de la experiencia. Diseña los wireframes, la paleta de colores, los iconos y asegura que la app sea fácil e intuitiva de usar.</li>
+                <li><strong>Programador/a:</strong> Es el constructor. Traduce los diseños en componentes y bloques funcionales dentro de App Inventor.</li>
+                <li><strong>Tester (Control de Calidad):</strong> Es el detective. Prueba la aplicación constantemente, busca errores (bugs), reporta problemas de usabilidad y asegura que todo funcione como se planeó.</li>
+            </ul>
+             <p><strong>Tarea (Líder):</strong> Registra a tu equipo y sus roles según las indicaciones de tu docente.</p>
+        </section>
+
+        <!-- Fase 2: Plan de Vuelo (5 Semanas) -->
+        <section class="phase-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">🗓️</span> Fase 2: Plan de Vuelo - Cronograma de 5 Semanas</h3>
+            <p>¡Un buen equipo necesita un buen plan! Usarán un Diagrama de Gantt en <span class="tool-mention">Google Sheets</span> para organizar su trabajo. A continuación, una guía de lo que deben lograr y entregar cada semana.</p>
+
+            <div class="week-section">
+                <h4>Semana 1: Diseño y Planificación (UI/UX)</h4>
+                <p><strong>Meta:</strong> Tener un plano claro de la aplicación.</p>
+                <div class="role-focus">
+                    <strong>Foco Principal: Diseñador/a UI/UX</strong>
+                    <ul>
+                        <li><strong>Diseñador:</strong> Lidera la creación de wireframes. <strong>Entregable:</strong> Imagen o PDF con los wireframes de 3-4 pantallas principales y el flujo de navegación.</li>
+                        <li><strong>Líder:</strong> Crea el cronograma. <strong>Entregable:</strong> Enlace al Diagrama de Gantt inicial en Google Sheets con las tareas de las 5 semanas.</li>
+                        <li><strong>Programador:</strong> Investiga los componentes necesarios. <strong>Entregable:</strong> Documento en la bitácora con la lista de componentes de App Inventor y posibles extensiones a usar.</li>
+                        <li><strong>Tester:</strong> Revisa los wireframes. <strong>Entregable:</strong> Lista de feedback y sugerencias de usabilidad sobre los wireframes en la bitácora.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <h4>Semana 2: Estructura Básica (Front-end)</h4>
+                <p><strong>Meta:</strong> Construir el "esqueleto" visual de la app en App Inventor.</p>
+                <div class="role-focus">
+                    <strong>Foco Principal: Programador/a</strong>
+                    <ul>
+                        <li><strong>Programador:</strong> Monta la interfaz en App Inventor. <strong>Entregable:</strong> Archivo .aia del proyecto con el diseño visual de las pantallas implementado (sin lógica de bloques).</li>
+                        <li><strong>Diseñador:</strong> Prepara los recursos visuales. <strong>Entregable:</strong> Carpeta compartida con la paleta de colores, tipografías y assets visuales (iconos, imágenes) necesarios.</li>
+                        <li><strong>Tester:</strong> Prueba la interfaz visual. <strong>Entregable:</strong> Capturas de pantalla con anotaciones de problemas visuales o de adaptación probando con el Companion de App Inventor.</li>
+                        <li><strong>Líder:</strong> Supervisa y documenta. <strong>Entregable:</strong> Actualización del Gantt y registro en la bitácora del estado del front-end, marcando tareas completadas.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <h4>Semana 3: Lógica y Funcionalidad (Back-end)</h4>
+                <p><strong>Meta:</strong> ¡Darle vida a la aplicación! Hacer que los botones hagan cosas.</p>
+                <div class="role-focus">
+                    <strong>Foco Principal: Programador/a</strong>
+                    <ul>
+                        <li><strong>Programador:</strong> Programa la lógica principal. <strong>Entregable:</strong> Archivo .aia con al menos una función clave de la app programada y funcional (ej. movimiento del personaje, guardar una nota, combinar una prenda).</li>
+                        <li><strong>Tester:</strong> Prueba la función implementada. <strong>Entregable:</strong> Video corto (screencast) mostrando la prueba de la función y reportando si funciona como se espera.</li>
+                        <li><strong>Diseñador:</strong> Propone mejoras de experiencia. <strong>Entregable:</strong> Documento en la bitácora con sugerencias de microinteracciones (sonidos, notificaciones) para las funciones programadas.</li>
+                        <li><strong>Líder:</strong> Documenta el avance. <strong>Entregable:</strong> Registro en la bitácora de las funciones completadas, los desafíos técnicos y las soluciones encontradas.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <h4>Semana 4: Pruebas y Depuración (Testing)</h4>
+                <p><strong>Meta:</strong> Encontrar y aplastar todos los errores (bugs).</p>
+                <div class="role-focus">
+                    <strong>Foco Principal: Tester</strong>
+                    <ul>
+                        <li><strong>Tester:</strong> Lidera la búsqueda de errores. <strong>Entregable:</strong> Lista numerada y priorizada de bugs y problemas de usabilidad en la bitácora.</li>
+                        <li><strong>Programador:</strong> Se enfoca en solucionar los problemas. <strong>Entregable:</strong> Archivo .aia actualizado con los bugs críticos reportados solucionados.</li>
+                        <li><strong>Diseñador:</strong> Propone soluciones visuales a problemas de usabilidad. <strong>Entregable:</strong> Mockups o sugerencias visuales en la bitácora para corregir los problemas reportados.</li>
+                        <li><strong>Líder:</strong> Gestiona la corrección de errores. <strong>Entregable:</strong> Gantt actualizado mostrando el estado de la depuración y la lista de bugs priorizada en la bitácora.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="week-section">
+                <h4>Semana 5: Pulido Final y Presentación</h4>
+                <p><strong>Meta:</strong> Tener un prototipo funcional y una presentación increíble.</p>
+                <div class="role-focus">
+                    <strong>Foco Principal: Líder y Diseñador/a UI/UX</strong>
+                    <ul>
+                        <li><strong>Diseñador:</strong> Realiza los últimos ajustes visuales. <strong>Entregable:</strong> Versión final de todos los assets visuales y una pantalla de "Créditos/Acerca de" implementada en la app.</li>
+                        <li><strong>Líder:</strong> Prepara la exposición final. <strong>Entregable:</strong> Borrador de la presentación (diapositivas o guion) que cubra todos los puntos del proyecto.</li>
+                        <li><strong>Programador:</strong> Entrega la versión final y estable del prototipo. <strong>Entregable:</strong> Versión final del archivo .aia del prototipo.</li>
+                        <li><strong>Tester:</strong> Realiza la última revisión. <strong>Entregable:</strong> Checklist de pruebas finales completado en la bitácora, confirmando que no hay errores críticos.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fase 3: Evaluación -->
+        <section class="phase-section">
+            <h3><span style="font-size: 1.5em; margin-right: 0.5rem;">📊</span> Fase 3: Evaluación del Prototipo</h3>
+            <p>Su trabajo será evaluado como un proyecto integral, considerando tanto el proceso como el resultado final.</p>
+            <h4>Criterios de Evaluación del Prototipo Final:</h4>
+            <ul>
+                <li><strong>Funcionalidad y Completitud:</strong> ¿La app implementa las funciones clave definidas? ¿Es estable y funcional?</li>
+                <li><strong>Diseño UI/UX:</strong> ¿La interfaz es clara, consistente y agradable? ¿La experiencia de usuario es intuitiva?</li>
+                <li><strong>Relevancia con el Tema:</strong> ¿La app presenta una solución coherente y creativa al problema del tema elegido?</li>
+                <li><strong>Proceso y Documentación:</strong> ¿La Bitácora y el Gantt reflejan un proceso de trabajo organizado, colaborativo y con resolución de problemas? ¿Se entregaron los semanales?</li>
+                <li><strong>Presentación Final:</strong> ¿El equipo comunica de forma clara y efectiva su proyecto, proceso y aprendizajes?</li>
+            </ul>
+            <p><strong>¡Recuerden que un prototipo exitoso es aquel del que se aprende, incluso si no es perfecto!</strong></p>
+        </section>
+
+    </main>
+
+    <footer class="portal-footer">
+        <!-- Footer corregido para Grado 10 -->
+        <p># I.E. Santa Juana de Lestonnac | Tecnología e Informática | Grado 10 | 2024</p>
+    </footer>
+
+</body>
+</html>
