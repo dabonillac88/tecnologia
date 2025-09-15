@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVA: Proyecto NEXA - Ciencia Ciudadana para Territorios Sostenibles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .stem-card-container {
+            perspective: 1000px;
+        }
+        .stem-card {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        .stem-card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .stem-card-face {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .stem-card-back {
+            transform: rotateY(180deg);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab.active {
+            border-bottom-color: #10B981;
+            color: #10B981;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-emerald-600">Proyecto NEXA</h1>
+            <p class="mt-2 text-lg text-gray-600">Ciencia Ciudadana para Territorios Sostenibles</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Problemática y Solución -->
+        <section class="grid md:grid-cols-2 gap-12 items-center mb-16">
+            <div class="bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold mb-4 text-red-500">La Problemática</h2>
+                <p class="text-lg leading-relaxed">
+                    El desconocimiento sobre nuestra biodiversidad local provoca interacciones inseguras con la fauna y la pérdida de datos valiosos para su conservación. Esta brecha de información nos impide proteger eficazmente nuestro patrimonio natural y convivir en armonía con él.
+                </p>
+            </div>
+            <div class="bg-emerald-600 text-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold mb-4">Nuestra Solución: App NEXA</h2>
+                <p class="text-lg leading-relaxed">
+                    **NEXA** es una app móvil que te convierte en un "científico ciudadano". Identifica especies, crea un mapa colaborativo de avistamientos y ofrece protocolos de seguridad para empoderar a nuestra comunidad con conocimiento y construir un territorio más sostenible.
+                </p>
+            </div>
+        </section>
+
+        <!-- STEM+ Interactivo -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8">¿Cómo Funciona? La Metodología STEM+</h2>
+            <p class="text-center text-lg mb-12 max-w-3xl mx-auto">Haz clic en cada tarjeta para descubrir cómo cada área del conocimiento hace posible nuestro proyecto.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                <!-- Ciencia -->
+                <div class="stem-card-container h-80" onclick="this.querySelector('.stem-card').classList.toggle('is-flipped')">
+                    <div class="stem-card relative w-full h-full">
+                        <div class="stem-card-face absolute w-full h-full flex flex-col justify-center items-center bg-yellow-400 text-white rounded-lg shadow-xl p-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 256 256"><path d="M244,100a12,12,0,0,1-12,12,112.14,112.14,0,0,1-100,100,12,12,0,0,1,0-24,88.12,88.12,0,0,0,88-88,12,12,0,0,1,12-12Zm-70.21,86.21a12,12,0,0,0-17-17l-17.58,17.58a40,40,0,0,0-51.42-51.42L88.37,117.8a12,12,0,1,0,17,17l-17.58,17.58a16,16,0,0,1,22.63,22.63l25.17-25.18a12,12,0,0,0-17-17L91.63,159.8a16.14,16.14,0,0,1-4.7-4.7l22.62-22.62a12,12,0,0,0,0-17,12.1,12.1,0,0,0-17,0l-22.62,22.62a40,40,0,0,0,51.42,51.42l17.58-17.58,17,17A12,12,0,0,0,173.79,186.21ZM220,12a12,12,0,0,0-12,12,88.12,88.12,0,0,0-88,88,12,12,0,0,0,24,0,64.07,64.07,0,0,1,64-64,12,12,0,0,0,12-12Z"></path></svg>
+                            <h3 class="text-2xl font-black mt-4">CIENCIA</h3>
+                        </div>
+                        <div class="stem-card-back stem-card-face absolute w-full h-full bg-yellow-500 text-white rounded-lg shadow-xl p-6">
+                            <p class="text-sm">Observa, captura y contribuye a un inventario de especies. Conviértete en un científico ciudadano y ayuda a monitorear nuestro ecosistema aplicando el método científico.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tecnología -->
+                <div class="stem-card-container h-80" onclick="this.querySelector('.stem-card').classList.toggle('is-flipped')">
+                    <div class="stem-card relative w-full h-full">
+                        <div class="stem-card-face absolute w-full h-full flex flex-col justify-center items-center bg-green-500 text-white rounded-lg shadow-xl p-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 256 256"><path d="M160,28H96A20.06,20.06,0,0,0,76,48V208a20.06,20.06,0,0,0,20,20h64a20.06,20.06,0,0,0,20-20V48A20.06,20.06,0,0,0,160,28Zm-4,180H100V48h56Zm-28-24a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"></path></svg>
+                            <h3 class="text-2xl font-black mt-4">TECNOLOGÍA</h3>
+                        </div>
+                        <div class="stem-card-back stem-card-face absolute w-full h-full bg-green-600 text-white rounded-lg shadow-xl p-6">
+                             <p class="text-sm">Usamos una app móvil con IA para el reconocimiento de imágenes, GPS para mapeo y una base de datos optimizada que funciona incluso sin conexión a internet.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ingeniería -->
+                <div class="stem-card-container h-80" onclick="this.querySelector('.stem-card').classList.toggle('is-flipped')">
+                    <div class="stem-card relative w-full h-full">
+                        <div class="stem-card-face absolute w-full h-full flex flex-col justify-center items-center bg-blue-500 text-white rounded-lg shadow-xl p-4">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,114.34l-80-80a12,12,0,0,0-17,0l-80,80A12,12,0,0,0,60,132h20v68a20,20,0,0,0,20,20h56a20,20,0,0,0,20-20V132h20a12,12,0,0,0,8.49-20.49ZM164,112v88a8,8,0,0,1-8,8H100a8,8,0,0,1-8-8V112Zm-23.51-24h-25L128,75.51ZM71.51,112,128,55.51,184.49,112Z"></path></svg>
+                            <h3 class="text-2xl font-black mt-4">INGENIERÍA</h3>
+                        </div>
+                         <div class="stem-card-back stem-card-face absolute w-full h-full bg-blue-600 text-white rounded-lg shadow-xl p-6">
+                           <p class="text-sm">Diseñamos una app intuitiva (UI/UX) y eficiente. Optimizamos el uso de batería y la sincronización de datos para crear una solución robusta y accesible para todos.</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Matemáticas -->
+                <div class="stem-card-container h-80" onclick="this.querySelector('.stem-card').classList.toggle('is-flipped')">
+                    <div class="stem-card relative w-full h-full">
+                        <div class="stem-card-face absolute w-full h-full flex flex-col justify-center items-center bg-red-500 text-white rounded-lg shadow-xl p-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 256 256"><path d="M236,20H20A12,12,0,0,0,8,32V224a12,12,0,0,0,12,12H236a12,12,0,0,0,12-12V32A12,12,0,0,0,236,20ZM104.4,188.4a12,12,0,0,1-16.8,16.8l-44-44a12,12,0,0,1,0-16.8l44-44a12,12,0,0,1,16.8,16.8L69.6,152Zm58,16.8a12,12,0,0,1-8.4,20.4,11.89,11.89,0,0,1-12.23-3.83L116.4,180.4a12,12,0,1,1,20.8-12l25.37,41.43A12,12,0,0,1,162.35,205.2ZM212,172a12,12,0,0,1-16.8-16.8L224.8,124,195.2,92.8a12,12,0,1,1,16.8-16.8L228,92,244,108a12,12,0,0,1,0,16.8Z"></path></svg>
+                            <h3 class="text-2xl font-black mt-4">MATEMÁTICAS</h3>
+                        </div>
+                        <div class="stem-card-back stem-card-face absolute w-full h-full bg-red-600 text-white rounded-lg shadow-xl p-6">
+                            <p class="text-sm">Algoritmos de probabilidad identifican especies. La geometría posiciona los hallazgos en el mapa. La estadística nos permite analizar los datos y entender patrones.</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Artes+ -->
+                <div class="stem-card-container h-80" onclick="this.querySelector('.stem-card').classList.toggle('is-flipped')">
+                    <div class="stem-card relative w-full h-full">
+                        <div class="stem-card-face absolute w-full h-full flex flex-col justify-center items-center bg-orange-500 text-white rounded-lg shadow-xl p-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 256 256"><path d="M240,92a12,12,0,0,1-11.32,12,112.5,112.5,0,0,1-97.36,97.36,12,12,0,0,1-1.32,22.63A136.46,136.46,0,0,0,228,131.32,12,12,0,0,1,240,92ZM124,12a12,12,0,0,0-12-12C52.49,0,0,52.49,0,112a12,12,0,0,0,24,0A88.1,88.1,0,0,1,112,24,12,12,0,0,0,124,12Z"></path></svg>
+                            <h3 class="text-2xl font-black mt-4">ARTES +</h3>
+                        </div>
+                        <div class="stem-card-back stem-card-face absolute w-full h-full bg-orange-600 text-white rounded-lg shadow-xl p-6">
+                           <p class="text-sm">Un diseño atractivo y una narrativa visual fomentan la fotografía de naturaleza. Reforzamos la identidad cultural y el sentido de pertenencia al territorio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Valor Agregado y Misión -->
+        <section class="bg-white p-8 md:p-12 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-center mb-8">Valor Agregado e Impacto</h2>
+            <!-- Tabs -->
+            <div class="border-b-2 border-gray-200 mb-8">
+                <nav class="flex -mb-px" id="tabs">
+                    <button class="tab active text-lg font-bold py-4 px-6 border-b-4 border-transparent" onclick="changeTab(event, 'mision')">Nuestra Misión</button>
+                    <button class="tab text-lg font-bold py-4 px-6 border-b-4 border-transparent" onclick="changeTab(event, 'simulacion')">Simulación de la App</button>
+                    <button class="tab text-lg font-bold py-4 px-6 border-b-4 border-transparent" onclick="changeTab(event, 'empezar')">¿Cómo Empezar?</button>
+                </nav>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="tab-contents">
+                <div id="mision" class="tab-content active">
+                    <h3 class="text-2xl font-bold mb-4">Nuestro Impacto en Territorios Sostenibles</h3>
+                    <p class="text-lg leading-relaxed mb-6">
+                        Nuestro impacto se mide a través de tres indicadores clave: generamos **conocimiento ambiental** al crear la primera línea base de biodiversidad local; fomentamos el **empoderamiento comunitario** transformando la educación en acción a través de la ciencia ciudadana; y promovemos la **coexistencia segura** al educar sobre interacciones respetuosas con la fauna, construyendo así un territorio más resiliente.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h4 class="font-bold text-xl text-emerald-700">Conocimiento Ambiental</h4>
+                            <p>Creamos el primer mapa vivo de la biodiversidad de nuestro territorio.</p>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h4 class="font-bold text-xl text-emerald-700">Empoderamiento Comunitario</h4>
+                            <p>Convertimos la curiosidad en acción, haciendo a todos partícipes de la ciencia.</p>
+                        </div>
+                        <div class="bg-gray-100 p-6 rounded-lg">
+                            <h4 class="font-bold text-xl text-emerald-700">Coexistencia Segura</h4>
+                            <p>Promovemos interacciones informadas y respetuosas con nuestra fauna local.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="simulacion" class="tab-content">
+                    <h3 class="text-2xl font-bold mb-4">Explora la Interfaz de NEXA</h3>
+                    <p class="mb-6 text-lg">Imagina cómo usarías la aplicación. Aquí te mostramos una simulación de sus pantallas principales.</p>
+                    <div class="bg-gray-200 p-4 rounded-lg flex justify-center items-center">
+                       <img src="https://placehold.co/800x600/e2e8f0/334155?text=Simulacion+de+la+App+NEXA\n(Pantalla+de+identificacion)" alt="Simulación de la App NEXA" class="rounded-md shadow-lg w-full max-w-2xl">
+                    </div>
+                </div>
+                <div id="empezar" class="tab-content">
+                    <h3 class="text-2xl font-bold mb-4">¡Únete a la Misión!</h3>
+                    <p class="mb-6 text-lg">Ser un científico ciudadano con NEXA es muy fácil. Sigue estos tres simples pasos:</p>
+                    <ol class="list-decimal list-inside text-lg space-y-4">
+                        <li>**Descarga la App:** Busca NEXA en la tienda de aplicaciones de tu dispositivo (próximamente).</li>
+                        <li>**Explora tu Entorno:** Sal a caminar, observa la naturaleza a tu alrededor. ¿Ves una planta o un animal que no conoces?</li>
+                        <li>**Captura y Contribuye:** Abre NEXA, toma una foto clara y deja que la app haga su magia. ¡No olvides agregar tu hallazgo al mapa para ayudar a toda la comunidad!</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 Proyecto NEXA. Un proyecto STEM+ para un futuro sostenible.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Lógica para las tabs de "Valor Agregado"
+        const tabs = document.getElementById('tabs');
+        const tabContents = document.getElementById('tab-contents');
+
+        function changeTab(event, tabId) {
+            // Desactivar todas las tabs
+            tabs.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Ocultar todo el contenido
+            tabContents.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Activar la tab y el contenido seleccionados
+            event.target.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
