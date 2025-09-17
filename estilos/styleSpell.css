@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --primary-red: #8B0000;
+    --secondary-green: #228B22;
+    --secondary-btn-bg: #6c757d;
+    --secondary-btn-hover: #5a6268;
+    --light-grey: #f0f4f8;
+    --dark-text: #333;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-grey);
+    color: var(--dark-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+}
+
+.container {
+    background-color: var(--white);
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 700px;
+    text-align: center;
+}
+
+.school-logo {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+header h1 {
+    color: var(--primary-red);
+    margin-bottom: 0.5rem;
+}
+
+.input-group {
+    margin: 2rem 0;
+    text-align: left;
+}
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+#level-selection h4 { margin-top: 2rem; }
+.level-buttons { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+.level-btn {
+    background-color: var(--secondary-green);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.level-btn:hover { background-color: #1a6f1a; transform: translateY(-2px); }
+
+.stats { display: flex; justify-content: space-between; font-size: 1.1rem; border-bottom: 2px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem; }
+.word-container { margin: 2rem 0; }
+#word-category { background-color: #e8f5e9; color: var(--secondary-green); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; }
+
+#word-to-spell {
+    font-size: 2.5rem;
+    margin: 0.5rem 0;
+    letter-spacing: 2px;
+    color: transparent;
+    text-shadow: 0 0 15px rgba(0,0,0,0.6);
+}
+
+#speak-btn { background: none; border: none; font-size: 2.5rem; cursor: pointer; color: var(--primary-red); }
+.input-area { display: flex; gap: 10px; margin: 1.5rem 0; }
+#spell-input { flex-grow: 1; padding: 12px; border: 2px solid #ccc; border-radius: 8px; font-size: 1.1rem; }
+#spell-input:focus { outline: none; border-color: var(--secondary-green); }
+
+#submit-btn, #next-word-btn {
+    color: white;
+    padding: 0 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#submit-btn { background-color: var(--secondary-green); }
+#next-word-btn { background-color: var(--secondary-green); margin-top: 1rem; }
+#submit-btn:hover, #next-word-btn:hover { background-color: #1a6f1a; }
+
+.game-controls { margin-top: 2rem; padding-top: 1rem; border-top: 2px solid #eee; display: flex; justify-content: space-between; gap: 1rem; }
+#end-game-btn, #return-to-start-btn-game, #return-to-start-btn-leaderboard { padding: 12px 20px; font-size: 1rem; border: none; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; flex-grow: 1; }
+#end-game-btn { background-color: var(--primary-red); color: white; }
+#end-game-btn:hover { background-color: #6a0000; }
+#return-to-start-btn-game { background-color: var(--secondary-btn-bg); color: white; }
+#return-to-start-btn-game:hover { background-color: var(--secondary-btn-hover); }
+#return-to-start-btn-leaderboard { background-color: var(--secondary-green); color: white; margin-top: 2rem; }
+
+.feedback-message { min-height: 2rem; font-size: 1.2rem; font-weight: 600; margin-top: 1rem; padding: 10px; border-radius: 8px; }
+.correct { color: #155724; background-color: #d4edda; }
+.incorrect { color: #721c24; background-color: #f8d7da; }
+
+.filter-buttons { margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.filter-btn { background-color: #e9ecef; color: #495057; border: 1px solid #dee2e6; padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; transition: background-color 0.3s, color 0.3s; }
+.filter-btn:hover { background-color: #ced4da; }
+.filter-btn.active { background-color: var(--secondary-green); color: white; border-color: var(--secondary-green); }
+
+#final-score-message { font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem; background-color: #fff3e0; color: #e65100; padding: 1rem; border-radius: 8px; }
+.leaderboard-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+.leaderboard-table th, .leaderboard-table td { padding: 12px 15px; border: 1px solid #ddd; text-align: left; }
+.leaderboard-table th { background-color: var(--primary-red); color: white; font-weight: 600; }
+.leaderboard-table tbody tr:nth-child(even) { background-color: #f9f9f9; }
+.leaderboard-table tbody tr:hover { background-color: #f1f1f1; }
+
+.hidden { display: none; }
