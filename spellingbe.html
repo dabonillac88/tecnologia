@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spelling Bee - Institución Educativa Santa Juana</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="escudo.png" alt="Escudo Institución Educativa Santa Juana" class="school-logo">
+            <h1>Spelling Bee Contest</h1>
+            <h2>Institución Educativa Santa Juana</h2>
+        </header>
+
+        <div id="setup-screen">
+            <h3>Bienvenido al Concurso</h3>
+	<h6>Elaborado por Robotecno - Área de tecnología e informática - 2025</h6>
+            <div class="input-group">
+                <label for="student-name">Nombre del Estudiante:</label>
+                <input type="text" id="student-name" placeholder="Escribe tu nombre completo...">
+            </div>
+            <div id="level-selection" class="hidden">
+                <h4>Selecciona un nivel para comenzar</h4>
+                <div class="level-buttons">
+                    <button class="level-btn" data-level="4-5">Grados 4-5</button>
+                    <button class="level-btn" data-level="6-7">Grados 6-7</button>
+                    <button class="level-btn" data-level="8-9">Grados 8-9</button>
+                    <button class="level-btn" data-level="10-11">Grados 10-11</button>
+                </div>
+            </div>
+        </div>
+
+        <main id="game-screen" class="hidden">
+            <div class="stats">
+                <p>Estudiante: <strong id="current-student"></strong></p>
+                <p>Puntuación: <strong id="score">0</strong></p>
+            </div>
+            <div class="word-container">
+                <p>Categoría: <strong id="word-category"></strong></p>
+                <h2 id="word-to-spell">Palabra</h2>
+                <button id="speak-btn">🔊 Escuchar palabra</button>
+            </div>
+            <div class="input-area">
+                <input type="text" id="spell-input" placeholder="Escribe la palabra aquí..." autocomplete="off">
+                <button id="submit-btn">Revisar</button>
+            </div>
+            <div id="feedback" class="feedback-message"></div>
+            <button id="next-word-btn" class="hidden">Siguiente Palabra</button>
+            <div class="game-controls">
+                <button id="end-game-btn">Finalizar Participación</button>
+                <button id="return-to-start-btn-game">Volver al Inicio</button>
+            </div>
+        </main>
+
+        <section id="leaderboard-screen" class="hidden">
+            <h3>Tabla de Posiciones</h3>
+            <div id="final-score-message"></div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="4-5">Grados 4-5</button>
+                <button class="filter-btn" data-filter="6-7">Grados 6-7</button>
+                <button class="filter-btn" data-filter="8-9">Grados 8-9</button>
+                <button class="filter-btn" data-filter="10-11">Grados 10-11</button>
+            </div>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Puesto</th>
+                        <th>Estudiante</th>
+                        <th>Nivel</th>
+                        <th>Puntuación</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body"></tbody>
+            </table>
+            <button id="return-to-start-btn-leaderboard">Iniciar Nuevo Participante</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
