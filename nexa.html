@@ -3,223 +3,1291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OVA: Proyecto NEXA - Ciencia Ciudadana para Territorios Sostenibles</title>
+    <title>Prototipo de Baja Fidelidad - App NEXA</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        /* Paleta de colores de NEXA */
+        :root {
+            --nexa-dark-green: #3B6E36;
+            --nexa-light-green: #8FBF70;
+            --nexa-white: #FFFFFF;
+            --nexa-black: #000000;
         }
-        .stem-card-container {
-            perspective: 1000px;
-        }
-        .stem-card {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
+
+        .bg-nexa-dark { background-color: var(--nexa-dark-green); }
+        .bg-nexa-light { background-color: var(--nexa-light-green); }
+        .text-nexa-dark { color: var(--nexa-dark-green); }
+        .text-nexa-light { color: var(--nexa-light-green); }
+        .border-nexa-dark { border-color: var(--nexa-dark-green); }
+        .border-nexa-light { border-color: var(--nexa-light-green); }
+        
+        .clickable {
             cursor: pointer;
+            transition: transform 0.1s ease-in-out;
         }
-        .stem-card.is-flipped {
-            transform: rotateY(180deg);
+        .clickable:active {
+            transform: scale(0.98);
         }
-        .stem-card-face {
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
+        
+        .tab-btn.active {
+            border-bottom-width: 2px;
+            border-color: var(--nexa-dark-green);
+            color: var(--nexa-dark-green);
+            font-weight: 600;
         }
-        .stem-card-back {
-            transform: rotateY(180deg);
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .tab.active {
-            border-bottom-color: #10B981;
-            color: #10B981;
+        /* Make sure map divs have a height */
+        #map-div, #species-map-div {
+            height: 100%;
+            width: 100%;
+            border-radius: 0.5rem; /* rounded-lg */
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-gray-200 font-sans">
 
-    <!-- Header -->
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-emerald-600">Proyecto NEXA</h1>
-            <p class="mt-2 text-lg text-gray-600">Ciencia Ciudadana para Territorios Sostenibles</p>
+    <div class="container mx-auto max-w-sm h-screen bg-nexa-white shadow-lg flex flex-col">
+
+        <!-- Encabezado de la App (Opcional, puede estar oculto en algunas pantallas) -->
+        <header id="app-header" class="p-4 border-b border-gray-200 bg-white sticky top-0 z-10">
+            <h1 class="text-xl font-bold text-nexa-dark text-center" id="header-title"></h1>
+        </header>
+
+        <!-- Contenido Principal (Pantallas) -->
+        <main class="flex-grow overflow-y-auto relative">
+
+            <!-- PANTALLA 1: BIENVENIDA -->
+            <div id="screen-welcome" class="flex flex-col items-center justify-center h-full p-8 text-center">
+                <img src="logonexa.png" alt="Logo de NEXA con una iguana y un árbol" class="w-56 h-auto mb-10">
+                
+                <div class="mb-16">
+                    <h1 class="text-3xl font-bold text-nexa-light" data-translate-key="welcome_to">Bienvenido a</h1>
+                    <h2 class="text-4xl font-bold text-nexa-dark">NEXA <span class="text-3xl align-middle">🌿</span></h2>
+                </div>
+                
+                <button id="btn-start" class="w-2/3 max-w-xs bg-nexa-light text-white font-bold py-3 px-4 rounded-full clickable text-lg" data-translate-key="start_button">
+                    Inicio
+                </button>
+            </div>
+
+            <!-- PANTALLA 2: MENÚ PRINCIPAL -->
+            <div id="screen-main-menu" class="hidden p-6">
+                <h2 class="text-2xl font-bold text-nexa-dark mb-6" data-translate-key="main_menu_title">Explora la biodiversidad de nuestra institución</h2>
+                <div class="flex flex-col space-y-4">
+                    <div id="btn-identify" class="bg-nexa-dark text-white p-4 rounded-lg flex items-center space-x-4 clickable">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        <span data-translate-key="btn_identify">Identificar Especie</span>
+                    </div>
+                    <div id="btn-flora" class="bg-nexa-dark text-white p-4 rounded-lg flex items-center space-x-4 clickable">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span data-translate-key="btn_flora">Flora</span>
+                    </div>
+                    <div id="btn-fauna" class="bg-nexa-dark text-white p-4 rounded-lg flex items-center space-x-4 clickable">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span data-translate-key="btn_fauna">Fauna</span>
+                    </div>
+                     <div id="btn-map" class="bg-nexa-dark text-white p-4 rounded-lg flex items-center space-x-4 clickable">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span data-translate-key="btn_map">Mapa ecológico</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANTALLA 3: IDENTIFICAR ESPECIE -->
+            <div id="screen-identify" class="hidden flex flex-col p-6 h-full">
+                <button class="btn-back text-nexa-dark mb-4 self-start" data-translate-key="btn_back_menu">&larr; Volver al menú</button>
+                
+                <div id="identify-camera-section" class="flex flex-col items-center">
+                    <div class="w-full h-64 bg-black rounded-lg flex items-center justify-center text-white mb-4">
+                        <span data-translate-key="camera_view">[Vista de la cámara]</span>
+                    </div>
+                    <div class="flex space-x-4 w-full">
+                        <button id="btn-scan-qr" class="flex-1 bg-gray-200 text-gray-700 font-semibold py-3 px-4 rounded-lg clickable" data-translate-key="btn_scan_qr">Escanear QR</button>
+                        <button id="btn-identify-ai" class="flex-1 bg-nexa-dark text-white font-semibold py-3 px-4 rounded-lg clickable" data-translate-key="btn_identify_ai">Identificar con IA</button>
+                    </div>
+                </div>
+
+                <div id="identify-result-section" class="hidden flex-grow overflow-y-auto">
+                    <h3 class="text-xl font-bold text-nexa-dark mb-4" data-translate-key="identified_species_ai">Especie Identificada (IA):</h3>
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <img src="zarigueya.jpg" alt="Foto de Zarigüeya" class="w-full h-40 object-cover">
+                        <div class="p-4">
+                            <h2 class="text-2xl font-bold text-nexa-dark">Zarigüeya Común (Chucha)</h2>
+                            <p class="text-md italic text-gray-500 mb-3">Didelphis marsupialis</p>
+                            <p class="text-gray-700" data-translate-key="desc_opossum">
+                                La zarigüeya, comúnmente conocida como 'chucha' en el Eje Cafetero, es un marsupial nocturno crucial para el ecosistema. Ayuda a controlar plagas y a dispersar semillas.
+                            </p>
+                            <button class="mt-4 text-nexa-light font-bold" data-translate-key="btn_full_card">Ver ficha completa &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="identify-qr-result-section" class="hidden flex-grow overflow-y-auto">
+                    <h3 class="text-xl font-bold text-nexa-dark mb-4" data-translate-key="identified_species_qr">Especie Identificada (QR):</h3>
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <img src="palmadecera.jpg" alt="Foto de Palma de Cera" class="w-full h-40 object-cover">
+                        <div class="p-4">
+                            <h2 class="text-2xl font-bold text-nexa-dark">Palma de Cera del Quindío</h2>
+                            <p class="text-md italic text-gray-500 mb-3">Ceroxylon quindiuense</p>
+                            <p class="text-gray-700" data-translate-key="desc_wax_palm">
+                                Es el árbol nacional de Colombia. Oriunda de los valles altos andinos, esta palma es la más alta del mundo, llegando a medir hasta 60 metros.
+                            </p>
+                            <button class="mt-4 text-nexa-light font-bold" data-translate-key="btn_full_card">Ver ficha completa &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="identify-qr-result-section-2" class="hidden flex-grow overflow-y-auto">
+                    <h3 class="text-xl font-bold text-nexa-dark mb-4" data-translate-key="identified_species_qr">Especie Identificada (QR):</h3>
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <img src="guayacan.jpeg" alt="Foto de Guayacán Amarillo" class="w-full h-40 object-cover">
+                        <div class="p-4">
+                            <h2 class="text-2xl font-bold text-nexa-dark">Guayacán Amarillo</h2>
+                            <p class="text-md italic text-gray-500 mb-3">Handroanthus chrysanthus</p>
+                            <p class="text-gray-700" data-translate-key="desc_guayacan">
+                                Un árbol ornamental muy común en las zonas urbanas de Colombia. Es famoso por su espectacular floración amarilla que cubre todo el árbol.
+                            </p>
+                            <button class="mt-4 text-nexa-light font-bold" data-translate-key="btn_full_card">Ver ficha completa &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PANTALLA 4: LISTA DE FLORA -->
+            <div id="screen-flora-list" class="hidden p-6 relative h-full flex flex-col">
+                <div class="flex justify-end space-x-2 mb-4">
+                    <button class="btn-sort p-2 text-sm bg-gray-200 rounded-lg clickable flex items-center space-x-1" data-list="flora" data-order="asc" title="Orden Ascendente (A-Z)">
+                        <span>A-Z</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path></svg>
+                    </button>
+                    <button class="btn-sort p-2 text-sm bg-gray-200 rounded-lg clickable flex items-center space-x-1" data-list="flora" data-order="desc" title="Orden Descendente (Z-A)">
+                        <span>Z-A</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m-9 4h6m4 0l4 4m0 0l4-4m-4 4V4"></path></svg>
+                    </button>
+                </div>
+                <div class="space-y-4 overflow-y-auto pb-20 flex-grow">
+                     <div class="bg-white rounded-lg shadow-md overflow-hidden flex species-item clickable">
+                        <img src="guayacan.jpeg" alt="Foto de Guayacán Amarillo" class="w-1/3 h-auto object-cover">
+                        <div class="p-3 w-2/3">
+                            <h3 class="font-bold text-nexa-dark">Guayacán Amarillo</h3>
+                            <p class="text-sm italic text-gray-500">Handroanthus chrysanthus</p>
+                            <p class="text-sm text-gray-700 mt-1" data-translate-key="desc_guayacan_short">Árbol ornamental famoso por su espectacular floración amarilla.</p>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-md overflow-hidden flex species-item clickable">
+                        <img src="palmadecera.jpg" alt="Foto de Palma de Cera" class="w-1/3 h-auto object-cover">
+                        <div class="p-3 w-2/3">
+                            <h3 class="font-bold text-nexa-dark">Palma de Cera</h3>
+                            <p class="text-sm italic text-gray-500">Ceroxylon quindiuense</p>
+                            <p class="text-sm text-gray-700 mt-1" data-translate-key="desc_wax_palm_short">Árbol nacional de Colombia y la palma más alta del mundo.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden flex species-item clickable">
+                        <img src="sietecueros.jpg" alt="Foto de Siete Cueros" class="w-1/3 h-auto object-cover">
+                        <div class="p-3 w-2/3">
+                            <h3 class="font-bold text-nexa-dark">Siete Cueros</h3>
+                            <p class="text-sm italic text-gray-500">Tibouchina lepidota</p>
+                            <p class="text-sm text-gray-700 mt-1" data-translate-key="desc_sietecueros_short">Arbusto nativo de los Andes, conocido por sus flores moradas.</p>
+                        </div>
+                    </div>
+                </div>
+                <button id="btn-add-species" class="absolute bottom-6 right-6 bg-nexa-dark text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg clickable">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                </button>
+            </div>
+
+
+            <!-- PANTALLA 5: LISTA DE FAUNA -->
+            <div id="screen-fauna-list" class="hidden p-6 relative h-full flex flex-col">
+                 <div class="flex justify-end space-x-2 mb-4">
+                    <button class="btn-sort p-2 text-sm bg-gray-200 rounded-lg clickable flex items-center space-x-1" data-list="fauna" data-order="asc" title="Orden Ascendente (A-Z)">
+                        <span>A-Z</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path></svg>
+                    </button>
+                    <button class="btn-sort p-2 text-sm bg-gray-200 rounded-lg clickable flex items-center space-x-1" data-list="fauna" data-order="desc" title="Orden Descendente (Z-A)">
+                        <span>Z-A</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h9m-9 4h6m4 0l4 4m0 0l4-4m-4 4V4"></path></svg>
+                    </button>
+                </div>
+                 <div class="space-y-4 overflow-y-auto pb-20 flex-grow">
+                     <div class="bg-white rounded-lg shadow-md overflow-hidden flex species-item clickable">
+                        <img src="barranquero.jpg" alt="Foto de Barranquero Andino" class="w-1/3 h-auto object-cover">
+                        <div class="p-3 w-2/3">
+                            <h3 class="font-bold text-nexa-dark">Barranquero Andino</h3>
+                            <p class="text-sm italic text-gray-500">Momotus aequatorialis</p>
+                            <p class="text-sm text-gray-700 mt-1" data-translate-key="desc_barranquero_short">Ave colorida reconocida por su cola en forma de raqueta.</p>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-md overflow-hidden flex species-item clickable">
+                        <img src="guatin.jpg" alt="Foto de Guatín" class="w-1/3 h-auto object-cover">
+                        <div class="p-3 w-2/3">
+                            <h3 class="font-bold text-nexa-dark">Guatín (Ñeque)</h3>
+                            <p class="text-sm italic text-gray-500">Dasyprocta punctata</p>
+                            <p class="text-sm text-gray-700 mt-1" data-translate-key="desc_guatin_short">Roedor diurno importante para la dispersión de semillas en los bosques.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden flex species-item clickable">
+                        <img src="colibri.jpg" alt="Foto de Colibrí Coruscans" class="w-1/3 h-auto object-cover">
+                        <div class="p-3 w-2/3">
+                            <h3 class="font-bold text-nexa-dark">Colibrí Coruscans</h3>
+                            <p class="text-sm italic text-gray-500">Colibri coruscans</p>
+                            <p class="text-sm text-gray-700 mt-1" data-translate-key="desc_colibri_short">Colibrí grande y brillante, común en zonas abiertas y jardines.</p>
+                        </div>
+                    </div>
+                 </div>
+                 <button id="btn-add-species-fauna" class="absolute bottom-6 right-6 bg-nexa-dark text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg clickable">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                </button>
+            </div>
+
+            <!-- PANTALLA 6: DETALLE DE ESPECIE -->
+            <div id="screen-species-detail" class="hidden">
+                 <button class="btn-back text-nexa-dark m-6" data-translate-key="btn_back_list">&larr; Volver a la lista</button>
+                 <img id="species-detail-img" src="https://placehold.co/600x400/CCCCCC/FFFFFF?text=Especie" alt="Imagen de la Especie" class="w-full h-48 object-cover">
+                 <div class="p-6">
+                     <h2 id="species-detail-title" class="text-3xl font-bold text-nexa-dark">Nombre de Especie</h2>
+                     <p id="species-detail-scientific" class="text-md italic text-gray-500 mb-3">Nomen scientificum</p>
+                     
+                     <!-- Pestañas de info -->
+                     <div class="border-b border-gray-200">
+                         <nav class="-mb-px flex space-x-4" aria-label="Tabs">
+                             <button class="tab-btn active whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500" data-target="tab-content-description" data-translate-key="tab_description">
+                                 Descripción
+                             </button>
+                             <button class="tab-btn whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500" data-target="tab-content-curiosities" data-translate-key="tab_curiosities">
+                                 Curiosidades
+                             </button>
+                              <button class="tab-btn whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm text-gray-500" data-target="tab-content-care" data-translate-key="tab_care">
+                                 Cuidados
+                             </button>
+                         </nav>
+                     </div>
+                     
+                     <!-- Contenido de pestañas -->
+                     <div class="py-4 text-gray-700">
+                        <div id="tab-content-description" class="tab-content"></div>
+                        <div id="tab-content-curiosities" class="tab-content hidden"></div>
+                        <div id="tab-content-care" class="tab-content hidden"></div>
+                     </div>
+
+                     <!-- Mapa -->
+                     <h3 class="text-xl font-bold text-nexa-dark mt-4 mb-2" data-translate-key="location_records">Registros de Ubicación</h3>
+                     <div id="species-map-container" class="w-full h-56 rounded-lg relative overflow-hidden">
+                         <div id="species-map-div"></div>
+                         <button id="btn-add-location" title="Añadir nueva ubicación" class="absolute top-2 right-2 bg-nexa-dark text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg clickable text-2xl font-bold z-[1000]">
+                             +
+                         </button>
+                     </div>
+                 </div>
+            </div>
+
+            <!-- PANTALLA 7: MAPA ECOLÓGICO -->
+            <div id="screen-map" class="hidden p-4 h-full flex flex-col">
+                <div id="map-container" class="w-full flex-grow relative">
+                    <div id="map-div"></div>
+                </div>
+            </div>
+
+             <!-- PANTALLA 8: CONFIGURACIÓN -->
+            <div id="screen-settings" class="hidden p-6">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2" data-translate-key="settings_language">Idioma</label>
+                        <div class="flex space-x-4">
+                            <button id="btn-lang-es" class="lang-btn flex-1 font-bold py-2 px-4 rounded-lg clickable">Español</button>
+                            <button id="btn-lang-en" class="lang-btn flex-1 font-bold py-2 px-4 rounded-lg clickable">English</button>
+                        </div>
+                    </div>
+                    <p class="text-gray-600" data-translate-key="settings_about">Sobre NEXA</p>
+                    <p class="text-gray-600" data-translate-key="settings_help">Ayuda y Soporte</p>
+                </div>
+            </div>
+
+            <!-- PANTALLA 9: REGISTRAR ESPECIE -->
+            <div id="screen-add-species" class="hidden p-6">
+                <form id="add-species-form">
+                    <button type="button" class="btn-back text-nexa-dark mb-4 self-start" data-translate-key="btn_cancel">&larr; Cancelar</button>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="species-type" class="block text-sm font-medium text-gray-700" data-translate-key="form_species_type">Tipo de Especie</label>
+                            <select id="species-type" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3">
+                                <option value="flora" data-translate-key="form_option_flora">Flora (Planta)</option>
+                                <option value="fauna" data-translate-key="form_option_fauna">Fauna (Animal)</option>
+                            </select>
+                        </div>
+                        <div class="w-full h-40 bg-gray-200 rounded-lg flex flex-col items-center justify-center text-gray-500 border-2 border-dashed border-gray-400 clickable" id="upload-box">
+                            <img id="image-preview" src="https://placehold.co/100x100/CCCCCC/FFFFFF?text=+" alt="Previsualización de imagen" class="hidden w-24 h-24 object-cover rounded-md">
+                            <div id="upload-placeholder">
+                                <svg class="w-10 h-10 text-gray-400 mb-2 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <span data-translate-key="form_upload_photo">Subir Fotografía</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="common-name" class="block text-sm font-medium text-gray-700" data-translate-key="form_common_name">Nombre Común</label>
+                            <input type="text" id="common-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3" required>
+                        </div>
+                        <div>
+                            <label for="scientific-name" class="block text-sm font-medium text-gray-700" data-translate-key="form_scientific_name">Nombre Científico</label>
+                            <input type="text" id="scientific-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3" required>
+                        </div>
+                        <div>
+                            <label for="description" class="block text-sm font-medium text-gray-700" data-translate-key="form_description">Descripción</label>
+                            <textarea id="description" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700" data-translate-key="form_location">Ubicación</label>
+                            <button id="btn-geolocate" type="button" class="mt-1 w-full flex items-center justify-center space-x-2 border border-gray-300 rounded-md shadow-sm py-2 px-3 clickable bg-white text-gray-700">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <span data-translate-key="form_geolocate">Ubicar con Geolocalización</span>
+                            </button>
+                            <p id="geolocation-info" class="text-sm text-gray-500 mt-2 hidden"></p>
+                        </div>
+                        <div class="border-t pt-4 mt-4">
+                            <p class="text-sm font-medium text-gray-700" data-translate-key="form_report_info">Información del Reporte</p>
+                             <p id="report-time" class="text-xs text-gray-500 mb-2"></p>
+                            <div>
+                                <label for="reporter-role" class="block text-sm font-medium text-gray-700" data-translate-key="form_who_reports">Quién reporta</label>
+                                <select id="reporter-role" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3">
+                                    <option data-translate-key="form_select_role">Seleccionar rol...</option>
+                                    <option value="estudiante" data-translate-key="form_role_student">Estudiante</option>
+                                    <option value="profesor" data-translate-key="form_role_teacher">Profesor</option>
+                                    <option value="administrativo" data-translate-key="form_role_admin">Administrativo</option>
+                                </select>
+                            </div>
+                            <div id="reporter-grade-container" class="hidden mt-2">
+                                <label for="reporter-grade" class="block text-sm font-medium text-gray-700" data-translate-key="form_grade">Grado</label>
+                                <select id="reporter-grade" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3">
+                                    <!-- Options will be added by JS -->
+                                </select>
+                            </div>
+                            <div class="mt-2">
+                                <label for="reporter-name" class="block text-sm font-medium text-gray-700" data-translate-key="form_reporter_name">Nombre de quien reporta</label>
+                                <input type="text" id="reporter-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3">
+                            </div>
+                        </div>
+                        <button id="btn-save-species" type="submit" class="w-full bg-nexa-dark text-white font-bold py-3 px-4 rounded-lg clickable" data-translate-key="form_save_species">
+                            Guardar Especie
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+             <!-- PANTALLA 10: PROTOCOLO QUÉ HAGO SI... -->
+            <div id="screen-protocol" class="hidden p-6">
+                 <button class="btn-back text-nexa-dark mb-4 self-start" data-translate-key="btn_back">&larr; Volver</button>
+                 <div id="protocol-start">
+                    <h2 class="text-2xl font-bold text-nexa-dark mb-4" data-translate-key="protocol_title">Protocolo de Acción</h2>
+                    <p class="mb-6 text-gray-700" data-translate-key="protocol_subtitle">Responde a las siguientes preguntas para saber cómo actuar si encuentras un animal silvestre.</p>
+                    <div id="q1" class="p-4 bg-gray-100 rounded-lg">
+                        <p class="font-semibold text-lg text-center mb-4" data-translate-key="protocol_q1">1. ¿El animal parece herido o en peligro inmediato?</p>
+                        <div class="flex space-x-4">
+                            <button class="protocol-btn flex-1 bg-nexa-dark text-white font-bold py-3 px-4 rounded-lg clickable" data-question="q1" data-answer="yes" data-translate-key="yes">Sí</button>
+                            <button class="protocol-btn flex-1 bg-gray-300 text-black font-bold py-3 px-4 rounded-lg clickable" data-question="q1" data-answer="no" data-translate-key="no">No</button>
+                        </div>
+                    </div>
+                 </div>
+
+                 <div id="q2" class="hidden mt-6 p-4 bg-gray-100 rounded-lg">
+                    <p class="font-semibold text-lg text-center mb-4" data-translate-key="protocol_q2">2. ¿El animal es grande, venenoso o se muestra agresivo?</p>
+                    <div class="flex space-x-4">
+                        <button class="protocol-btn flex-1 bg-nexa-dark text-white font-bold py-3 px-4 rounded-lg clickable" data-question="q2" data-answer="yes" data-translate-key="yes">Sí</button>
+                        <button class="protocol-btn flex-1 bg-gray-300 text-black font-bold py-3 px-4 rounded-lg clickable" data-question="q2" data-answer="no" data-translate-key="no">No</button>
+                    </div>
+                 </div>
+
+                 <div id="q3" class="hidden mt-6 p-4 bg-gray-100 rounded-lg">
+                    <p class="font-semibold text-lg text-center mb-4" data-translate-key="protocol_q3">3. ¿El animal está en un lugar inapropiado o riesgoso (ej. un salón, una vía)?</p>
+                    <div class="flex space-x-4">
+                        <button class="protocol-btn flex-1 bg-nexa-dark text-white font-bold py-3 px-4 rounded-lg clickable" data-question="q3" data-answer="yes" data-translate-key="yes">Sí</button>
+                        <button class="protocol-btn flex-1 bg-gray-300 text-black font-bold py-3 px-4 rounded-lg clickable" data-question="q3" data-answer="no" data-translate-key="no">No</button>
+                    </div>
+                 </div>
+
+                 <!-- Resultados del Protocolo -->
+                 <div id="protocol-results" class="mt-6 space-y-4">
+                    <div id="res-observe" class="hidden p-4 bg-green-100 border-l-4 border-green-500 rounded-r-lg">
+                        <h3 class="font-bold text-green-800" data-translate-key="protocol_res_observe_title">Acción: Observar y Registrar</h3>
+                        <p class="text-green-700" data-translate-key="protocol_res_observe_text">¡Es un avistamiento normal! Disfruta de la fauna local desde una distancia segura. No lo alimentes ni lo molestes. Es el momento perfecto para registrar tu observación en la app.</p>
+                    </div>
+                    <div id="res-teacher" class="hidden p-4 bg-yellow-100 border-l-4 border-yellow-500 rounded-r-lg">
+                        <h3 class="font-bold text-yellow-800" data-translate-key="protocol_res_teacher_title">Acción: Contactar a un Docente</h3>
+                        <p class="text-yellow-700" data-translate-key="protocol_res_teacher_text">No intentes mover al animal. Tu seguridad es primero. Busca a un profesor (preferiblemente de ciencias) o a un administrativo e infórmale de la situación para que ellos puedan coordinar la ayuda necesaria.</p>
+                    </div>
+                    <div id="res-authorities" class="hidden p-4 bg-red-100 border-l-4 border-red-500 rounded-r-lg">
+                        <h3 class="font-bold text-red-800" data-translate-key="protocol_res_authorities_title">Acción: Llamar a las Autoridades</h3>
+                        <p class="text-red-700" data-translate-key="protocol_res_authorities_text">¡No te acerques! Tu seguridad es la prioridad. Llama inmediatamente a las autoridades ambientales para que manejen la situación de forma segura.</p>
+                        <div class="mt-2 text-sm">
+                            <p><strong>CARDER (Risaralda):</strong> (606) 3116511</p>
+                            <p><strong>Policía Ambiental:</strong> 123</p>
+                        </div>
+                    </div>
+                 </div>
+                 <button id="protocol-reset" class="hidden mt-6 w-full text-center text-nexa-dark font-semibold" data-translate-key="protocol_reset">Reiniciar protocolo</button>
+            </div>
+            
+             <!-- PANTALLA 11: DATOS CURIOSOS -->
+            <div id="screen-curiosities" class="hidden p-6 flex flex-col h-full">
+                <button class="btn-back text-nexa-dark mb-4 self-start" data-translate-key="btn_back">&larr; Volver</button>
+                <div class="flex-grow flex flex-col items-center justify-center text-center">
+                    <div id="curiosity-card" class="bg-white p-6 rounded-xl shadow-lg w-full max-w-xs transform transition-transform duration-300">
+                        <!-- Content will be injected by JS -->
+                    </div>
+                    <button id="btn-next-fact" class="mt-8 bg-nexa-dark text-white font-bold py-3 px-6 rounded-full clickable" data-translate-key="btn_next_fact">
+                        Ver otro dato
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTALLA 12: CONSEJOS -->
+            <div id="screen-tips" class="hidden p-6 flex flex-col h-full">
+                <button class="btn-back text-nexa-dark mb-4 self-start" data-translate-key="btn_back">&larr; Volver</button>
+                <div class="flex-grow flex flex-col items-center justify-center text-center">
+                    <div id="tip-card" class="bg-white p-6 rounded-xl shadow-lg w-full max-w-xs transform transition-transform duration-300">
+                        <!-- Content will be injected by JS -->
+                    </div>
+                    <button id="btn-next-tip" class="mt-8 bg-nexa-dark text-white font-bold py-3 px-6 rounded-full clickable" data-translate-key="btn_next_tip">
+                        Ver otro consejo
+                    </button>
+                </div>
+            </div>
+
+
+        </main>
+
+        <!-- Menú Desplegable (Inicialmente oculto) -->
+        <div id="more-menu-modal" class="hidden absolute inset-0 bg-black bg-opacity-50 z-[1010]">
+            <div class="absolute bottom-16 left-0 right-0 max-w-sm mx-auto bg-white rounded-t-lg p-4 shadow-lg">
+                <div class="relative mb-4">
+                    <input type="text" id="main-search-input" placeholder="Buscar especie..." data-translate-key="search_placeholder" class="w-full bg-gray-100 border-2 border-gray-200 rounded-full py-2 px-4">
+                    <svg class="w-5 h-5 absolute right-4 top-2.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                 <!-- Container for search results -->
+                <div id="search-results-container" class="hidden flex flex-col space-y-2 max-h-64 overflow-y-auto">
+                    <!-- Results will be injected here by JS -->
+                </div>
+                <!-- Container for default buttons -->
+                <div id="default-menu-buttons" class="flex flex-col space-y-3">
+                    <button id="btn-protocol" class="bg-nexa-dark text-white p-3 rounded-lg flex items-center space-x-4 clickable text-left">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span data-translate-key="menu_protocol">¿Qué hago si...?</span>
+                    </button>
+                    <button id="btn-curiosities" class="bg-nexa-dark text-white p-3 rounded-lg flex items-center space-x-4 clickable text-left">
+                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        <span data-translate-key="menu_curiosities">Datos Curiosos</span>
+                    </button>
+                    <button id="btn-tips" class="bg-nexa-dark text-white p-3 rounded-lg flex items-center space-x-4 clickable text-left">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                        <span data-translate-key="menu_tips">Consejos</span>
+                    </button>
+                    <button id="btn-settings-from-menu" class="bg-nexa-dark text-white p-3 rounded-lg flex items-center space-x-4 clickable text-left">
+                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span data-translate-key="menu_settings">Configuración</span>
+                    </button>
+                </div>
+            </div>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-12">
-
-        <!-- Problemática y Solución -->
-        <section class="grid md:grid-cols-2 gap-12 items-center mb-16">
-            <div class="bg-white p-8 rounded-lg shadow-lg">
-                <h2 class="text-3xl font-bold mb-4 text-red-500">La Problemática</h2>
-                <p class="text-lg leading-relaxed">
-                    El desconocimiento sobre nuestra biodiversidad local provoca interacciones inseguras con la fauna y la pérdida de datos valiosos para su conservación. Esta brecha de información nos impide proteger eficazmente nuestro patrimonio natural y convivir en armonía con él.
-                </p>
-            </div>
-            <div class="bg-emerald-600 text-white p-8 rounded-lg shadow-lg">
-                <h2 class="text-3xl font-bold mb-4">Nuestra Solución: App NEXA</h2>
-                <p class="text-lg leading-relaxed">
-                    **NEXA** es una app móvil que te convierte en un "científico ciudadano". Identifica especies, crea un mapa colaborativo de avistamientos y ofrece protocolos de seguridad para empoderar a nuestra comunidad con conocimiento y construir un territorio más sostenible.
-                </p>
-            </div>
-        </section>
-
-        <!-- STEM+ Interactivo -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold text-center mb-8">¿Cómo Funciona? La Metodología STEM+</h2>
-            <p class="text-center text-lg mb-12 max-w-3xl mx-auto">Haz clic en cada tarjeta para descubrir cómo cada área del conocimiento hace posible nuestro proyecto.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                <!-- Ciencia -->
-                <div class="stem-card-container h-80" onclick="this.querySelector('.stem-card').classList.toggle('is-flipped')">
-                    <div class="stem-card relative w-full h-full">
-                        <div class="stem-card-face absolute w-full h-full flex flex-col justify-center items-center bg-yellow-400 text-white rounded-lg shadow-xl p-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 256 256"><path d="M244,100a12,12,0,0,1-12,12,112.14,112.14,0,0,1-100,100,12,12,0,0,1,0-24,88.12,88.12,0,0,0,88-88,12,12,0,0,1,12-12Zm-70.21,86.21a12,12,0,0,0-17-17l-17.58,17.58a40,40,0,0,0-51.42-51.42L88.37,117.8a12,12,0,1,0,17,17l-17.58,17.58a16,16,0,0,1,22.63,22.63l25.17-25.18a12,12,0,0,0-17-17L91.63,159.8a16.14,16.14,0,0,1-4.7-4.7l22.62-22.62a12,12,0,0,0,0-17,12.1,12.1,0,0,0-17,0l-22.62,22.62a40,40,0,0,0,51.42,51.42l17.58-17.58,17,17A12,12,0,0,0,173.79,186.21ZM220,12a12,12,0,0,0-12,12,88.12,88.12,0,0,0-88,88,12,12,0,0,0,24,0,64.07,64.07,0,0,1,64-64,12,12,0,0,0,12-12Z"></path></svg>
-                            <h3 class="text-2xl font-black mt-4">CIENCIA</h3>
-                        </div>
-                        <div class="stem-card-back stem-card-face absolute w-full h-full bg-yellow-500 text-white rounded-lg shadow-xl p-6">
-                            <p class="text-sm">Observa, captura y contribuye a un inventario de especies. Conviértete en un científico ciudadano y ayuda a monitorear nuestro ecosistema aplicando el método científico.</p>
-                        </div>
-                    </div>
+        
+        <!-- Modal de Confirmación -->
+        <div id="confirmation-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[1020] flex items-center justify-center p-4">
+            <div class="bg-white rounded-lg shadow-xl p-6 text-center max-w-sm mx-auto">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                    <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                 </div>
-                <!-- Tecnología -->
-                <div class="stem-card-container h-80" onclick="this.querySelector('.stem-card').classList.toggle('is-flipped')">
-                    <div class="stem-card relative w-full h-full">
-                        <div class="stem-card-face absolute w-full h-full flex flex-col justify-center items-center bg-green-500 text-white rounded-lg shadow-xl p-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 256 256"><path d="M160,28H96A20.06,20.06,0,0,0,76,48V208a20.06,20.06,0,0,0,20,20h64a20.06,20.06,0,0,0,20-20V48A20.06,20.06,0,0,0,160,28Zm-4,180H100V48h56Zm-28-24a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"></path></svg>
-                            <h3 class="text-2xl font-black mt-4">TECNOLOGÍA</h3>
-                        </div>
-                        <div class="stem-card-back stem-card-face absolute w-full h-full bg-green-600 text-white rounded-lg shadow-xl p-6">
-                             <p class="text-sm">Usamos una app móvil con IA para el reconocimiento de imágenes, GPS para mapeo y una base de datos optimizada que funciona incluso sin conexión a internet.</p>
-                        </div>
-                    </div>
+                <h3 id="confirmation-modal-title" class="text-lg leading-6 font-medium text-gray-900 mt-4" data-translate-key="modal_success_title">¡Registro Exitoso!</h3>
+                <div class="mt-2">
+                    <p id="confirmation-modal-text" class="text-sm text-gray-500" data-translate-key="modal_success_text">La nueva especie ha sido guardada en el catálogo.</p>
                 </div>
-                <!-- Ingeniería -->
-                <div class="stem-card-container h-80" onclick="this.querySelector('.stem-card').classList.toggle('is-flipped')">
-                    <div class="stem-card relative w-full h-full">
-                        <div class="stem-card-face absolute w-full h-full flex flex-col justify-center items-center bg-blue-500 text-white rounded-lg shadow-xl p-4">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,114.34l-80-80a12,12,0,0,0-17,0l-80,80A12,12,0,0,0,60,132h20v68a20,20,0,0,0,20,20h56a20,20,0,0,0,20-20V132h20a12,12,0,0,0,8.49-20.49ZM164,112v88a8,8,0,0,1-8,8H100a8,8,0,0,1-8-8V112Zm-23.51-24h-25L128,75.51ZM71.51,112,128,55.51,184.49,112Z"></path></svg>
-                            <h3 class="text-2xl font-black mt-4">INGENIERÍA</h3>
-                        </div>
-                         <div class="stem-card-back stem-card-face absolute w-full h-full bg-blue-600 text-white rounded-lg shadow-xl p-6">
-                           <p class="text-sm">Diseñamos una app intuitiva (UI/UX) y eficiente. Optimizamos el uso de batería y la sincronización de datos para crear una solución robusta y accesible para todos.</p>
-                        </div>
-                    </div>
-                </div>
-                 <!-- Matemáticas -->
-                <div class="stem-card-container h-80" onclick="this.querySelector('.stem-card').classList.toggle('is-flipped')">
-                    <div class="stem-card relative w-full h-full">
-                        <div class="stem-card-face absolute w-full h-full flex flex-col justify-center items-center bg-red-500 text-white rounded-lg shadow-xl p-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 256 256"><path d="M236,20H20A12,12,0,0,0,8,32V224a12,12,0,0,0,12,12H236a12,12,0,0,0,12-12V32A12,12,0,0,0,236,20ZM104.4,188.4a12,12,0,0,1-16.8,16.8l-44-44a12,12,0,0,1,0-16.8l44-44a12,12,0,0,1,16.8,16.8L69.6,152Zm58,16.8a12,12,0,0,1-8.4,20.4,11.89,11.89,0,0,1-12.23-3.83L116.4,180.4a12,12,0,1,1,20.8-12l25.37,41.43A12,12,0,0,1,162.35,205.2ZM212,172a12,12,0,0,1-16.8-16.8L224.8,124,195.2,92.8a12,12,0,1,1,16.8-16.8L228,92,244,108a12,12,0,0,1,0,16.8Z"></path></svg>
-                            <h3 class="text-2xl font-black mt-4">MATEMÁTICAS</h3>
-                        </div>
-                        <div class="stem-card-back stem-card-face absolute w-full h-full bg-red-600 text-white rounded-lg shadow-xl p-6">
-                            <p class="text-sm">Algoritmos de probabilidad identifican especies. La geometría posiciona los hallazgos en el mapa. La estadística nos permite analizar los datos y entender patrones.</p>
-                        </div>
-                    </div>
-                </div>
-                 <!-- Artes+ -->
-                <div class="stem-card-container h-80" onclick="this.querySelector('.stem-card').classList.toggle('is-flipped')">
-                    <div class="stem-card relative w-full h-full">
-                        <div class="stem-card-face absolute w-full h-full flex flex-col justify-center items-center bg-orange-500 text-white rounded-lg shadow-xl p-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" viewBox="0 0 256 256"><path d="M240,92a12,12,0,0,1-11.32,12,112.5,112.5,0,0,1-97.36,97.36,12,12,0,0,1-1.32,22.63A136.46,136.46,0,0,0,228,131.32,12,12,0,0,1,240,92ZM124,12a12,12,0,0,0-12-12C52.49,0,0,52.49,0,112a12,12,0,0,0,24,0A88.1,88.1,0,0,1,112,24,12,12,0,0,0,124,12Z"></path></svg>
-                            <h3 class="text-2xl font-black mt-4">ARTES +</h3>
-                        </div>
-                        <div class="stem-card-back stem-card-face absolute w-full h-full bg-orange-600 text-white rounded-lg shadow-xl p-6">
-                           <p class="text-sm">Un diseño atractivo y una narrativa visual fomentan la fotografía de naturaleza. Reforzamos la identidad cultural y el sentido de pertenencia al territorio.</p>
-                        </div>
-                    </div>
+                <div class="mt-4">
+                    <button id="btn-close-modal" type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-nexa-dark text-base font-medium text-white clickable" data-translate-key="modal_ok">
+                        Entendido
+                    </button>
                 </div>
             </div>
-        </section>
-
-        <!-- Valor Agregado y Misión -->
-        <section class="bg-white p-8 md:p-12 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-bold text-center mb-8">Valor Agregado e Impacto</h2>
-            <!-- Tabs -->
-            <div class="border-b-2 border-gray-200 mb-8">
-                <nav class="flex -mb-px" id="tabs">
-                    <button class="tab active text-lg font-bold py-4 px-6 border-b-4 border-transparent" onclick="changeTab(event, 'mision')">Nuestra Misión</button>
-                    <button class="tab text-lg font-bold py-4 px-6 border-b-4 border-transparent" onclick="changeTab(event, 'simulacion')">Simulación de la App</button>
-                    <button class="tab text-lg font-bold py-4 px-6 border-b-4 border-transparent" onclick="changeTab(event, 'empezar')">¿Cómo Empezar?</button>
-                </nav>
-            </div>
-
-            <!-- Tab Content -->
-            <div id="tab-contents">
-                <div id="mision" class="tab-content active">
-                    <h3 class="text-2xl font-bold mb-4">Nuestro Impacto en Territorios Sostenibles</h3>
-                    <p class="text-lg leading-relaxed mb-6">
-                        Nuestro impacto se mide a través de tres indicadores clave: generamos **conocimiento ambiental** al crear la primera línea base de biodiversidad local; fomentamos el **empoderamiento comunitario** transformando la educación en acción a través de la ciencia ciudadana; y promovemos la **coexistencia segura** al educar sobre interacciones respetuosas con la fauna, construyendo así un territorio más resiliente.
-                    </p>
-                    <div class="grid md:grid-cols-3 gap-6 text-center">
-                        <div class="bg-gray-100 p-6 rounded-lg">
-                            <h4 class="font-bold text-xl text-emerald-700">Conocimiento Ambiental</h4>
-                            <p>Creamos el primer mapa vivo de la biodiversidad de nuestro territorio.</p>
-                        </div>
-                        <div class="bg-gray-100 p-6 rounded-lg">
-                            <h4 class="font-bold text-xl text-emerald-700">Empoderamiento Comunitario</h4>
-                            <p>Convertimos la curiosidad en acción, haciendo a todos partícipes de la ciencia.</p>
-                        </div>
-                        <div class="bg-gray-100 p-6 rounded-lg">
-                            <h4 class="font-bold text-xl text-emerald-700">Coexistencia Segura</h4>
-                            <p>Promovemos interacciones informadas y respetuosas con nuestra fauna local.</p>
-                        </div>
-                    </div>
-                </div>
-                <div id="simulacion" class="tab-content">
-                    <h3 class="text-2xl font-bold mb-4">Explora la Interfaz de NEXA</h3>
-                    <p class="mb-6 text-lg">Imagina cómo usarías la aplicación. Aquí te mostramos una simulación de sus pantallas principales.</p>
-                    <div class="bg-gray-200 p-4 rounded-lg flex justify-center items-center">
-                      <div style="position: relative; width: 100%; height: 0; padding-top: 100.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;">  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"    src="https://www.canva.com/design/DAGylfHNHGI/VAoBwuUV3A68rzbWwRv58A/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">  </iframe></div><a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGylfHNHGI&#x2F;VAoBwuUV3A68rzbWwRv58A&#x2F;view?utm_content=DAGylfHNHGI&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">WireFrame NEXA</a> de angiiee._.ee                    </div>
-                </div>
-                <div id="empezar" class="tab-content">
-                    <h3 class="text-2xl font-bold mb-4">¡Únete a la Misión!</h3>
-                    <p class="mb-6 text-lg">Ser un científico ciudadano con NEXA es muy fácil. Sigue estos tres simples pasos:</p>
-                    <ol class="list-decimal list-inside text-lg space-y-4">
-                        <li>**Descarga la App:** Busca NEXA en la tienda de aplicaciones de tu dispositivo (próximamente).</li>
-                        <li>**Explora tu Entorno:** Sal a caminar, observa la naturaleza a tu alrededor. ¿Ves una planta o un animal que no conoces?</li>
-                        <li>**Captura y Contribuye:** Abre NEXA, toma una foto clara y deja que la app haga su magia. ¡No olvides agregar tu hallazgo al mapa para ayudar a toda la comunidad!</li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-16">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <p>&copy; 2025 Proyecto NEXA. Un proyecto STEM+ para un futuro sostenible.</p>
         </div>
-    </footer>
+
+
+        <!-- Navegación Inferior -->
+        <footer id="app-footer" class="p-2 border-t border-gray-200 bg-nexa-light sticky bottom-0 hidden">
+            <nav class="flex justify-around items-center">
+                <button data-target="screen-main-menu" class="nav-btn text-center text-nexa-dark p-2">
+                    <svg class="w-7 h-7 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                </button>
+                <button id="btn-more-menu" class="text-center text-nexa-dark p-2">
+                    <svg class="w-7 h-7 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                </button>
+                <button class="text-center text-nexa-dark p-2">
+                     <svg class="w-7 h-7 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                </button>
+            </nav>
+        </footer>
+    </div>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script>
-        // Lógica para las tabs de "Valor Agregado"
-        const tabs = document.getElementById('tabs');
-        const tabContents = document.getElementById('tab-contents');
+        document.addEventListener('DOMContentLoaded', () => {
+            const screens = document.querySelectorAll('main > div');
+            const header = document.getElementById('app-header');
+            const headerTitle = document.getElementById('header-title');
+            const footer = document.getElementById('app-footer');
+            const moreMenuModal = document.getElementById('more-menu-modal');
+            const confirmationModal = document.getElementById('confirmation-modal');
+            const mainContent = document.querySelector('main');
 
-        function changeTab(event, tabId) {
-            // Desactivar todas las tabs
-            tabs.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
+            const floraListContainer = document.querySelector('#screen-flora-list .space-y-4');
+            const faunaListContainer = document.querySelector('#screen-fauna-list .space-y-4');
+            
+            let currentLanguage = 'es';
+
+            // --- Traducciones ---
+            const translations = {
+                es: {
+                    welcome_to: "Bienvenido a", start_button: "Inicio", main_menu_title: "Explora la biodiversidad de nuestra institución", btn_identify: "Identificar Especie",
+                    btn_flora: "Flora", btn_fauna: "Fauna", btn_map: "Mapa ecológico", btn_back_menu: "← Volver al menú", camera_view: "[Vista de la cámara]", btn_scan_qr: "Escanear QR",
+                    btn_identify_ai: "Identificar con IA", identified_species_ai: "Especie Identificada (IA):", photo_opossum: "[Foto de Zarigüeya]", desc_opossum: "La zarigüeya, comúnmente conocida como 'chucha' en el Eje Cafetero, es un marsupial nocturno crucial para el ecosistema. Ayuda a controlar plagas y a dispersar semillas.",
+                    btn_full_card: "Ver ficha completa →", identified_species_qr: "Especie Identificada (QR):", photo_wax_palm: "[Foto de Palma de Cera]", desc_wax_palm: "Es el árbol nacional de Colombia. Oriunda de los valles altos andinos, esta palma es la más alta del mundo, llegando a medir hasta 60 metros.",
+                    photo_guayacan: "[Foto de Guayacán Amarillo]", desc_guayacan: "Un árbol ornamental muy común en las zonas urbanas de Colombia. Es famoso por su espectacular floración amarilla que cubre todo el árbol.", photo_placeholder: "[Foto]",
+                    desc_guayacan_short: "Árbol ornamental famoso por su espectacular floración amarilla.", desc_wax_palm_short: "Árbol nacional de Colombia y la palma más alta del mundo.",
+                    desc_sietecueros_short: "Arbusto nativo de los Andes, conocido por sus flores moradas.", desc_barranquero_short: "Ave colorida reconocida por su cola en forma de raqueta.",
+                    desc_guatin_short: "Roedor diurno importante para la dispersión de semillas en los bosques.", desc_colibri_short: "Colibrí grande y brillante, común en zonas abiertas y jardines.",
+                    btn_back_list: "← Volver a la lista", species_image: "[Imagen de la Especie]", tab_description: "Descripción", tab_curiosities: "Curiosidades", tab_care: "Cuidados",
+                    location_records: "Registros de Ubicación", settings_language: "Idioma", settings_about: "Sobre NEXA", settings_help: "Ayuda y Soporte", btn_cancel: "← Cancelar",
+                    form_species_type: "Tipo de Especie", form_option_flora: "Flora (Planta)", form_option_fauna: "Fauna (Animal)", form_upload_photo: "Subir Fotografía", form_common_name: "Nombre Común",
+                    form_scientific_name: "Nombre Científico", form_description: "Descripción", form_location: "Ubicación", form_geolocate: "Ubicar con Geolocalización", form_report_info: "Información del Reporte",
+                    form_who_reports: "Quién reporta", form_select_role: "Seleccionar rol...", form_role_student: "Estudiante", form_role_teacher: "Profesor", form_role_admin: "Administrativo",
+                    form_grade: "Grado", form_reporter_name: "Nombre de quien reporta", form_save_species: "Guardar Especie", protocol_title: "Protocolo de Acción",
+                    protocol_subtitle: "Responde a las siguientes preguntas para saber cómo actuar si encuentras un animal silvestre.", protocol_q1: "1. ¿El animal parece herido o en peligro inmediato?",
+                    yes: "Sí", no: "No", protocol_q2: "2. ¿El animal es grande, venenoso o se muestra agresivo?", protocol_q3: "3. ¿El animal está en un lugar inapropiado o riesgoso (ej. un salón, una vía)?",
+                    protocol_res_observe_title: "Acción: Observar y Registrar", protocol_res_observe_text: "¡Es un avistamiento normal! Disfruta de la fauna local desde una distancia segura. No lo alimentes ni lo molestes. Es el momento perfecto para registrar tu observación en la app.",
+                    protocol_res_teacher_title: "Acción: Contactar a un Docente", protocol_res_teacher_text: "No intentes mover al animal. Tu seguridad es primero. Busca a un profesor (preferiblemente de ciencias) o a un administrativo e infórmale de la situación para que ellos puedan coordinar la ayuda necesaria.",
+                    protocol_res_authorities_title: "Acción: Llamar a las Autoridades", protocol_res_authorities_text: "¡No te acerques! Tu seguridad es la prioridad. Llama inmediatamente a las autoridades ambientales para que manejen la situación de forma segura.",
+                    protocol_reset: "Reiniciar protocolo", btn_back: "← Volver", btn_next_fact: "Ver otro dato", btn_next_tip: "Ver otro consejo", search_placeholder: "Buscar especie...",
+                    menu_protocol: "¿Qué hago si...?", menu_curiosities: "Datos Curiosos", menu_tips: "Consejos", menu_settings: "Configuración", modal_success_title: "¡Registro Exitoso!",
+                    modal_success_text: "La nueva especie ha sido guardada en el catálogo.", modal_ok: "Entendido", modal_location_title: "Ubicación Registrada", modal_location_text: "Tu avistamiento ha sido añadido al mapa de esta especie.",
+                    header_main: "Inicio", header_identify: "Identificar Especie", header_flora: "Flora", header_fauna: "Fauna", header_detail: "Detalle de Especie",
+                    header_protocol: "¿Qué hago si...?", header_curiosities: "Datos Curiosos", header_tips: "Consejos", header_add: "Registrar Especie", header_map: "Mapa Ecológico",
+                    header_settings: "Configuración"
+                },
+                en: {
+                    welcome_to: "Welcome to", start_button: "Start", main_menu_title: "Explore the biodiversity of our institution", btn_identify: "Identify Species",
+                    btn_flora: "Flora", btn_fauna: "Fauna", btn_map: "Ecological Map", btn_back_menu: "← Back to menu", camera_view: "[Camera View]", btn_scan_qr: "Scan QR",
+                    btn_identify_ai: "Identify with AI", identified_species_ai: "Identified Species (AI):", photo_opossum: "[Opossum Photo]", desc_opossum: "The common opossum, known locally as 'chucha', is a crucial nocturnal marsupial for the ecosystem. It helps control pests and disperse seeds.",
+                    btn_full_card: "View full card →", identified_species_qr: "Identified Species (QR):", photo_wax_palm: "[Wax Palm Photo]", desc_wax_palm: "It is the national tree of Colombia. Native to the high Andean valleys, this palm is the tallest in the world, reaching up to 60 meters.",
+                    photo_guayacan: "[Guayacan Photo]", desc_guayacan: "A very common ornamental tree in urban areas of Colombia. It is famous for its spectacular yellow bloom that covers the entire tree.", photo_placeholder: "[Photo]",
+                    desc_guayacan_short: "Ornamental tree famous for its spectacular yellow bloom.", desc_wax_palm_short: "National tree of Colombia and the world's tallest palm.",
+                    desc_sietecueros_short: "Native shrub of the Andes, known for its purple flowers.", desc_barranquero_short: "Colorful bird recognized by its racket-shaped tail.",
+                    desc_guatin_short: "Diurnal rodent important for seed dispersal in forests.", desc_colibri_short: "Large, bright hummingbird, common in open areas and gardens.",
+                    btn_back_list: "← Back to list", species_image: "[Species Image]", tab_description: "Description", tab_curiosities: "Curiosities", tab_care: "Care",
+                    location_records: "Location Records", settings_language: "Language", settings_about: "About NEXA", settings_help: "Help & Support", btn_cancel: "← Cancel",
+                    form_species_type: "Species Type", form_option_flora: "Flora (Plant)", form_option_fauna: "Fauna (Animal)", form_upload_photo: "Upload Photo", form_common_name: "Common Name",
+                    form_scientific_name: "Scientific Name", form_description: "Description", form_location: "Location", form_geolocate: "Geolocate", form_report_info: "Report Information",
+                    form_who_reports: "Who is reporting", form_select_role: "Select role...", form_role_student: "Student", form_role_teacher: "Teacher", form_role_admin: "Administrative",
+                    form_grade: "Grade", form_reporter_name: "Reporter's Name", form_save_species: "Save Species", protocol_title: "Action Protocol",
+                    protocol_subtitle: "Answer the following questions to know how to act if you find a wild animal.", protocol_q1: "1. Does the animal seem injured or in immediate danger?",
+                    yes: "Yes", no: "No", protocol_q2: "2. Is the animal large, venomous, or aggressive?", protocol_q3: "3. Is the animal in an inappropriate or risky place (e.g., a classroom, a road)?",
+                    protocol_res_observe_title: "Action: Observe and Record", protocol_res_observe_text: "It's a normal sighting! Enjoy the local wildlife from a safe distance. Do not feed or disturb it. It's the perfect time to record your observation in the app.",
+                    protocol_res_teacher_title: "Action: Contact a Teacher", protocol_res_teacher_text: "Do not try to move the animal. Your safety comes first. Find a teacher (preferably from science) or an administrator and inform them of the situation so they can coordinate the necessary help.",
+                    protocol_res_authorities_title: "Action: Call the Authorities", protocol_res_authorities_text: "Do not approach! Your safety is the priority. Immediately call the environmental authorities to handle the situation safely.",
+                    protocol_reset: "Reset protocol", btn_back: "← Back", btn_next_fact: "See another fact", btn_next_tip: "See another tip", search_placeholder: "Search species...",
+                    menu_protocol: "What do I do if...?", menu_curiosities: "Curious Facts", menu_tips: "Tips", menu_settings: "Settings", modal_success_title: "Success!",
+                    modal_success_text: "The new species has been saved to the catalog.", modal_ok: "OK", modal_location_title: "Location Registered", modal_location_text: "Your sighting has been added to this species' map.",
+                    header_main: "Home", header_identify: "Identify Species", header_flora: "Flora", header_fauna: "Fauna", header_detail: "Species Detail",
+                    header_protocol: "What do I do if...?", header_curiosities: "Curious Facts", header_tips: "Tips", header_add: "Register Species", header_map: "Ecological Map",
+                    header_settings: "Settings"
+                }
+            };
+
+            // --- Base de datos de ejemplo ---
+            const speciesData = {
+                "Barranquero Andino": {
+                    scientific: "Momotus aequatorialis",
+                    imgSrc: "barranquero.jpg",
+                    es: {
+                        description: "Ave colorida reconocida por su cola en forma de raqueta. Anida en barrancos de tierra y es clave para el equilibrio del ecosistema.",
+                        curiosities: "A pesar de su plumaje brillante, puede ser difícil de ver quieto en el follaje. Mueve su cola como un péndulo cuando está alerta, un comportamiento único.",
+                        care: "Si encuentras uno herido, no intentes alimentarlo. Contacta a la autoridad ambiental local (CARDER en Risaralda). Mantén a las mascotas alejadas de sus nidos."
+                    },
+                    en: {
+                        description: "Colorful bird recognized by its racket-shaped tail. It nests in dirt banks and is key to the ecosystem's balance.",
+                        curiosities: "Despite its bright plumage, it can be hard to see when still in the foliage. It wags its tail like a pendulum when alert, a unique behavior.",
+                        care: "If you find an injured one, do not try to feed it. Contact the local environmental authority (CARDER in Risaralda). Keep pets away from their nests."
+                    }
+                },
+                "Guayacán Amarillo": {
+                    scientific: "Handroanthus chrysanthus",
+                    imgSrc: "guayacan.jpeg",
+                    es: {
+                        description: "Árbol ornamental famoso por su espectacular floración amarilla que ocurre una vez al año, cubriendo todo el árbol y creando una alfombra de flores.",
+                        curiosities: "Su madera es una de las más duras y resistentes de los trópicos. La floración masiva y sincronizada es una estrategia para atraer polinizadores.",
+                        care: "Requiere pleno sol y espacio para crecer. Si observas ramas secas o plagas, informa a mantenimiento para su correcto cuidado."
+                    },
+                    en: {
+                        description: "Ornamental tree famous for its spectacular yellow bloom that occurs once a year, covering the entire tree and creating a carpet of flowers.",
+                        curiosities: "Its wood is one of the hardest and most resistant in the tropics. The massive, synchronized blooming is a strategy to attract pollinators.",
+                        care: "It requires full sun and space to grow. If you notice dry branches or pests, inform maintenance for proper care."
+                    }
+                },
+                 "Guatín (Ñeque)": {
+                    scientific: "Dasyprocta punctata",
+                    imgSrc: "guatin.jpg",
+                    es: {
+                        description: "Roedor diurno de tamaño mediano, crucial para la dispersión de semillas grandes en los bosques tropicales.",
+                        curiosities: "Entierran semillas para comerlas más tarde, pero a menudo olvidan dónde las dejaron. Esto ayuda a que nuevos árboles crezcan.",
+                        care: "No intentes alimentarlos ni acorralarlos. Son animales tímidos y silvestres. Simplemente obsérvalos desde la distancia."
+                    },
+                     en: {
+                        description: "Medium-sized diurnal rodent, crucial for the dispersal of large seeds in tropical forests.",
+                        curiosities: "They bury seeds to eat later but often forget where they left them. This helps new trees to grow.",
+                        care: "Do not try to feed or corner them. They are shy, wild animals. Simply observe them from a distance."
+                    }
+                }
+            };
+            
+            const sightings = [
+                { name: 'Barranquero Andino', coords: [4.8305, -75.6690] },
+                { name: 'Guatín (Ñeque)', coords: [4.8298, -75.6685] },
+                { name: 'Guayacán Amarillo', coords: [4.8300, -75.6700] },
+                { name: 'Colibrí Coruscans', coords: [4.8310, -75.6695] }
+            ];
+
+            const curiousFacts = [
+                {
+                    es: { title: "¿Sabías que...?", fact: "El Barranquero Andino hace sus nidos en túneles que excava en barrancos de tierra. ¡A veces pueden tener más de 4 metros de largo!"},
+                    en: { title: "Did you know...?", fact: "The Andean Motmot makes its nests in tunnels it digs into earth banks. They can sometimes be over 4 meters long!"},
+                    category: "Fauna"
+                },
+                {
+                    es: { title: "¡Increíble!", fact: "La Palma de Cera, nuestro árbol nacional, puede vivir más de 100 años y es la palma más alta del mundo."},
+                    en: { title: "Incredible!", fact: "The Wax Palm, our national tree, can live for over 100 years and is the tallest palm in the world."},
+                    category: "Flora"
+                },
+                {
+                    es: { title: "Dato Curioso", fact: "Los Guatines (o ñeques) son 'jardineros del bosque'. Entierran semillas para comer después, pero olvidan dónde las dejaron, ayudando a que nuevos árboles crezcan."},
+                    en: { title: "Curious Fact", fact: "Agoutis (or ñeques) are 'forest gardeners.' They bury seeds to eat later but often forget where they left them, helping new trees grow."},
+                    category: "Fauna"
+                },
+                {
+                    es: { title: "Naturaleza Sorprendente", fact: "El árbol Siete Cueros recibe su nombre porque su corteza se desprende en capas muy delgadas, como si tuviera 'siete pieles'."},
+                    en: { title: "Surprising Nature", fact: "The Siete Cueros tree gets its name because its bark peels off in very thin layers, as if it had 'seven skins'."},
+                    category: "Flora"
+                },
+                {
+                    es: { title: "¡Asombroso!", fact: "Algunos colibríes, como el Colibrí Coruscans, pueden batir sus alas más de 50 veces por segundo para mantenerse en el aire."},
+                    en: { title: "Amazing!", fact: "Some hummingbirds, like the Sparkling Violetear, can beat their wings more than 50 times per second to stay airborne."},
+                    category: "Fauna"
+                }
+            ];
+            
+            const tipsData = [
+                {
+                    es: { title: "Compostaje Casero", tip: "¡No tires las cáscaras de frutas y verduras! Puedes crear tu propio abono (compost) para nutrir las plantas de la huerta escolar y reducir residuos."},
+                    en: { title: "Home Composting", tip: "Don't throw away fruit and vegetable peels! You can create your own compost to nourish the school garden plants and reduce waste."},
+                    category: "Jardinería"
+                },
+                {
+                    es: { title: "Respeta su Espacio", tip: "Si ves un animal silvestre, como una zarigüeya o un guatín, no te acerques ni intentes tocarlo. Obsérvalo desde lejos para no estresarlo."},
+                    en: { title: "Respect Their Space", tip: "If you see a wild animal, like an opossum or an agouti, do not approach or try to touch it. Observe it from a distance to avoid stressing it."},
+                    category: "Fauna Silvestre"
+                },
+                {
+                    es: { title: "Riego Inteligente", tip: "El mejor momento para regar las plantas es temprano en la mañana o al atardecer. Así, el agua no se evapora tan rápido y las raíces la aprovechan mejor."},
+                    en: { title: "Smart Watering", tip: "The best time to water plants is early in the morning or at dusk. This way, the water doesn't evaporate as quickly and the roots can absorb it better."},
+                    category: "Jardinería"
+                },
+                {
+                    es: { title: "No dejes comida", tip: "Evita dejar restos de tu almuerzo en el patio. Esto puede atraer animales silvestres y alterar su dieta natural, además de generarles dependencia."},
+                    en: { title: "Don't Leave Food", tip: "Avoid leaving leftover food in the yard. This can attract wildlife and alter their natural diet, as well as create dependency."},
+                    category: "Fauna Silvestre"
+                },
+                {
+                    es: { title: "Hoteles para Insectos", tip: "Puedes construir pequeños 'hoteles' con cañas, piñas y trozos de madera para atraer insectos beneficiosos como las abejas solitarias, que ayudan a polinizar las flores."},
+                    en: { title: "Insect Hotels", tip: "You can build small 'hotels' with reeds, pinecones, and pieces of wood to attract beneficial insects like solitary bees, which help pollinate flowers."},
+                    category: "Jardinería"
+                }
+            ];
+
+
+            let qrScanToggle = false; 
+            const screenHistory = [];
+            let lastReportedType = 'flora';
+            
+            // Map instances
+            let mainMap = null;
+            let detailMap = null;
+            const schoolCoords = [4.8303, -75.6694]; // Coordenadas de la Institución
+
+            function setLanguage(lang) {
+                currentLanguage = lang;
+                document.querySelectorAll('[data-translate-key]').forEach(el => {
+                    const key = el.dataset.translateKey;
+                    const translation = translations[lang][key];
+                    if (translation) {
+                        if (el.tagName === 'INPUT' && el.placeholder) {
+                            el.placeholder = translation;
+                        } else {
+                            el.textContent = translation;
+                        }
+                    }
+                });
+
+                // Update active button style
+                const btnEs = document.getElementById('btn-lang-es');
+                const btnEn = document.getElementById('btn-lang-en');
+                if (lang === 'es') {
+                    btnEs.classList.add('bg-nexa-dark', 'text-white');
+                    btnEs.classList.remove('bg-gray-200', 'text-black');
+                    btnEn.classList.add('bg-gray-200', 'text-black');
+                    btnEn.classList.remove('bg-nexa-dark', 'text-white');
+                } else {
+                    btnEn.classList.add('bg-nexa-dark', 'text-white');
+                    btnEn.classList.remove('bg-gray-200', 'text-black');
+                    btnEs.classList.add('bg-gray-200', 'text-black');
+                    btnEs.classList.remove('bg-nexa-dark', 'text-white');
+                }
+
+                // Update current screen title
+                const currentScreenId = screenHistory[screenHistory.length - 1];
+                updateHeaderTitle(currentScreenId);
+            }
+
+            function updateHeaderTitle(screenId) {
+                let key = '';
+                 switch(screenId) {
+                    case 'screen-main-menu': key = 'header_main'; break;
+                    case 'screen-identify': key = 'header_identify'; break;
+                    case 'screen-flora-list': key = 'header_flora'; break;
+                    case 'screen-fauna-list': key = 'header_fauna'; break;
+                    case 'screen-species-detail': key = 'header_detail'; break;
+                    case 'screen-protocol': key = 'header_protocol'; break;
+                    case 'screen-curiosities': key = 'header_curiosities'; break;
+                    case 'screen-tips': key = 'header_tips'; break;
+                    case 'screen-add-species': key = 'header_add'; break;
+                    case 'screen-map': key = 'header_map'; break;
+                    case 'screen-settings': key = 'header_settings'; break;
+                    default: headerTitle.textContent = 'NEXA'; return;
+                }
+                headerTitle.textContent = translations[currentLanguage][key];
+            }
+
+            function initializeMainMap() {
+                if (mainMap) return;
+                mainMap = L.map('map-div').setView(schoolCoords, 18);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap'
+                }).addTo(mainMap);
+
+                sightings.forEach(sighting => {
+                    L.marker(sighting.coords).addTo(mainMap)
+                        .bindPopup(`<b>${sighting.name}</b>`);
+                });
+            }
+            
+            function initializeDetailMap() {
+                if (detailMap) return;
+                detailMap = L.map('species-map-div').setView(schoolCoords, 18);
+                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap'
+                }).addTo(detailMap);
+            }
+            
+            // Keep track of detail map markers to clear them
+            let detailMapMarkers = [];
+            function updateDetailMap(speciesName) {
+                // Clear previous markers
+                detailMapMarkers.forEach(marker => marker.remove());
+                detailMapMarkers = [];
+
+                const speciesSightings = sightings.filter(s => s.name === speciesName);
+                if (speciesSightings.length > 0) {
+                     speciesSightings.forEach(sighting => {
+                        const marker = L.marker(sighting.coords).addTo(detailMap)
+                            .bindPopup(`<b>${sighting.name}</b>`);
+                        detailMapMarkers.push(marker);
+                    });
+                    // Adjust map view to fit markers
+                    const group = new L.featureGroup(detailMapMarkers);
+                    detailMap.fitBounds(group.getBounds().pad(0.1));
+                } else {
+                    detailMap.setView(schoolCoords, 18);
+                }
+            }
+
+
+            function showScreen(screenId, addToHistory = true) {
+                const currentScreen = screenHistory[screenHistory.length - 1];
+                if (addToHistory && currentScreen !== screenId) {
+                    screenHistory.push(screenId);
+                }
+
+                screens.forEach(screen => {
+                    screen.classList.add('hidden');
+                });
+                const targetScreen = document.getElementById(screenId);
+                if(targetScreen) {
+                    targetScreen.classList.remove('hidden');
+                    mainContent.scrollTop = 0;
+                }
+
+                if (screenId === 'screen-welcome') {
+                    header.classList.add('hidden');
+                    footer.classList.add('hidden');
+                } else {
+                    header.classList.remove('hidden');
+                    footer.classList.remove('hidden');
+                }
+                
+                updateHeaderTitle(screenId);
+                
+                if (screenId === 'screen-map') {
+                    setTimeout(() => {
+                        initializeMainMap();
+                        if(mainMap) mainMap.invalidateSize();
+                    }, 100);
+                }
+                
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('border-b-2', 'border-nexa-dark');
+                    if (btn.dataset.target === screenId) {
+                        btn.classList.add('border-b-2', 'border-nexa-dark');
+                    }
+                });
+            }
+
+            // --- Navigation Event Listeners ---
+            document.getElementById('btn-start').addEventListener('click', () => showScreen('screen-main-menu'));
+            document.getElementById('btn-identify').addEventListener('click', () => {
+                document.getElementById('identify-camera-section').classList.remove('hidden');
+                document.getElementById('identify-result-section').classList.add('hidden');
+                document.getElementById('identify-qr-result-section').classList.add('hidden');
+                document.getElementById('identify-qr-result-section-2').classList.add('hidden');
+                showScreen('screen-identify');
             });
-            // Ocultar todo el contenido
-            tabContents.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
+            document.getElementById('btn-flora').addEventListener('click', () => showScreen('screen-flora-list'));
+            document.getElementById('btn-fauna').addEventListener('click', () => showScreen('screen-fauna-list'));
+            document.getElementById('btn-map').addEventListener('click', () => showScreen('screen-map'));
+             document.getElementById('btn-protocol').addEventListener('click', () => {
+                resetProtocol();
+                moreMenuModal.classList.add('hidden');
+                showScreen('screen-protocol');
+            });
+             document.getElementById('btn-curiosities').addEventListener('click', () => {
+                showRandomFact();
+                moreMenuModal.classList.add('hidden');
+                showScreen('screen-curiosities');
+            });
+             document.getElementById('btn-tips').addEventListener('click', () => {
+                showRandomTip();
+                moreMenuModal.classList.add('hidden');
+                showScreen('screen-tips');
+            });
+            
+            document.getElementById('btn-identify-ai').addEventListener('click', () => {
+                document.getElementById('identify-camera-section').classList.add('hidden');
+                document.getElementById('identify-qr-result-section').classList.add('hidden');
+                document.getElementById('identify-qr-result-section-2').classList.add('hidden');
+                document.getElementById('identify-result-section').classList.remove('hidden');
             });
 
-            // Activar la tab y el contenido seleccionados
-            event.target.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        }
+            document.getElementById('btn-scan-qr').addEventListener('click', () => {
+                document.getElementById('identify-camera-section').classList.add('hidden');
+                document.getElementById('identify-result-section').classList.add('hidden');
+                if (qrScanToggle) {
+                    document.getElementById('identify-qr-result-section').classList.add('hidden');
+                    document.getElementById('identify-qr-result-section-2').classList.remove('hidden');
+                } else {
+                    document.getElementById('identify-qr-result-section-2').classList.add('hidden');
+                    document.getElementById('identify-qr-result-section').classList.remove('hidden');
+                }
+                qrScanToggle = !qrScanToggle;
+            });
+            
+            // Event delegation for species items
+            mainContent.addEventListener('click', (e) => {
+                 const speciesItem = e.target.closest('.species-item');
+                 if (speciesItem) {
+                    const title = speciesItem.querySelector('h3').textContent.trim();
+                    const data = speciesData[title];
+                    if (!data) return;
+
+                    document.getElementById('species-detail-title').textContent = title;
+                    document.getElementById('species-detail-scientific').textContent = data.scientific;
+                    document.getElementById('species-detail-img').src = data.imgSrc;
+                    document.getElementById('tab-content-description').textContent = data[currentLanguage].description;
+                    document.getElementById('tab-content-curiosities').textContent = data[currentLanguage].curiosities;
+                    document.getElementById('tab-content-care').textContent = data[currentLanguage].care;
+
+                    // Reset tabs to default
+                    document.querySelectorAll('#screen-species-detail .tab-btn').forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('#screen-species-detail .tab-btn[data-target="tab-content-description"]').classList.add('active');
+                    document.querySelectorAll('#screen-species-detail .tab-content').forEach(content => content.classList.add('hidden'));
+                    document.getElementById('tab-content-description').classList.remove('hidden');
+                    
+                    showScreen('screen-species-detail');
+                    
+                    setTimeout(() => {
+                        initializeDetailMap();
+                        if (detailMap) {
+                            detailMap.invalidateSize();
+                            updateDetailMap(title);
+                        }
+                    }, 100);
+                }
+            });
+
+            document.getElementById('btn-add-species').addEventListener('click', () => showScreen('screen-add-species'));
+            document.getElementById('btn-add-species-fauna').addEventListener('click', () => showScreen('screen-add-species'));
+
+            document.querySelectorAll('.btn-back').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    screenHistory.pop(); // Remove current screen
+                    const previousScreen = screenHistory.pop() ?? 'screen-main-menu'; // Get previous screen
+                    showScreen(previousScreen, false);
+                });
+            });
+            
+            // --- Add Species Form Logic ---
+            const addSpeciesForm = document.getElementById('add-species-form');
+            addSpeciesForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const speciesType = document.getElementById('species-type').value;
+                const commonName = document.getElementById('common-name').value;
+                const scientificName = document.getElementById('scientific-name').value;
+                const description = document.getElementById('description').value;
+                
+                lastReportedType = speciesType;
+                
+                const newSpeciesHtml = `
+                 <div class="bg-white rounded-lg shadow-md overflow-hidden flex species-item clickable">
+                    <img src="https://placehold.co/200x200/CCCCCC/FFFFFF?text=Nueva" alt="Foto de nueva especie" class="w-1/3 h-auto object-cover">
+                    <div class="p-3 w-2/3">
+                        <h3 class="font-bold text-nexa-dark">${commonName}</h3>
+                        <p class="text-sm italic text-gray-500">${scientificName}</p>
+                        <p class="text-sm text-gray-700 mt-1">${description}</p>
+                    </div>
+                </div>`;
+
+                if (speciesType === 'flora') {
+                    floraListContainer.insertAdjacentHTML('afterbegin', newSpeciesHtml);
+                } else {
+                    faunaListContainer.insertAdjacentHTML('afterbegin', newSpeciesHtml);
+                }
+                
+                document.getElementById('confirmation-modal-title').textContent = translations[currentLanguage].modal_success_title;
+                document.getElementById('confirmation-modal-text').textContent = translations[currentLanguage].modal_success_text;
+                confirmationModal.classList.remove('hidden');
+            });
+            
+            const defaultCloseModalBehavior = () => {
+                confirmationModal.classList.add('hidden');
+                addSpeciesForm.reset(); 
+                document.getElementById('geolocation-info').classList.add('hidden');
+                const geolocateBtnSpan = btnGeolocate.querySelector('span');
+                if(geolocateBtnSpan) geolocateBtnSpan.textContent = translations[currentLanguage].form_geolocate;
+                btnGeolocate.classList.remove('bg-nexa-light', 'text-white', 'border-nexa-light');
+                document.getElementById('reporter-grade-container').classList.add('hidden');
+                document.getElementById('image-preview').classList.add('hidden');
+                document.getElementById('upload-placeholder').classList.remove('hidden');
+                
+                if (lastReportedType === 'flora') {
+                    showScreen('screen-flora-list');
+                } else if (lastReportedType === 'fauna') {
+                    showScreen('screen-fauna-list');
+                }
+            };
+            
+            document.getElementById('btn-close-modal').addEventListener('click', defaultCloseModalBehavior);
+
+            document.getElementById('upload-box').addEventListener('click', () => {
+                 document.getElementById('image-preview').src = 'https://placehold.co/200x200/A9A9A9/FFFFFF?text=Preview';
+                 document.getElementById('image-preview').classList.remove('hidden');
+                 document.getElementById('upload-placeholder').classList.add('hidden');
+            });
+
+            // --- Geolocate Logic ---
+            const btnGeolocate = document.getElementById('btn-geolocate');
+            const geolocationInfo = document.getElementById('geolocation-info');
+            btnGeolocate.addEventListener('click', () => {
+                geolocationInfo.textContent = 'Ubicación capturada: Lat: 4.8303, Lon: -75.6694';
+                geolocationInfo.classList.remove('hidden');
+                const geolocateBtnSpan = btnGeolocate.querySelector('span');
+                if(geolocateBtnSpan) geolocateBtnSpan.textContent = 'Ubicación Guardada';
+                btnGeolocate.classList.add('bg-nexa-light', 'text-white', 'border-nexa-light');
+            });
+
+            // --- Reporter Role Logic ---
+            const reporterRoleSelect = document.getElementById('reporter-role');
+            const reporterGradeContainer = document.getElementById('reporter-grade-container');
+            reporterRoleSelect.addEventListener('change', (e) => {
+                if(e.target.value === 'estudiante') {
+                    reporterGradeContainer.classList.remove('hidden');
+                } else {
+                    reporterGradeContainer.classList.add('hidden');
+                }
+            });
+
+            function populateGrades() {
+                const gradeSelect = document.getElementById('reporter-grade');
+                const grades = ['T1', 'T2', 'T3', 'T4'];
+                const sections = ['a', 'b', 'c', 'd'];
+                for(let i = 1; i <= 11; i++) {
+                    sections.forEach(sec => {
+                        grades.push(`${i}${sec}`);
+                    });
+                }
+                gradeSelect.innerHTML = `<option>${translations[currentLanguage].form_select_role}</option>` + grades.map(g => `<option value="${g}">${g.toUpperCase()}</option>`).join('');
+            }
+            
+            // --- Bottom Nav & More Menu ---
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetScreen = btn.dataset.target;
+                    if (targetScreen) showScreen(targetScreen);
+                });
+            });
+
+            const searchInput = document.getElementById('main-search-input');
+            const defaultMenuButtons = document.getElementById('default-menu-buttons');
+            const searchResultsContainer = document.getElementById('search-results-container');
+            
+            document.getElementById('btn-more-menu').addEventListener('click', (e) => {
+                e.stopPropagation();
+                moreMenuModal.classList.toggle('hidden');
+                // Al abrir el menú, resetea la búsqueda
+                if (!moreMenuModal.classList.contains('hidden')) {
+                    searchInput.value = '';
+                    searchResultsContainer.classList.add('hidden');
+                    defaultMenuButtons.classList.remove('hidden');
+                }
+            });
+            
+            moreMenuModal.addEventListener('click', () => moreMenuModal.classList.add('hidden'));
+            
+            moreMenuModal.querySelector('div').addEventListener('click', (e) => e.stopPropagation());
+
+
+            document.getElementById('btn-settings-from-menu').addEventListener('click', () => {
+                moreMenuModal.classList.add('hidden');
+                showScreen('screen-settings');
+            });
+            
+            // --- Species Detail Tabs & Map Button ---
+            document.querySelector('#screen-species-detail').addEventListener('click', e => {
+                if (e.target.classList.contains('tab-btn')) {
+                    document.querySelectorAll('#screen-species-detail .tab-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    document.querySelectorAll('#screen-species-detail .tab-content').forEach(content => content.classList.add('hidden'));
+                    document.getElementById(e.target.dataset.target).classList.remove('hidden');
+                }
+
+                if (e.target.id === 'btn-add-location' || e.target.parentElement.id === 'btn-add-location') {
+                    document.getElementById('confirmation-modal-title').textContent = translations[currentLanguage].modal_location_title;
+                    document.getElementById('confirmation-modal-text').textContent = translations[currentLanguage].modal_location_text;
+                    lastReportedType = null; // Prevent navigation on close
+                    confirmationModal.classList.remove('hidden');
+                    
+                    document.getElementById('btn-close-modal').onclick = () => {
+                        confirmationModal.classList.add('hidden');
+                         // Reset the default close behavior
+                        document.getElementById('btn-close-modal').onclick = defaultCloseModalBehavior;
+                    };
+                }
+            });
+
+            // --- Sort and Search Logic ---
+            function sortSpeciesList(listType, order) {
+                const container = listType === 'flora' ? floraListContainer : faunaListContainer;
+                const items = Array.from(container.querySelectorAll('.species-item'));
+
+                items.sort((a, b) => {
+                    const nameA = a.querySelector('h3').textContent.trim().toLowerCase();
+                    const nameB = b.querySelector('h3').textContent.trim().toLowerCase();
+                    if (order === 'asc') {
+                        return nameA.localeCompare(nameB);
+                    } else {
+                        return nameB.localeCompare(nameA);
+                    }
+                });
+                items.forEach(item => container.appendChild(item));
+            }
+
+            document.querySelectorAll('.btn-sort').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    sortSpeciesList(btn.dataset.list, btn.dataset.order);
+                });
+            });
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                searchResultsContainer.innerHTML = '';
+
+                if (searchTerm.length === 0) {
+                    searchResultsContainer.classList.add('hidden');
+                    defaultMenuButtons.classList.remove('hidden');
+                    return;
+                }
+
+                searchResultsContainer.classList.remove('hidden');
+                defaultMenuButtons.classList.add('hidden');
+
+                const allSpeciesItems = [
+                    ...document.querySelectorAll('#screen-flora-list .species-item'),
+                    ...document.querySelectorAll('#screen-fauna-list .species-item')
+                ];
+
+                let resultsFound = false;
+                allSpeciesItems.forEach(item => {
+                    const name = item.querySelector('h3').textContent;
+                    const listType = item.closest('#screen-flora-list') ? 'Flora' : 'Fauna';
+
+                    if (name.toLowerCase().includes(searchTerm)) {
+                        resultsFound = true;
+                        const resultElement = document.createElement('button');
+                        resultElement.className = 'bg-gray-100 text-left p-3 rounded-lg flex items-center space-x-3 clickable w-full';
+                        resultElement.innerHTML = `
+                            <span class="text-sm font-bold ${listType === 'Flora' ? 'text-green-600' : 'text-blue-600'}">${translations[currentLanguage][listType.toLowerCase()]}</span>
+                            <span>${name}</span>
+                        `;
+                        
+                        resultElement.addEventListener('click', () => {
+                            item.click(); // This will trigger the detail view logic
+                            moreMenuModal.classList.add('hidden'); // Close the menu
+                        });
+                        
+                        searchResultsContainer.appendChild(resultElement);
+                    }
+                });
+
+                if (!resultsFound) {
+                    searchResultsContainer.innerHTML = `<p class="text-center text-gray-500 p-4">${translations[currentLanguage].no_results || 'No se encontraron especies.'}</p>`;
+                }
+            });
+            
+            // --- Protocol Logic ---
+            function showResult(resultId) {
+                document.getElementById('q1').classList.add('hidden');
+                document.getElementById('q2').classList.add('hidden');
+                document.getElementById('q3').classList.add('hidden');
+                document.getElementById(resultId).classList.remove('hidden');
+                document.getElementById('protocol-reset').classList.remove('hidden');
+            }
+
+            function resetProtocol() {
+                document.getElementById('protocol-start').style.display = 'block';
+                document.getElementById('q1').classList.remove('hidden');
+                document.getElementById('q2').classList.add('hidden');
+                document.getElementById('q3').classList.add('hidden');
+                document.querySelectorAll('#protocol-results > div').forEach(res => res.classList.add('hidden'));
+                document.getElementById('protocol-reset').classList.add('hidden');
+            }
+            
+            document.getElementById('protocol-reset').addEventListener('click', resetProtocol);
+
+            document.querySelectorAll('.protocol-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const question = btn.dataset.question;
+                    const answer = btn.dataset.answer;
+
+                    if (question === 'q1') {
+                        if (answer === 'yes') {
+                            document.getElementById('q2').classList.remove('hidden');
+                        } else {
+                            document.getElementById('q3').classList.remove('hidden');
+                        }
+                        document.getElementById('q1').classList.add('hidden');
+                    } else if (question === 'q2') {
+                        if (answer === 'yes') {
+                            showResult('res-authorities');
+                        } else {
+                            showResult('res-teacher');
+                        }
+                    } else if (question === 'q3') {
+                        if (answer === 'yes') {
+                            document.getElementById('q2').classList.remove('hidden');
+                            document.getElementById('q3').classList.add('hidden');
+                        } else {
+                            showResult('res-observe');
+                        }
+                    }
+                });
+            });
+
+            // --- Curiosities Logic ---
+            const curiosityCard = document.getElementById('curiosity-card');
+            let lastFactIndex = -1;
+
+            function showRandomFact() {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * curiousFacts.length);
+                } while (randomIndex === lastFactIndex && curiousFacts.length > 1);
+                
+                lastFactIndex = randomIndex;
+                const fact = curiousFacts[randomIndex];
+                
+                curiosityCard.style.transform = 'scale(0.95)';
+                curiosityCard.style.opacity = '0';
+
+                setTimeout(() => {
+                    curiosityCard.innerHTML = `
+                        <h3 class="text-xl font-bold text-nexa-dark mb-2">${fact[currentLanguage].title}</h3>
+                        <p class="text-gray-700">${fact[currentLanguage].fact}</p>
+                        <span class="inline-block mt-4 px-3 py-1 text-xs font-semibold rounded-full ${fact.category === 'Flora' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">${translations[currentLanguage][fact.category.toLowerCase()]}</span>
+                    `;
+                    curiosityCard.style.transform = 'scale(1)';
+                    curiosityCard.style.opacity = '1';
+                }, 200);
+            }
+            
+            document.getElementById('btn-next-fact').addEventListener('click', showRandomFact);
+
+            // --- Tips Logic ---
+            const tipCard = document.getElementById('tip-card');
+            let lastTipIndex = -1;
+
+            function showRandomTip() {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * tipsData.length);
+                } while (randomIndex === lastTipIndex && tipsData.length > 1);
+                
+                lastTipIndex = randomIndex;
+                const tip = tipsData[randomIndex];
+                
+                tipCard.style.transform = 'scale(0.95)';
+                tipCard.style.opacity = '0';
+
+                setTimeout(() => {
+                    tipCard.innerHTML = `
+                        <h3 class="text-xl font-bold text-nexa-dark mb-2">${tip[currentLanguage].title}</h3>
+                        <p class="text-gray-700">${tip[currentLanguage].tip}</p>
+                        <span class="inline-block mt-4 px-3 py-1 text-xs font-semibold rounded-full ${tip.category === 'Jardinería' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}">${tip.category}</span>
+                    `;
+                    tipCard.style.transform = 'scale(1)';
+                    tipCard.style.opacity = '1';
+                }, 200);
+            }
+            
+            document.getElementById('btn-next-tip').addEventListener('click', showRandomTip);
+
+            // Language Buttons
+            document.getElementById('btn-lang-es').addEventListener('click', () => setLanguage('es'));
+            document.getElementById('btn-lang-en').addEventListener('click', () => setLanguage('en'));
+
+            // --- Initial Screen ---
+            showScreen('screen-welcome');
+            setLanguage('es'); // Set initial language
+            populateGrades();
+        });
     </script>
+
 </body>
 </html>
+"
+I would like to organize the images in the code, specifically the 'src' attribute of each image section. The images are located in the same folder as the main page.
 
